@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <div class="col-md-4">asd sda
+    <div class="col-md-4">
         @if (isset($grievance->url))
         <p>Image</p>
         <img src="{{url($grievance->url)}}" alt="" class="img-thumbnail" />

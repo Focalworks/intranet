@@ -2,6 +2,12 @@
 @parent<script src="//cdn.ckeditor.com/4.4.3/basic/ckeditor.js"></script>
 @stop
 @section('content')
+<?php
+$urgency = Input::old('urgency');
+if ($urgency == '') {
+    $urgency = 1;
+}
+?>
 <div class="row">
     <div class="col-md-12"><h1>Add Grievance</h1></div>
 </div>
@@ -12,26 +18,26 @@
         
         <div class="form-group">
             <label for="title">Grievance title</label>
-            <input type="text" class="form-control" id="title" placeholder="Grievance title" name="title">
+            <input type="text" class="form-control" id="title" placeholder="Grievance title" name="title" value="{{Input::old('title')}}">
             <span class="error-display">{{$errors->first('title')}}</span>
         </div>
         
         <div class="form-group">
             <label for="body">Body</label>
-            <textarea name="body" id="body" class="form-control"></textarea>
+            <textarea name="body" id="body" class="form-control">{{Input::old('body')}}</textarea>
             <span class="error-display">{{$errors->first('body')}}</span>
         </div>
     </div>
     <div class="col-md-6">
         <div class="form-group">
             <label for="category">Category</label>
-            {{GlobalHelper::getDropdownFromArray('category', Grievance::getGrievanceCategories(), '')}}
+            {{GlobalHelper::getDropdownFromArray('category', Grievance::getGrievanceCategories(), Input::old('category'))}}
             <span class="error-display">{{$errors->first('category')}}</span>
         </div>
         
         <div class="form-group">
             <label for="urgency">Urgency</label>
-            {{GlobalHelper::getDropdownFromArray('urgency', Grievance::getUrgencies(), '1')}}
+            {{GlobalHelper::getDropdownFromArray('urgency', Grievance::getUrgencies(), $urgency)}}
             <span class="error-display">{{$errors->first('urgency')}}</span>
         </div>
     
