@@ -1,0 +1,24 @@
+{
+    "name": "focalworks/filemanaged",
+    "description": "",
+    "authors": [
+        {
+            "name": "Focalworks",
+            "email": "mobile.dev@focalworks.in"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations",
+            "src/models"
+        ],
+        "psr-0": {
+            "Focalworks\\Filemanaged\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,12 @@
+/bootstrap/compiled.php
+/vendor
+composer.phar
+composer.lock
+.DS_Store
+Thumbs.db
+.settings/
+.buildpath
+.project
+.idea/
+public/packages/
+public/grievance/
