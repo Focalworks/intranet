@@ -49,16 +49,14 @@ class ReBaseApp extends Command {
         // running scripts for L4Mod SentryUser
         $this->info('Running Sentry migrations');
         $this->call('migrate', array('--bench' => 'l4mod/sentryuser'));
-        $this->call('asset:publish', array('--bench' => 'l4mod/sentryuser'));
-        
-        // debugbar assets
-        $this->call('asset:publish', array('debugbar/laravel-debugbar'));
         
         // workbench migrations for focalworks modules
         $this->call('migrate', array('--bench' => 'focalworks/grievance'));
         $this->call('migrate', array('--bench' => 'focalworks/filemanaged'));
         $this->call('migrate', array('--bench' => 'focalworks/comment'));
 
+        $this->call('asset:publish', array('debugbar/laravel-debugbar'));
+        $this->call('asset:publish', array('--bench' => 'l4mod/sentryuser'));
         $this->call('asset:publish', array('--bench' => 'focalworks/comment'));
 
         // calling default migrations

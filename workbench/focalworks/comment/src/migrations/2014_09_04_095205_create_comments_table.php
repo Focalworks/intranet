@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration {
 	      $table->increments('cid');
 	      $table->integer('pid');
 	      $table->integer('nid');
-	      $table->integer('user_id');
+	      $table->unsignedInteger('user_id');
 	      $table->string('section', '255');
 	      $table->string('thread', '255');
 	      $table->text('comment');
