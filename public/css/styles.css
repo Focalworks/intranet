@@ -385,10 +385,25 @@ Main Container */
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   width: 136px !important;
 }
-.main-wrapper .comment-list-item {
+.main-wrapper ul.comments-wrapper {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item .comment-group {
   border: 1px solid #9eb2c0;
   margin-bottom: 10px;
   padding: 20px;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item .comment-group ul.comment-controles {
+  list-style: none;
+  padding: 0;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item .comment-group ul.comment-controles li {
+  display: inline-block;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper {
+  margin-left: 50px;
 }
 /* ==========================================
 Sidebar */
