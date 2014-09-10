@@ -60,9 +60,8 @@ Comments.directive('comment', function(commentsService) {
       nid: '=',
     },
     replace: true,
-    templateUrl: base_url + 'assets/js/custom/templates/comments-wrapper.html',
+    templateUrl: base_url + 'packages/focalworks/comment/js/custom/templates/comments-wrapper.html',
     link: function($scope, element, attrs, myCtrl) {
-     
     },
     controller: function($scope, commentsService) {
       $scope.showPopup = false;
@@ -118,7 +117,7 @@ Comments.directive('commentItem', ['$compile', 'commentsService', function($comp
       nid: '=',
       section : '='
     },
-    templateUrl: base_url + 'assets/js/custom/templates/comment.html',
+    templateUrl: base_url + 'packages/focalworks/comment/js/custom/templates/comment.html',
     link: function ($scope, element, attrs) {
         /* For comment children */
         if (angular.isArray($scope.comment.children)) {
