@@ -119,6 +119,7 @@ return array(
 	    'Focalworks\Grievance\GrievanceServiceProvider',
 	    'Intervention\Image\ImageServiceProvider',
 	    'Focalworks\Filemanaged\FilemanagedServiceProvider',
+	    'Komal\Comment\CommentServiceProvider',
 
 	),
 

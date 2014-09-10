@@ -57,6 +57,9 @@ class ReBaseApp extends Command {
         // workbench migrations for focalworks modules
         $this->call('migrate', array('--bench' => 'focalworks/grievance'));
         $this->call('migrate', array('--bench' => 'focalworks/filemanaged'));
+        $this->call('migrate', array('--bench' => 'focalworks/comment'));
+
+        $this->call('asset:publish', array('--bench' => 'focalworks/comment'));
 
         // calling default migrations
         $this->call('migrate');

@@ -1,0 +1,25 @@
+{
+    "name": "komal/comment",
+    "description": "",
+    "authors": [
+        {
+            "name": "Komal Savla",
+            "email": "komal.savla@focalworks.in"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations",
+            "src/models",
+            "src/controllers"
+        ],
+        "psr-0": {
+            "Komal\\Comment\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}

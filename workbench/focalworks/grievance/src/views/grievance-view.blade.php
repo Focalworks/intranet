@@ -1,5 +1,7 @@
 @section('scripts')
 @parent<script src="//cdn.ckeditor.com/4.4.3/basic/ckeditor.js"></script>
+<script type="text/javascript" src="{{ asset('packages/focalworks/comment/js/app.js') }}"></script>
+<script type="text/javascript" src="{{ asset('packages/focalworks/comment/js/custom/add_comments.js') }}"></script>
 @stop
 @section('content')
 <div class="row">
@@ -57,6 +59,10 @@
 </div>
 {{ Form::hidden('id', $grievance->id) }}
 {{ Form::close() }}
+
+<div ng-app="articleApp" ng-controller="mainCntrl">
+<comment data-section="grievance_view" data-nid="{{$grievance->id}}"></comment>
+</div>
 
 <script>
     $(window).load(function ()
