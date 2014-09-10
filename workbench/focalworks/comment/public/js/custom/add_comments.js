@@ -103,7 +103,7 @@ Comments.directive('commentTree', function () {
       nid: '=',
       section : '='
     },
-    template: '<ul><comment_item ng-repeat="comment in collection" comment="comment" nid="nid" section="section"></comment_item></ul>',
+    template: '<ul class="comments-wrapper"><comment_item ng-repeat="comment in collection" comment="comment" nid="nid" section="section"></comment_item></ul>',
   }
 })
 
