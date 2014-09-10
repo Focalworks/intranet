@@ -3,6 +3,12 @@ $( document ).ready(function() {
 	var mainHeight = $(document).height(),
 			menuWrapper = $('.menu-wrapper');
 	menuWrapper.css('height',(mainHeight-58));
+	
+	$( window ).resize(function(){
+		var mainHeight = $(document).height();
+		menuWrapper.css('height',(mainHeight-58));
+	});
+	
 });
 
 // Menu Slider 

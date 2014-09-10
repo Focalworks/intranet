@@ -185,6 +185,9 @@ Header */
   color: #2e3641;
   height: 58px;
   padding: 6px 0;
+  position: fixed;
+  width: 100%;
+  z-index: 999999999;
 }
 .navbar.navbar-default .navbar-header {
   text-transform: uppercase;
@@ -245,6 +248,9 @@ Header */
 }
 /* ==========================================
 Main Container */
+.main-content-wrapper {
+  padding-top: 58px;
+}
 /****** Login Page ******/
 .user-login-wrapper {
   left: -100%;
@@ -308,6 +314,8 @@ Main Container */
 
   /******* Add Grievance *******/
 
+  /******** Coments ********/
+
 }
 .main-wrapper.main-wrapper-normal {
   margin-left: 60px;
@@ -355,6 +363,9 @@ Main Container */
 .main-wrapper .image-preview {
   margin-bottom: 20px;
 }
+.main-wrapper .image-preview label {
+  display: block;
+}
 .main-wrapper .upload-img-wrapper .upload-img {
   background: url('../images/btn-upload.png') no-repeat;
   border: none;
@@ -374,6 +385,11 @@ Main Container */
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   width: 136px !important;
 }
+.main-wrapper .comment-list-item {
+  border: 1px solid #9eb2c0;
+  margin-bottom: 10px;
+  padding: 20px;
+}
 /* ==========================================
 Sidebar */
 .sidebar {
@@ -382,7 +398,9 @@ Sidebar */
   font-family: 'Bree Serif', serif;
 }
 .sidebar.menu-wrapper {
-  position: absolute;
+  position: fixed;
+  overflow-x: hidden;
+  overflow-y: auto;
   width: 250px;
 }
 .sidebar.menu-wrapper .fw-btn-menu {

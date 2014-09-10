@@ -44,7 +44,7 @@
   @include(Config::get('packages/l4mod/sentryuser/sentryuser.nav-tpl'))
   @endif
   @endif
-  <div class="container-fluid">
+  <div class="container-fluid main-content-wrapper">
     <div class="row">
       <div class="sidebar float-left menu-wrapper menu-wrapper-{{UserInterface::getUserMenuPref()}}" data-menu="{{UserInterface::getUserMenuPref()}}">
         @include('master.sidebar')

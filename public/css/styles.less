@@ -177,6 +177,9 @@ Header */
 		color: #2e3641;
 		height: 58px;
 		padding: 6px 0;
+		position: fixed;
+		width: 100%;
+		z-index: 999999999;
 		.navbar-header {
 			text-transform: uppercase;
 			font-size: 20px;
@@ -236,7 +239,9 @@ Header */
 }
 /* ==========================================
 Main Container */
-
+.main-content-wrapper {
+	padding-top: 58px;
+}
 /****** Login Page ******/
 .user-login-wrapper {
 	left: -100%;
@@ -340,6 +345,9 @@ Main Container */
 	/******* Add Grievance *******/
 	.image-preview {
 		margin-bottom: 20px;
+		label {
+			display: block;
+		}
 	}
 	.upload-img-wrapper {
 		.upload-img {
@@ -362,6 +370,12 @@ Main Container */
 			}
 		}
 	}
+	/******** Coments ********/
+	.comment-list-item {
+		border: 1px solid #9eb2c0;
+		margin-bottom: 10px;
+		padding: 20px;
+	}
 }
 
 /* ==========================================
@@ -371,7 +385,9 @@ Sidebar */
 	box-sizing: border-box;
 	font-family: 'Bree Serif', serif;
 	&.menu-wrapper {
-		position: absolute;
+		position: fixed;
+		overflow-x: hidden;
+		overflow-y: auto;
 		width: 250px;
 		.fw-btn-menu {
 			cursor: pointer;
