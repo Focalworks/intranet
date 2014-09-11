@@ -394,10 +394,14 @@ Main Container */
   border: 1px solid #9eb2c0;
   margin-bottom: 10px;
   padding: 20px;
+  position: relative;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group ul.comment-controles {
+  position: absolute;
   list-style: none;
   padding: 0;
+  right: 0;
+  bottom: 0;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group ul.comment-controles li {
   display: inline-block;
@@ -415,6 +419,7 @@ Sidebar */
 .sidebar.menu-wrapper {
   position: fixed;
   width: 250px;
+  z-index: 99999999;
 }
 .sidebar.menu-wrapper .fw-btn-menu {
   cursor: pointer;

@@ -1,25 +1,27 @@
 <li class="comment-list-item" ng-show ="!deleted[comment.cid]">
 	<div class="comment-group clearfix">
 		<div ng-show="editComment[comment.cid]">{{comment.comment}}</div>
+
+		<div ng-hide="editComment[comment.cid]">
+			<textarea class="form-control" rows="6" ng-model="comment.comment"></textarea>
+			<button class="btn btn-primary btn-md" ng-click="post_comment(comment, 'Edit')">Save</button>
+		</div>
+		
+		<div ng-hide="hideReply[comment.cid]">
+			<textarea class="form-control" rows="6" ng-model="comment_message"></textarea>
+			<button class="btn btn-primary btn-md" ng-click="post_comment(comment)">Post</button>
+		</div>
+		
 		<ul class="comment-controles clearfix">
 			<li class="comment-controle first">
 				<div class="btn btn-primary btn-xs" ng-click="editComment[comment.cid] = false" ng-show="editComment[comment.cid]">Edit</div>
-				<div ng-hide="editComment[comment.cid]">
-					<textarea class="form-control" rows="6" ng-model="comment.comment"></textarea>
-					<button class="btn btn-primary btn-md" ng-click="post_comment(comment, 'Edit')">Save</button>
-				</div>
 			</li>
 			<li class="comment-controle">
 				<div class="btn btn-primary btn-xs" ng-click="hideReply[comment.cid] = false" ng-show="hideReply[comment.cid]">Reply</div>
-				<div ng-hide="hideReply[comment.cid]">
-					<textarea class="form-control" rows="6" ng-model="comment_message"></textarea>
-					<button class="btn btn-primary btn-md" ng-click="post_comment(comment)">Post</button>
-				</div>
 			</li>
 			<li class="comment-controle last">
 				<div class="btn btn-primary btn-xs" ng-click="delete_comment(comment)">Delete</div>
 			</li>
 		</ul>
 	</div>
-
 </li>

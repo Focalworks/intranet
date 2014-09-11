@@ -380,12 +380,15 @@ Main Container */
 				border: 1px solid #9eb2c0;
 				margin-bottom: 10px;
 				padding: 20px;
+				position: relative;
 				ul.comment-controles {
+					position: absolute;	
 					list-style: none;
 					padding: 0;
+					right: 0;
+					bottom: 0;
 					li {
 						display: inline-block;
-						
 					}
 				}
 			}
@@ -405,6 +408,7 @@ Sidebar */
 	&.menu-wrapper {
 		position: fixed;
 		width: 250px;
+		z-index: 99999999;
 		.fw-btn-menu {
 			cursor: pointer;
 			border-bottom: 1px solid #444;
