@@ -414,8 +414,6 @@ Sidebar */
 }
 .sidebar.menu-wrapper {
   position: fixed;
-  overflow-x: hidden;
-  overflow-y: auto;
   width: 250px;
 }
 .sidebar.menu-wrapper .fw-btn-menu {
