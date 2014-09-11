@@ -6,6 +6,9 @@ $(document).ready(function () {
     handleDeleteFromTableListing();
 
     toggleMenuStateForUser();
+
+    // For Comments Tool bar
+    toggleCommentToolBar()
 });
 
 function handleDeleteFromTableListing()
@@ -63,4 +66,30 @@ function toggleMenuStateForUser()
             }
         });
     });
+}
+
+// Tool bar on Comments
+
+function toggleCommentToolBar() {
+  TriggerClick = 0;
+  $('body').on('click', '.comments-wrapper .comment-list-item .comment-group .comment-controles-wrapper .comment-controle-icon' , function() {
+    $('body').on('click', 'ul.comment-controles li .comment-controle-inner', function(){
+      $('.comments-wrapper .comment-list-item .comment-group .comment-controles-wrapper .comment-controle-icon').addClass('comment-controle-icon-normal').removeClass('comment-controle-icon-active');
+       $(this).parent().parent('ul.comment-controles').slideUp(500);
+    });
+    if ($(this).hasClass('comment-controle-icon-active')) {
+      TriggerClick = 1;
+    } else {
+      TriggerClick = 0;
+    }
+    if(TriggerClick == 0){
+      TriggerClick = 1;
+      $(this).addClass('comment-controle-icon-active').removeClass('comment-controle-icon-normal');
+      $(this).next('ul.comment-controles').slideDown(500);
+    } else {
+      TriggerClick = 0;
+      $(this).addClass('comment-controle-icon-normal').removeClass('comment-controle-icon-active');
+      $(this).next('ul.comment-controles').slideUp(500);
+    }
+  });
 }
