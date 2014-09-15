@@ -106,9 +106,9 @@ class Grievance extends Eloquent
         $linkString = url('grievance/list?sortby=' . $key . '&order=' . $sortArray[$key]);
 
         if ($sortBy == $key) {
-            $aLink = '<a href="'.$linkString.'" class="fw-icon active">'.$columnName.'<span class="fw-icon"></span></a></a>';
+            $aLink = '<a href="'.$linkString.'" class="'.$sortArray[$sortBy].'">'.$columnName.'<span class="fw-icon-sort"></span></a></a>';
         } else {
-            $aLink = '<a href="'.$linkString.'" class="normal">'.$columnName.'<span class="fw-icon"></span></a>';
+            $aLink = '<a href="'.$linkString.'" class="normal">'.$columnName.'</a>';
         }
 
         return $aLink;
