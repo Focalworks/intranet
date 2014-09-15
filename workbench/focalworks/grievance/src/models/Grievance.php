@@ -94,12 +94,21 @@ class Grievance extends Eloquent
 
     public static function sortColumnLinkHelper($sortArray, $key, $sortBy)
     {
+        $columnName = ucwords($key);
+
+        // special case of column names
+        switch ($columnName) {
+            case 'Created_at':
+                $columnName = 'Created at';
+                break;
+        }
+
         $linkString = url('grievance/list?sortby=' . $key . '&order=' . $sortArray[$key]);
 
         if ($sortBy == $key) {
-            $aLink = '<a href="'.$linkString.'" class="fw-icon active">'.ucwords($key).'<span class="fw-icon"></span></a></a>';
+            $aLink = '<a href="'.$linkString.'" class="fw-icon active">'.$columnName.'<span class="fw-icon"></span></a></a>';
         } else {
-            $aLink = '<a href="'.$linkString.'" class="normal">'.ucwords($key).'<span class="fw-icon"></span></a>';
+            $aLink = '<a href="'.$linkString.'" class="normal">'.$columnName.'<span class="fw-icon"></span></a>';
         }
 
         return $aLink;
