@@ -106,6 +106,13 @@ label, .control-label, .help-block, .checkbox, .radio {
 	font-size: 15px;
 	font-family: 'Bree Serif', serif;
 }
+a:link, a:visited {
+	.transition(all 0.5s ease);
+	&:hover {
+		color: @blue;
+		.transition(all 0.5s ease);
+	}
+}
 .btn {
 	text-transform: uppercase;
 	&.btn-primary {
@@ -383,12 +390,12 @@ Main Container */
 		margin: 20px 0;
 		padding: 0;
 		.comment-list-item {
+			background: #fff;
+			border: 1px solid #cccccc;
+			margin-bottom: 10px;
+			padding: 20px;
+			position: relative;
 			.comment-group {
-				background: #fff;
-				border: 1px solid #cccccc;
-				margin-bottom: 10px;
-				padding: 20px;
-				position: relative;
 				.comment-display-wrapper {
 					.user-picture {
 						border: 1px solid #c3c3c3;
@@ -399,6 +406,7 @@ Main Container */
 					}
 					.comment-display-content {
 						margin-left: 90px;
+						min-height: 80px;
 						.comment-display-name {
 							font-family: 'Bree Serif', serif;
 							font-weight: bold;
@@ -409,9 +417,9 @@ Main Container */
 						background: #f5f5f5;
 						border: 1px solid #cccccc;
 						float: left;
+						margin-left: 90px;
 						margin-top: 15px;
-						/*font-size: 14px;
-						padding: 2px 5px;*/
+						.transition(all 0.5s ease);
 						&:hover {
 							color: @blue;
 							cursor: pointer;
@@ -454,6 +462,7 @@ Main Container */
 								line-height: normal;
 								min-width: 100px;
 								margin: 10px;
+								.transition(all 0.5s ease);
 								.fw-icon-edit, .fw-icon-delete {
 									float: right;
 									margin-top: 4px;
@@ -475,7 +484,37 @@ Main Container */
 				}
 			}
 			ul.comments-wrapper {
-				margin: 0 0 0 50px;
+				margin: 0 0 0 90px;
+				.comment-list-item {
+					background: none;
+					border: none;
+					padding: 0;
+					border-top: 1px solid #cccccc;
+					padding-top: 10px;
+					margin-top: 10px;
+					.comment-group {
+						.comment-display-wrapper {
+							.user-picture {
+								height: 50px;
+								width: 50px;
+								margin-right: 10px;
+							}
+							.comment-display-content {
+								margin-left: 60px;
+								min-height: inherit;
+								.comment-display-name {
+									margin-bottom: 5px;
+								}
+							}
+							.comment-controle-reply {
+								margin-left: 60px;
+							}
+						}
+					}
+					ul.comments-wrapper {
+						margin: 0 0 0 60px;
+					}
+				}
 			}
 		}
 	}

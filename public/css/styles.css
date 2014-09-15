@@ -99,6 +99,23 @@ label,
   font-size: 15px;
   font-family: 'Bree Serif', serif;
 }
+a:link,
+a:visited {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+a:link:hover,
+a:visited:hover {
+  color: #4196fe;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
 .btn {
   text-transform: uppercase;
 }
@@ -408,7 +425,7 @@ Main Container */
   margin: 20px 0;
   padding: 0;
 }
-.main-wrapper ul.comments-wrapper .comment-list-item .comment-group {
+.main-wrapper ul.comments-wrapper .comment-list-item {
   background: #fff;
   border: 1px solid #cccccc;
   margin-bottom: 10px;
@@ -424,6 +441,7 @@ Main Container */
 }
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content {
   margin-left: 90px;
+  min-height: 80px;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content .comment-display-name {
   font-family: 'Bree Serif', serif;
@@ -434,10 +452,13 @@ Main Container */
   background: #f5f5f5;
   border: 1px solid #cccccc;
   float: left;
+  margin-left: 90px;
   margin-top: 15px;
-  /*font-size: 14px;
-						padding: 2px 5px;*/
-
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-controle-reply:hover {
   color: #4196fe;
@@ -484,6 +505,11 @@ Main Container */
   line-height: normal;
   min-width: 100px;
   margin: 10px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-controles-wrapper ul.comment-controles li.comment-controle .comment-controle-inner .fw-icon-edit,
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-controles-wrapper ul.comment-controles li.comment-controle .comment-controle-inner .fw-icon-delete {
@@ -504,7 +530,33 @@ Main Container */
   background-repeat: no-repeat;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper {
-  margin: 0 0 0 50px;
+  margin: 0 0 0 90px;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item {
+  background: none;
+  border: none;
+  padding: 0;
+  border-top: 1px solid #cccccc;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .user-picture {
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content {
+  margin-left: 60px;
+  min-height: inherit;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content .comment-display-name {
+  margin-bottom: 5px;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-controle-reply {
+  margin-left: 60px;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item ul.comments-wrapper {
+  margin: 0 0 0 60px;
 }
 /* ==========================================
 Sidebar */

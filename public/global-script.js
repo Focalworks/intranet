@@ -8,7 +8,10 @@ $(document).ready(function () {
     toggleMenuStateForUser();
 
     // For Comments Tool bar
-    toggleCommentToolBar()
+    toggleCommentToolBar();
+
+    // For Main wrapper height
+    containerHeight()
 });
 
 function handleDeleteFromTableListing()
@@ -91,5 +94,17 @@ function toggleCommentToolBar() {
       $(this).addClass('comment-controle-icon-normal').removeClass('comment-controle-icon-active');
       $(this).next('ul.comment-controles').slideUp(500);
     }
+  });
+}
+
+// For Main wrapper height
+function containerHeight() {
+  var mainHeight = $(document).height(),
+      mainWrapper = $('.main-wrapper');
+  mainWrapper.css('min-height',(mainHeight-58));
+  
+  $( window ).resize(function(){
+    var mainHeight = $(document).height();
+    mainWrapper.css('min-height',(mainHeight-58));
   });
 }
