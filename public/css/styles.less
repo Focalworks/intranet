@@ -71,6 +71,9 @@ Mixins */
 .center {
 	text-align: center;
 }
+.clear {
+	clear: both;
+}
 
 /* ==========================================
 Functions & Operations */
@@ -105,13 +108,6 @@ input[type="text"], select, textarea {
 label, .control-label, .help-block, .checkbox, .radio {
 	font-size: 15px;
 	font-family: 'Bree Serif', serif;
-}
-a:link, a:visited {
-	.transition(all 0.5s ease);
-	&:hover {
-		color: @blue;
-		.transition(all 0.5s ease);
-	}
 }
 .btn {
 	text-transform: uppercase;
@@ -180,6 +176,11 @@ a:link, a:visited {
 		height: 13px;
 		width: 20px;
 		.sprite(0 -532px);
+	}
+	&.fw-icon-clock {
+		height: 14px;
+		width: 16px;
+		.sprite(0 -597px);
 	}
 }
 
@@ -398,19 +399,35 @@ Main Container */
 			.comment-group {
 				.comment-display-wrapper {
 					.user-picture {
-						border: 1px solid #c3c3c3;
-						height: 70px;
-						margin-right: 20px;
-						text-align: center;
-						width: 70px;
+						display: table-cell;
+						vertical-align: top;
+						.user-picture-inner {
+							border: 1px solid #c3c3c3;
+							height: 70px;
+							margin-right: 20px;
+							text-align: center;
+							width: 70px;
+						}
 					}
 					.comment-display-content {
-						margin-left: 90px;
-						min-height: 80px;
-						.comment-display-name {
+						display: table-cell;
+						min-height: 70px;
+						vertical-align: top;
+						width: 100%;
+						.comment-display-name-wrapper {
 							font-family: 'Bree Serif', serif;
-							font-weight: bold;
 							margin-bottom: 15px;
+							.comment-display-name {
+								font-weight: bold;
+								margin-right: 10px;
+							}
+							.comment-post-date {
+								color: #a8bd44;
+							}
+						}
+						.btn-action {
+							margin-top: 10px;
+							text-align: right;
 						}
 					}
 					.comment-controle-reply {
@@ -436,7 +453,7 @@ Main Container */
 					top: 0;
 					.comment-controle-icon {
 						position: absolute;
-						right: 0;
+						right: 10px;
 						top: 0;
 						z-index: 9;
 						&.comment-controle-icon-active {
@@ -476,8 +493,6 @@ Main Container */
 										.sprite(0 -441px);
 									}
 								}
-								&.comment-controle-edit {}
-								&.comment-controle-delete {}
 							}
 						}
 					}
@@ -493,16 +508,23 @@ Main Container */
 					padding-top: 10px;
 					margin-top: 10px;
 					.comment-group {
+						.comment-controles-wrapper {
+							.comment-controle-icon {
+								right: -10px;
+							}
+						}
 						.comment-display-wrapper {
 							.user-picture {
-								height: 50px;
-								width: 50px;
-								margin-right: 10px;
+								.user-picture-inner {
+									height: 50px;
+									width: 50px;
+									margin-right: 10px;
+								}
 							}
 							.comment-display-content {
 								margin-left: 60px;
-								min-height: inherit;
-								.comment-display-name {
+								min-height: 50px;
+								.comment-display-name-wrapper {
 									margin-bottom: 5px;
 								}
 							}
@@ -516,6 +538,15 @@ Main Container */
 					}
 				}
 			}
+		}
+	}
+	.comment-action-arapper {
+		margin-top: 20px;
+		text-align: right;
+	}
+	.form-control {
+		&.textare-comment {
+			background: #f9f9f9;
 		}
 	}
 }

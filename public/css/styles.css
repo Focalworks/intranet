@@ -50,6 +50,9 @@ Mixins */
 .center {
   text-align: center;
 }
+.clear {
+  clear: both;
+}
 /* ==========================================
 Functions & Operations */
 /* ==========================================
@@ -98,23 +101,6 @@ label,
 .radio {
   font-size: 15px;
   font-family: 'Bree Serif', serif;
-}
-a:link,
-a:visited {
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-}
-a:link:hover,
-a:visited:hover {
-  color: #4196fe;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  transition: all 0.5s ease;
 }
 .btn {
   text-transform: uppercase;
@@ -211,6 +197,14 @@ a:visited:hover {
   width: 20px;
   background-image: url('../images/sprite.png');
   background-position: 0 -532px;
+  background-repeat: no-repeat;
+}
+[class*="fw-icon-"].fw-icon-clock,
+[class^="fw-icon-"].fw-icon-clock {
+  height: 14px;
+  width: 16px;
+  background-image: url('../images/sprite.png');
+  background-position: 0 -597px;
   background-repeat: no-repeat;
 }
 /* ==========================================
@@ -433,6 +427,10 @@ Main Container */
   position: relative;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .user-picture {
+  display: table-cell;
+  vertical-align: top;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .user-picture .user-picture-inner {
   border: 1px solid #c3c3c3;
   height: 70px;
   margin-right: 20px;
@@ -440,13 +438,25 @@ Main Container */
   width: 70px;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content {
-  margin-left: 90px;
-  min-height: 80px;
+  display: table-cell;
+  min-height: 70px;
+  vertical-align: top;
+  width: 100%;
 }
-.main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content .comment-display-name {
+.main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content .comment-display-name-wrapper {
   font-family: 'Bree Serif', serif;
-  font-weight: bold;
   margin-bottom: 15px;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content .comment-display-name-wrapper .comment-display-name {
+  font-weight: bold;
+  margin-right: 10px;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content .comment-display-name-wrapper .comment-post-date {
+  color: #a8bd44;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content .btn-action {
+  margin-top: 10px;
+  text-align: right;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-controle-reply {
   background: #f5f5f5;
@@ -477,7 +487,7 @@ Main Container */
 }
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-controles-wrapper .comment-controle-icon {
   position: absolute;
-  right: 0;
+  right: 10px;
   top: 0;
   z-index: 9;
 }
@@ -540,16 +550,19 @@ Main Container */
   padding-top: 10px;
   margin-top: 10px;
 }
-.main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .user-picture {
+.main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item .comment-group .comment-controles-wrapper .comment-controle-icon {
+  right: -10px;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .user-picture .user-picture-inner {
   height: 50px;
   width: 50px;
   margin-right: 10px;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content {
   margin-left: 60px;
-  min-height: inherit;
+  min-height: 50px;
 }
-.main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content .comment-display-name {
+.main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content .comment-display-name-wrapper {
   margin-bottom: 5px;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-controle-reply {
@@ -557,6 +570,13 @@ Main Container */
 }
 .main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item ul.comments-wrapper {
   margin: 0 0 0 60px;
+}
+.main-wrapper .comment-action-arapper {
+  margin-top: 20px;
+  text-align: right;
+}
+.main-wrapper .form-control.textare-comment {
+  background: #f9f9f9;
 }
 /* ==========================================
 Sidebar */
