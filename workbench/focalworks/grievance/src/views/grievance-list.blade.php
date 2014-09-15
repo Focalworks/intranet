@@ -19,10 +19,10 @@
             <thead>
                 <tr class="info">
                 	<th>Title</th>
-                	<th>Category</th>
-                	<th>Urgency</th>
-                	<th>Created on</th>
-                	<th>Status</th>
+                    <th>{{Grievance::sortColumnLinkHelper($sortArray, 'category', $sortBy)}}</th>
+                    <th>{{Grievance::sortColumnLinkHelper($sortArray, 'urgency', $sortBy)}}</th>
+                    <th>{{Grievance::sortColumnLinkHelper($sortArray, 'created_at', $sortBy)}}</th>
+                    <th>{{Grievance::sortColumnLinkHelper($sortArray, 'status', $sortBy)}}</th>
                 	@if ($access)
                 	<th></th>
                 	@endif
@@ -54,6 +54,10 @@
     <h2>You have not submitted an Grievances or suggestions. To add click {{link_to('grievance/add', 'here')}}</h2>
 @endif
 
+@if ($sort)
+{{$grievances->appends($sort)->links()}}
+@else
 {{$grievances->links()}}
+@endif
 
 @stop

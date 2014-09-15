@@ -29,10 +29,64 @@ class GrievanceController extends BaseController
      */
     public function handleList()
     {
-        $userObj = Session::get('userObj');
-        $access = PermApi::user_has_permission('manage_grievance');
+        // flag to check sort based on which pagination link will change in view.
+        $sort = false;
 
-        $data = Grievance::orderBy('urgency', 'desc')->orderBy('created_at', 'desc')->orderBy('status', 'desc');
+        // fetch get data
+        $sortBy = Input::get('sortby');
+        $orderBy = Input::get('order');
+
+        $data = DB::table('grievances');
+
+        // populating the array for default sorting
+        $arrSortLinks = array(
+            'category' => 'desc',
+            'urgency' => 'desc',
+            'created_at' => 'desc',
+            'status' => 'desc',
+        );
+
+        if ($sortBy && $orderBy) {
+            // if the sort is set, then the conditions will change
+
+            $arrSortLinks[$sortBy] = $orderBy;
+
+            $conditions = array(
+                Input::get('sortby') => Input::get('order')
+            );
+
+            $paginateSort = array(
+                'sortby' => Input::get('sortby'),
+                'order' => Input::get('order'),
+            );
+
+            $sort = true;
+
+            if (array_key_exists($sortBy, $arrSortLinks)) {
+                if ($arrSortLinks[$sortBy] == 'desc') {
+                    $arrSortLinks[$sortBy] = 'asc';
+                } else {
+                    $arrSortLinks[$sortBy] = 'desc';
+                }
+            }
+        }
+        else {
+            $conditions = array(
+                'urgency' => 'desc',
+                'created_at' => 'desc',
+                'status' => 'desc',
+            );
+        }
+
+        foreach ($conditions as $col => $ord) {
+            $data->orderBy($col, $ord);
+        }
+
+        // get the user session
+        $userObj = Session::get('userObj');
+
+        // check if the user has access to manage permissions. Based on this, manage link will come
+        $access = PermApi::user_has_permission('manage_grievance');
 
         // if the permission is not applicable, then see only own 
         if (!$access) {
@@ -42,6 +96,9 @@ class GrievanceController extends BaseController
         $data = $data->paginate(10);
 
         $this->layout->content = View::make('grievance::grievance-list')
+        ->with('sortArray', $arrSortLinks)
+        ->with('sortBy', $sortBy)
+        ->with('sort', ($sort === true) ? $paginateSort : false)
         ->with('grievances', $data)
         ->with('access', $access);
     }
