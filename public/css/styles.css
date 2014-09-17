@@ -373,6 +373,13 @@ Main Container */
   font-weight: normal;
   vertical-align: middle;
 }
+.main-wrapper .table thead tr.info th span.glyphicon {
+  font-size: 12px;
+}
+.main-wrapper .table thead tr.info th a:link,
+.main-wrapper .table thead tr.info th a:visited {
+  color: #fff;
+}
 .main-wrapper .table.table-striped tbody tr td {
   color: #2e3641;
 }
@@ -636,6 +643,10 @@ Sidebar */
   cursor: pointer;
   padding: 10px 20px;
 }
+.sidebar.menu-wrapper ul.menu > li.leaf .item-wrapper .fw-icons {
+  float: right;
+  color: white;
+}
 .sidebar.menu-wrapper ul.menu > li.leaf:hover {
   border-bottom: 1px solid #000;
   -webkit-transition: all 0.5s ease;
@@ -643,6 +654,11 @@ Sidebar */
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+}
+.sidebar.menu-wrapper ul.menu > li.leaf:hover .item-wrapper .fw-icons {
+  color: #4196fe;
+  /*.transition(all 0.5s ease);*/
+
 }
 .sidebar.menu-wrapper ul.menu > li.leaf:hover .fw-icon-home,
 .sidebar.menu-wrapper ul.menu > li.leaf:active .fw-icon-home {

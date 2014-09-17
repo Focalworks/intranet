@@ -329,6 +329,12 @@ Main Container */
 					font-size: 18px;
 					font-weight: normal;
 					vertical-align: middle;
+					span.glyphicon {
+						font-size: 12px;
+					}
+					a:link, a:visited {
+						color: #fff;
+					}
 				}
 			}
 		}
@@ -597,10 +603,20 @@ Sidebar */
 					border-bottom: 1px solid #000;
 					cursor: pointer;
 					padding: 10px 20px;
+					.fw-icons {
+						float: right;
+						color: white;
+					}
 				}
 				&:hover {
 					border-bottom: 1px solid #000;
 					.transition(all 0.5s ease);
+					.item-wrapper {
+						.fw-icons {
+							color: @blue;
+							/*.transition(all 0.5s ease);*/
+						}
+					}
 				}
 				&:hover, &:active {
 					.fw-icon-home {
