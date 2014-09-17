@@ -28,3 +28,5 @@ Route::group(array(
         Route::post('entity/delete', 'EntityController@deletEntity');
         Route::get('customise/toggle-menu', 'EntityController@toggleMenuActive');
     });
+
+Route::get('ticket/fetch', 'KanbanizeController@getTicketList');
