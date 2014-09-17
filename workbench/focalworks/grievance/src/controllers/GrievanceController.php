@@ -29,9 +29,6 @@ class GrievanceController extends BaseController
      */
     public function handleList()
     {
-        // flag to check sort based on which pagination link will change in view.
-        $sort = false;
-
         // fetch get data
         $sortBy = Input::get('sortby');
         $orderBy = Input::get('order');
@@ -46,12 +43,14 @@ class GrievanceController extends BaseController
             'status' => 'desc',
         );
 
+        // flag to check sort based on which pagination link will change in view.
+        $sort = false;
         if ($sortBy && $orderBy) {
             // if the sort is set, then the conditions will change
 
             $arrSortLinks[$sortBy] = $orderBy;
 
-            $conditions = array(
+            $sortOrder = array(
                 Input::get('sortby') => Input::get('order')
             );
 
@@ -71,19 +70,27 @@ class GrievanceController extends BaseController
             }
         }
         else {
-            $conditions = array(
+            $sortOrder = array(
                 'urgency' => 'desc',
                 'created_at' => 'desc',
                 'status' => 'desc',
             );
         }
 
-        foreach ($conditions as $col => $ord) {
+        // building the query with orderBy clauses
+        foreach ($sortOrder as $col => $ord) {
             $data->orderBy($col, $ord);
         }
 
         // get the user session
         $userObj = Session::get('userObj');
+
+        if(isset($userObj->grievanceFilter)) {
+            $whereClause = $userObj->grievanceFilter;
+            foreach ($whereClause as $key => $value) {
+                $data->where($key, $value);
+            }
+        }
 
         // check if the user has access to manage permissions. Based on this, manage link will come
         $access = PermApi::user_has_permission('manage_grievance');
@@ -96,11 +103,13 @@ class GrievanceController extends BaseController
         $data = $data->paginate(10);
 
         $this->layout->content = View::make('grievance::grievance-list')
-        ->with('sortArray', $arrSortLinks)
-        ->with('sortBy', $sortBy)
-        ->with('sort', ($sort === true) ? $paginateSort : false)
-        ->with('grievances', $data)
-        ->with('access', $access);
+            ->with('sortArray', $arrSortLinks)
+            ->with('userObj', $userObj)
+            ->with('sortBy', $sortBy)
+            ->with('filters', (isset($whereClause)) ? $whereClause : false)
+            ->with('sort', ($sort === true) ? $paginateSort : false)
+            ->with('grievances', $data)
+            ->with('access', $access);
     }
 
     /**
@@ -326,5 +335,41 @@ class GrievanceController extends BaseController
 
         $this->layout->content = View::make('grievance::grievance-manage')
             ->with('grievance', $grievance);
+    }
+
+    public function handleGrievanceFilter()
+    {
+        $userObj = Session::get('userObj');
+
+        $postData = Input::all();
+
+        unset($postData['_token']);
+
+        $filterArr = array();
+
+        // removing the null elements
+        foreach ($postData as $key => $value) {
+            if ($value != "") {
+                $filterArr[$key] = $value;
+            }
+        }
+
+        if (count($filterArr) > 0) {
+            $userObj->grievanceFilter = $filterArr;
+            Session::set('userObj', $userObj);
+        }
+
+        return Redirect::to('grievance/list');
+    }
+
+    public function handleGrievanceFilterRest()
+    {
+        $userObj = Session::get('userObj');
+
+        unset($userObj->grievanceFilter);
+
+        Session::set('userObj', $userObj);
+
+        return Redirect::to('grievance/list');
     }
 }

@@ -6,13 +6,60 @@
     <div class="col-md-12"><h1>List of Grievances / Suggestions</h1></div>
 </div>
 
+@if (isset($grievances) && count($grievances) > 0)
+<div class="filter-container row">
+    {{ Form::open(array('url' => 'grievance/filter', 'role' => 'form', 'class' => 'form-inline')) }}
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">Category</div>
+                @if(isset($filters['category']))
+                {{GlobalHelper::getDropdownFromArray('category', Grievance::getGrievanceCategories(), $filters['category'])}}
+                @else
+                {{GlobalHelper::getDropdownFromArray('category', Grievance::getGrievanceCategories())}}
+                @endif
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">Urgency</div>
+                @if(isset($filters['urgency']))
+                {{GlobalHelper::getDropdownFromArray('urgency', Grievance::getUrgencies(), $filters['urgency'])}}
+                @else
+                {{GlobalHelper::getDropdownFromArray('urgency', Grievance::getUrgencies())}}
+                @endif
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">Status</div>
+                @if(isset($filters['status']))
+                {{GlobalHelper::getDropdownFromArray('status', Grievance::getStatusName(), $filters['status'])}}
+                @else
+                {{GlobalHelper::getDropdownFromArray('status', Grievance::getStatusName())}}
+                @endif
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+            <div class="form-group">
+                <button class="btn btn-primary">Filter</button>
+                @if(isset($userObj->grievanceFilter))
+                    <a href="{{url('grievance/reset')}}" class="btn btn-primary">Reset</a>
+                @endif
+            </div>
+        </div>
+    {{Form::close()}}
+</div>
 <div class="row">
     <div class="col-md-12">
         <p><a href="{{url('grievance/add')}}" class="btn btn-primary btn-md">+ Add New</a></p>
     </div>
 </div>
-
-@if (isset($grievances) && count($grievances) > 0)
 <div class="row">
     <div class="col-md-12">
         <table class="table table-striped table-hover">
