@@ -10,6 +10,7 @@ Route::group(array(
     Route::get('grievance/add', 'GrievanceController@handleAdd');
     Route::get('grievance/view/{id}', 'GrievanceController@handleGrievanceView');
     Route::get('grievance/manage/{id}', 'GrievanceController@handleGrievanceManage');
+    Route::get('grievance/reset', 'GrievanceController@handleGrievanceFilterRest');
     
     Route::group(array(
         'before' => 'csrf'
@@ -17,5 +18,6 @@ Route::group(array(
     {
         Route::post('grievance/save', 'GrievanceController@handleGrievanceSave');
         Route::post('grievance/update', 'GrievanceController@handleGrievanceUpdate');
+        Route::post('grievance/filter', 'GrievanceController@handleGrievanceFilter');
     });
 });
