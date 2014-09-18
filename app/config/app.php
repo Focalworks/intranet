@@ -120,6 +120,7 @@ return array(
 	    'Intervention\Image\ImageServiceProvider',
 	    'Focalworks\Filemanaged\FilemanagedServiceProvider',
 	    'Komal\Comment\CommentServiceProvider',
+	    'Focalworks\Kanbanize\KanbanizeServiceProvider',
 
 	),
 
