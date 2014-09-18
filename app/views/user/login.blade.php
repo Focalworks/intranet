@@ -16,7 +16,7 @@
 <body class="login">
 	<div class="user-login-wrapper">
 		<div class="logo-wrapper">
-			<div class="logo-wrapper-inner"><img src="{{ asset('images/logo_0.png') }}" /></div>
+			<div class="logo-wrapper-inner img-circle"><img src="{{ asset('images/logo_0.png') }}" /></div>
 		</div>
 		<div class="login-lonk">
 			<div class="login-lonk-inner">
