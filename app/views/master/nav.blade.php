@@ -7,13 +7,16 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse nav-right-block pull-right" id="bs-example-navbar-collapse-1">
-      <!-- <div class="search-wrapper pull-left">
-        <input type="text" placeholder="Search" />
+      <!-- <div class="search-wrapper pull-left form-group has-feedback">
+        <label class="control-label sr-only" for="inputSuccess5">Hidden label</label>
+        <input type="text" class="form-control" id="inputSuccess5" placeholder="Search">
+        <span class="glyphicon glyphicon-search form-control-feedback"></span>
       </div> -->
+
       <ul class="nav navbar-nav navbar-right">
         <span class="user-image"><img src="{{asset(UserHelper::getUserPicture())}}" alt="" class="pull-left" width="35" height="35" /></span>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{UserHelper::getUserDisplayName()}} <span class="fw-icon-arrow"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{UserHelper::getUserDisplayName()}} <span class="fw-icons glyphicon glyphicon-chevron-down"></span><span class="fw-icons glyphicon glyphicon-chevron-up"></span></a>
           <ul class="dropdown-menu">
             <li>{{ link_to('edit-profile', 'Edit Profile') }}</li>
             <li class="divider"></li>
