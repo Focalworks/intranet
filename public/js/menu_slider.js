@@ -17,7 +17,8 @@ function menuSlider() {
 			menuWrapper = $('.menu-wrapper'),
 			mainWrapper = $('.main-wrapper')
 			subMenuLink = $('.menu-wrapper .menu-inner .menu .sub-menu'),
-			subMenuWrapper = $('.menu-wrapper .menu-inner .menu .sub-menu .sub-menu-wrapper');
+			subMenuWrapper = $('.menu-wrapper .menu-inner .menu .sub-menu .sub-menu-wrapper'),
+			subMenuWrapperIcon = $('.menu-wrapper .menu-inner .menu .sub-menu .item-wrapper .fw-icons-left'); /* Plus & Minus icons */
 
 	//Main Menu
 	TriggerClick = 0;
@@ -35,6 +36,7 @@ function menuSlider() {
       subMenuTriggerClick=0; 												/* Sub Menu Slide */
       subMenuWrapper.hide(); 												/* Sub Menu Slide */
       subMenuLink.removeClass('sub-menu-open'); 		/* Sub Menu Slide */
+      subMenuWrapperIcon.removeClass('glyphicon-minus').addClass('glyphicon-plus'); /* Plus & Minus icons */
 		}
 	});
 
@@ -44,10 +46,12 @@ function menuSlider() {
 		if(subMenuTriggerClick == 0){
 			subMenuTriggerClick = 1;
 			subMenuLink.addClass('sub-menu-open');
+			subMenuWrapperIcon.addClass('glyphicon-minus').removeClass('glyphicon-plus'); /* Plus & Minus icons */
 			subMenuWrapper.slideDown(100);
 		} else{
 			subMenuTriggerClick = 0;
 			subMenuLink.removeClass('sub-menu-open');
+			subMenuWrapperIcon.addClass('glyphicon-plus').removeClass('glyphicon-minus'); /* Plus & Minus icons */
 			subMenuWrapper.slideUp(100);
 		}
 

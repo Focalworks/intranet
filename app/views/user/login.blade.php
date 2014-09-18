@@ -16,11 +16,11 @@
 <body class="login">
 	<div class="user-login-wrapper">
 		<div class="logo-wrapper">
-			<div class="logo-wrapper-inner"><img src="{{ asset('images/logo_0.png') }}" /></div>
+			<div class="logo-wrapper-inner img-circle"><img src="{{ asset('images/logo_0.png') }}" /></div>
 		</div>
 		<div class="login-lonk">
 			<div class="login-lonk-inner">
-				<a href="{{url('user/oauth')}}" class="btn btn-info col-md-push1"><span class="fw-icon-lock float-left"></span>Login with Focalworks Email</a>
+				<a href="{{url('user/oauth')}}" class="btn btn-info col-md-push1"><span class="fw-icons glyphicon glyphicon-lock"></span>Login with Focalworks Email</a>
 			</div>
 		</div>
 	</div>
