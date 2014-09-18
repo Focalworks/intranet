@@ -54,6 +54,7 @@ class ReBaseApp extends Command {
         $this->call('migrate', array('--bench' => 'focalworks/grievance'));
         $this->call('migrate', array('--bench' => 'focalworks/filemanaged'));
         $this->call('migrate', array('--bench' => 'focalworks/comment'));
+        $this->call('migrate', array('--bench' => 'focalworks/kanbanize'));
 
         $this->call('asset:publish', array('debugbar/laravel-debugbar'));
         $this->call('asset:publish', array('--bench' => 'l4mod/sentryuser'));
