@@ -7,19 +7,13 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <p><a href="{{url('grievance/add')}}" class="btn btn-primary btn-md">+ Add New</a></p>
+        <p><a href="{{url('grievance/add')}}" class="btn btn-success btn-md">+ Add New</a></p>
     </div>
 </div>
 @if (isset($grievances) && count($grievances) > 0)
-<div class="filter-container row">
+<div class="filter-container clearfix">
     {{ Form::open(array('url' => 'grievance/filter', 'role' => 'form', 'class' => 'form-inline')) }}
-    <div class="col-lg-2 col-md-2 col-sm-2">
-        <div class="form-group">
-            <label class="">Filter</label><br />
-            <label class="">By</label>
-        </div>
-    </div>
-    <div class="col-lg-2 col-md-2 col-sm-2">
+    <div class="col-md-2 col-sm-4">
         <div class="form-group">
             <label class="">Category</label><br />
             @if(isset($filters['category']))
@@ -29,7 +23,7 @@
             @endif
         </div>
     </div>
-    <div class="col-lg-2 col-md-2 col-sm-2">
+    <div class="col-md-2 col-sm-4">
         <div class="form-group">
             <label class="">Urgency</label><br />
             @if(isset($filters['urgency']))
@@ -39,7 +33,7 @@
             @endif
         </div>
     </div>
-    <div class="col-lg-2 col-md-2 col-sm-2">
+    <div class="col-md-3 col-sm-4">
         <div class="form-group">
             <label class="">Status</label><br />
             @if(isset($filters['status']))
@@ -49,7 +43,7 @@
             @endif
         </div>
     </div>
-    <div class="pull-left">
+    <div class="col-md-2 col-sm-4">
         <div class="form-group">
            <label class="">&nbsp;</label><br />
             <button class="btn btn-primary">Filter</button>
