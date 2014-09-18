@@ -278,8 +278,10 @@ class GrievanceController extends BaseController
 
                 // create the folder if it is not present
                 if (! file_exists($folder)) {
+                    Log::info('Folder created' . $folder);
                     mkdir($folder, 0777, true);
                 }
+
 
                 // saving the image on desired folder
                 $image->save($folder . $filename);
@@ -288,6 +290,7 @@ class GrievanceController extends BaseController
                 $fileManagedData = array(
                     'user_id' => $userObj->id,
                     'entity' => GRIEVANCE,
+                    'entity_id' => $Grivance->id,
                     'filename' => $filename,
                     'url' => $folder . $filename,
                     'filemime' => $photo->getMimeType(),
@@ -298,10 +301,12 @@ class GrievanceController extends BaseController
                     // updating the file information in file managed table
                     $FileManaged = new FileManaged;
                     $FileManaged->updateFileInfo(Input::get('fid'), $fileManagedData);
+                    Log::info('updating the file information in file managed table');
                 } else {
                     // saving the file information in file managed table
                     $FileManaged = new FileManaged;
                     $FileManaged->saveFileInfo($fileManagedData);
+                    Log::info('saving the file information in file managed table');
                 }
 
                 // removing the file only when new file has been uploaded
