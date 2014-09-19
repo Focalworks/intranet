@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
+
 class Grievance extends Eloquent
 {
-
     protected $table = 'grievances';
     
     public function getGrievance($id)
@@ -13,11 +15,78 @@ class Grievance extends Eloquent
             $table.'.urgency', $table.'.user_id', $table.'.status', $table.'.created_at', $table.'.updated_at',
             'file_managed.id as fid', 'file_managed.url', 'file_managed.filemime', 'file_managed.filesize'
         );
-        $FileManaged = new FileManaged;
+
         $query = DB::table($this->table)->where($this->table.'.id', $id);
         $query->select($arrSelect);
         $query->join('file_managed', 'file_managed.entity_id', '=', $this->table . '.id', 'left');
         return $query;
+    }
+
+    public function saveGrievance($postData)
+    {
+        try {
+            DB::beginTransaction();
+
+            // fetch the user object from session
+            $userObj = Session::get('userObj');
+
+            // creating the grievance instance based on the post data.
+            $Grivance = new Grievance();
+            $Grivance->title = $postData['title'];
+            $Grivance->description = $postData['body'];
+            $Grivance->category = $postData['category'];
+            $Grivance->urgency = $postData['urgency'];
+            $Grivance->status = 'sadsad';
+            $Grivance->user_id = $userObj->id;
+            $Grivance->save(); // save the grievance
+
+            // upload photo if present and entry in file managed table
+            if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
+                $photo = Input::file('photo');
+                $image = Image::make($photo->getRealPath());
+
+                $filename = GlobalHelper::sanitize($photo->getClientOriginalName(), true);
+                $filename = time() . '_' . $filename;
+                $folder = 'grievance/' . $userObj->id . '/';
+
+                $image->resize(null, 240, function ($constraint)
+                {
+                    $constraint->aspectRatio();
+                });
+
+                // create the folder if it is not present
+                if (! file_exists($folder)) {
+                    mkdir($folder, 0777, true);
+                }
+
+                // saving the image on desired folder
+                $image->save($folder . $filename);
+
+                // building the data before saving
+                $fileManagedData = array(
+                    'user_id' => $userObj->id,
+                    'entity' => GRIEVANCE,
+                    'entity_id' => $Grivance->id,
+                    'filename' => $filename,
+                    'url' => $folder . $filename,
+                    'filemime' => $photo->getMimeType(),
+                    'filesize' => $photo->getSize(),
+                    'status' => 1,
+                );
+
+                // saving the file information in file managed table
+                $FileManaged = new FileManaged;
+                $FileManaged->saveFileInfo($fileManagedData);
+            }
+
+            DB::commit();
+
+            return true;
+        } catch (Exception $e) {
+            DB::rollback();
+            SentryHelper::setMessage($e->getMessage(), 'warning');
+            return false;
+        }
     }
     
     public function deleteGrievance($id)

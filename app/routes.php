@@ -20,6 +20,8 @@ Route::get('admin-login', function() {
         return View::make('user.admin-login');
     });
 
+Route::controller('api', 'ApiController');
+
 /* this section is for authenticated users only */
 Route::group(array(
         'before' => 'checkAuth'
