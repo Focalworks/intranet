@@ -201,7 +201,7 @@ class GrievanceController extends BaseController
         PermApi::access_check('manage_grievance');
 
         $Grievance = new Grievance;
-        $grievance = $Grievance->getGrievance($id)->first();
+        $grievance = $Grievance->getGrievance($id);
 
         $this->layout->content = View::make('grievance::grievance-manage')
             ->with('grievance', $grievance);
