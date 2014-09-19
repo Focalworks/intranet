@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.0.*",
-		"barryvdh/laravel-debugbar": "1.*",
+		"barryvdh/laravel-debugbar": "~1.6",
 		"cartalyst/sentry": "2.1.*",
 		"artdarek/oauth-4-laravel": "dev-master",
 		"intervention/image": "2.*"
