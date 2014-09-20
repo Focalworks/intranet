@@ -172,7 +172,14 @@ class GrievanceController extends BaseController
             PermApi::access_check('@');
         }
 
-        $this->layout->content = View::make('grievance::grievance-view')
+        // view will change to read only for tickets status not 1
+        if ($grievance->status != 1) {
+            $view = 'grievance::grievance-readonly';
+        } else {
+            $view = 'grievance::grievance-view';
+        }
+
+        $this->layout->content = View::make($view)
         ->with('grievance', $grievance);
     }
 
