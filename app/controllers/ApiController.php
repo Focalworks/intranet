@@ -38,4 +38,19 @@ class ApiController extends BaseController
 
         return $grievances;
     }
+
+    /*public function getGrievanceList()
+    {
+        $Grievance = new Grievance;
+
+        $ids = DB::table('grievances')->where('user_id', 3)->lists('id');
+
+        $grievances = array();
+
+        foreach ($ids as $id) {
+            $grievances[] = $Grievance->getGrievance($id);
+        }
+
+        return $grievances;
+    }*/
 }
