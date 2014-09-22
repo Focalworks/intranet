@@ -79,12 +79,12 @@
                 	<td class="col-md-2">{{GlobalHelper::formatDate($grievance->created_at, 'dS M Y')}}</td>
                 	<td class="col-md-2">{{Grievance::getStatusName($grievance->status)}}</td>
                 	@if ($access)
-                	<th>
+                	<td>
                 	{{link_to('grievance/manage/' . $grievance->id, 'Manage')}} / 
                 	{{link_to('grievance/list', 'Delete', array('class' => 'delete-link',
                         'data-delete-id' => $grievance->id,
                         'data-delete-entity' => GRIEVANCE))}}
-                	</th>
+                	</td>
                 	@endif
                 </tr>
                 @endforeach

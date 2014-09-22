@@ -41,6 +41,8 @@ class Grievance extends Eloquent
         $query->join('file_managed', 'file_managed.entity_id', '=', $this->table . '.id', 'left');
 
         $data = $query->first();
+        $data->time_ago = GlobalHelper::timeAgo(strtotime($data->created_at));
+        $data->comment_count = DB::table('comments')->where('section', 'grievance_view')->where('nid', $id)->count();
 
         $key = 'grievance_' . $id;
         Cache::forget($key);
