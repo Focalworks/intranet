@@ -12,11 +12,30 @@ class KanbanizeController extends BaseController
     protected $ticket_table;
     protected $project_table;
 
+    /**
+     * Defining the master layout.
+     *
+     * @var string
+     */
+    protected $layout = 'sentryuser::master';
+
     public function __construct()
     {
+        /**
+         * Setting the layout of the controller to something else
+         * if the configuration is present.
+         */
+        if (Config::get('packages/l4mod/sentryuser/sentryuser.master-tpl') != '')
+            $this->layout = Config::get('packages/l4mod/sentryuser/sentryuser.master-tpl');
+
         $this->apikey = 'sTez3KazHInejEC6F7vBqebHrGIATISh35PpqsIo';
         $this->ticket_table = 'kanbanize_tickets';
         $this->project_table = 'kanbanize_projects';
+    }
+
+    public function getLandingPage()
+    {
+        $this->layout->content = View::make('kanbanize::kanban-land');
     }
 
     public function setCurlInit($url)
