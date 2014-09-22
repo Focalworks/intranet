@@ -23,6 +23,8 @@ class Grievance extends Eloquent
         if ($data) {
             return $data;
         } else {
+            // adding the code to invalidate the cache
+            Event::fire('grievance.cacheClear', [$id]);
             return $this->loadGrievance($id);
         }
     }
@@ -45,8 +47,7 @@ class Grievance extends Eloquent
         $data->comment_count = DB::table('comments')->where('section', 'grievance_view')->where('nid', $id)->count();
 
         $key = 'grievance_' . $id;
-        Cache::forget($key);
-        Cache::forever($key, $data);
+        //Cache::forever($key, $data);
 
         return $data;
     }
@@ -111,8 +112,10 @@ class Grievance extends Eloquent
             DB::commit();
 
             $data = $this->loadGrievance($Grivance->id);
+
+            // adding the code to invalidate the cache
+            Event::fire('grievance.cacheClear', [$Grivance->id]);
             $key = 'grievance_' . $Grivance->id;
-            Cache::forget($key);
             Cache::forever($key, $data);
 
             return true;
@@ -205,8 +208,10 @@ class Grievance extends Eloquent
             DB::commit();
 
             $data = $this->loadGrievance($Grivance->id);
+
+            // adding the code to invalidate the cache
+            Event::fire('grievance.cacheClear', [$Grivance->id]);
             $key = 'grievance_' . $Grivance->id;
-            Cache::forget($key);
             Cache::forever($key, $data);
 
             return true;

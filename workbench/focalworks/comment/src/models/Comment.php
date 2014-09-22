@@ -25,8 +25,7 @@ class Comment extends Eloquent
             $cid = DB::table('comments')->insertGetId($insertData);
 
             // adding the code to invalidate the cache
-            $key = 'grievance_' . $nid;
-            Cache::forget($key);
+            Event::fire('grievance.cacheClear', [$nid]);
 
             $result = $insertData;
             $result['cid'] = $cid;

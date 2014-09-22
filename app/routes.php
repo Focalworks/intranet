@@ -30,3 +30,10 @@ Route::group(array(
         Route::post('entity/delete', 'EntityController@deletEntity');
         Route::get('customise/toggle-menu', 'EntityController@toggleMenuActive');
     });
+
+/*Event::listen('grievance.cacheClear', function($id) {
+    $key = 'grievance_' . $id;
+    Cache::forget($key);
+});*/
+
+Event::subscribe('FW\Subscriber\HookSubscriber');

@@ -39,7 +39,7 @@ class ApiController extends BaseController
         return $grievances;
     }
 
-    /*public function getGrievanceList()
+    public function getGrievanceList()
     {
         $Grievance = new Grievance;
 
@@ -52,5 +52,5 @@ class ApiController extends BaseController
         }
 
         return $grievances;
-    }*/
+    }
 }
