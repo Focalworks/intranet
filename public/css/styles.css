@@ -533,12 +533,18 @@ Main Container */
 .main-wrapper ul.comments-wrapper .comment-list-item ul.comments-wrapper .comment-list-item ul.comments-wrapper {
   margin: 0 0 0 60px;
 }
-.main-wrapper .comment-action-arapper {
+.main-wrapper .comment-post-wrapper {
+  background: #fff;
+  border: 1px solid #eaedf2;
+  margin-bottom: 10px;
+  padding: 20px;
+}
+.main-wrapper .comment-post-wrapper .comment-post .textare-comment {
+  background: #f9f9f9;
+}
+.main-wrapper .comment-post-wrapper .comment-action-arapper {
   margin-top: 20px;
   text-align: right;
-}
-.main-wrapper .form-control.textare-comment {
-  background: #f9f9f9;
 }
 /* ==========================================
 Sidebar */
