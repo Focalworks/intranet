@@ -33,7 +33,7 @@
             @endif
         </div>
     </div>
-    <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="col-lg-2 col-md-2 col-sm-4">
         <div class="form-group">
             <label class="">Status</label><br />
             @if(isset($filters['status']))
@@ -43,7 +43,7 @@
             @endif
         </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-5">
+    <div class="col-lg-2 col-md-3 col-sm-4">
         <div class="form-group">
            <label class="">&nbsp;</label><br />
             <button class="btn btn-primary">Filter</button>

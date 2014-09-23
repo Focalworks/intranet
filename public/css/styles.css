@@ -205,11 +205,30 @@ Header */
   display: none;
 }
 .navbar.navbar-default .nav-right-block .navbar-right.navbar-nav li .dropdown-menu {
-  background-color: #eaedf2;
+  background-color: #9eb2c0;
   top: 52px;
+}
+.navbar.navbar-default .nav-right-block .navbar-right.navbar-nav li .dropdown-menu > li > a {
+  font-size: 14px;
+  padding: 10px 20px;
 }
 .navbar.navbar-default .nav-right-block .navbar-right.navbar-nav li .dropdown-menu .divider {
   margin: 0;
+}
+.navbar.navbar-default .nav-right-block .navbar-right.navbar-nav li .dropdown-menu a:link,
+.navbar.navbar-default .nav-right-block .navbar-right.navbar-nav li .dropdown-menu a:visited {
+  color: #ffffff;
+}
+.navbar.navbar-default .nav-right-block .navbar-right.navbar-nav li .dropdown-menu:before {
+  border-bottom: 10px solid #9eb2c0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  z-index: 1;
+  margin-left: -5px;
 }
 /* ==========================================
 Main Container */
@@ -618,6 +637,9 @@ Sidebar */
   display: none;
   margin: 0;
   padding: 0;
+  -webkit-box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.175);
+  -moz-box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.175);
 }
 .sidebar.menu-wrapper ul.menu > li.leaf.sub-menu ul.sub-menu-wrapper li {
   border-bottom: 1px solid #555;
@@ -650,31 +672,31 @@ Sidebar */
   position: relative;
 }
 .sidebar.menu-wrapper.menu-wrapper-normal .menu-inner ul.menu li.leaf:hover.sub-menu ul.sub-menu-wrapper {
-  background: #eaedf2;
+  background: #9eb2c0;
   display: block !important;
   position: absolute;
   right: -132px;
-  top: 0;
+  top: -1px;
   z-index: 999;
 }
 .sidebar.menu-wrapper.menu-wrapper-normal .menu-inner ul.menu li.leaf:hover.sub-menu ul.sub-menu-wrapper li {
-  border-bottom: 1px solid #d7e0f0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 .sidebar.menu-wrapper.menu-wrapper-normal .menu-inner ul.menu li.leaf:hover.sub-menu ul.sub-menu-wrapper li a:link,
 .sidebar.menu-wrapper.menu-wrapper-normal .menu-inner ul.menu li.leaf:hover.sub-menu ul.sub-menu-wrapper li a:visited {
-  color: #2e3641;
-  padding: 10px 20px 10px 20px;
+  color: #ffffff;
+  padding: 10px 20px;
 }
-.sidebar.menu-wrapper.menu-wrapper-normal .menu-inner ul.menu li.leaf:hover.sub-menu ul.sub-menu-wrapper li.first {
-  border-top: 1px solid #d7e0f0;
+.sidebar.menu-wrapper.menu-wrapper-normal .menu-inner ul.menu li.leaf:hover.sub-menu ul.sub-menu-wrapper li.last {
+  border-bottom: none;
 }
 .sidebar.menu-wrapper.menu-wrapper-normal .menu-inner ul.menu li.leaf:hover.sub-menu ul.sub-menu-wrapper:before {
-  border-right: 10px solid #eaedf2;
+  border-right: 10px solid #9eb2c0;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   content: '';
   position: absolute;
-  top: 10px;
+  top: 12px;
   left: -11px;
   z-index: 1;
 }
