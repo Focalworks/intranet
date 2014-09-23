@@ -5,7 +5,7 @@ var kanbanize = angular.module('kanbanize', ['ngRoute']);
 
 kanbanize.config(['$routeProvider', function($routeProvider) {
     $routeProvider.when("/kanban/projects", {templateUrl: "kanban-api/templates/project-list", pageTitle: "Your kanbanize projects"});
-    $routeProvider.when("/kanban/tickets", {templateUrl: "kanban-api/templates/tickets", pageTitle: "Tickets from this board"});
+    $routeProvider.when("/kanban/{}/tickets", {templateUrl: "kanban-api/templates/tickets", pageTitle: "Tickets from this board"});
     $routeProvider.when("/kanban/import", {templateUrl: "admin/template/import", pageTitle: "Import expenses"});
     $routeProvider.otherwise({redirectTo: "/kanban/projects"});
 }]);
