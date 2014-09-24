@@ -219,6 +219,12 @@ Header */
 .navbar.navbar-default .nav-right-block .navbar-right.navbar-nav li .dropdown-menu a:visited {
   color: #ffffff;
 }
+.navbar.navbar-default .nav-right-block .navbar-right.navbar-nav li .dropdown-menu a:link:hover,
+.navbar.navbar-default .nav-right-block .navbar-right.navbar-nav li .dropdown-menu a:visited:hover,
+.navbar.navbar-default .nav-right-block .navbar-right.navbar-nav li .dropdown-menu a:link.active,
+.navbar.navbar-default .nav-right-block .navbar-right.navbar-nav li .dropdown-menu a:visited.active {
+  color: #2e3641;
+}
 .navbar.navbar-default .nav-right-block .navbar-right.navbar-nav li .dropdown-menu:before {
   border-bottom: 10px solid #9eb2c0;
   border-left: 10px solid transparent;
@@ -692,6 +698,12 @@ Sidebar */
 .sidebar.menu-wrapper.menu-wrapper-normal .menu-inner ul.menu li.leaf:hover.sub-menu ul.sub-menu-wrapper li a:visited {
   color: #ffffff;
   padding: 10px 20px;
+}
+.sidebar.menu-wrapper.menu-wrapper-normal .menu-inner ul.menu li.leaf:hover.sub-menu ul.sub-menu-wrapper li a:link:hover,
+.sidebar.menu-wrapper.menu-wrapper-normal .menu-inner ul.menu li.leaf:hover.sub-menu ul.sub-menu-wrapper li a:visited:hover,
+.sidebar.menu-wrapper.menu-wrapper-normal .menu-inner ul.menu li.leaf:hover.sub-menu ul.sub-menu-wrapper li a:link.active,
+.sidebar.menu-wrapper.menu-wrapper-normal .menu-inner ul.menu li.leaf:hover.sub-menu ul.sub-menu-wrapper li a:visited.active {
+  color: #2e3641;
 }
 .sidebar.menu-wrapper.menu-wrapper-normal .menu-inner ul.menu li.leaf:hover.sub-menu ul.sub-menu-wrapper li.last {
   border-bottom: none;
