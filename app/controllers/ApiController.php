@@ -39,6 +39,12 @@ class ApiController extends BaseController
         return $grievances;
     }
 
+    public function postGrievanceSave()
+    {
+        Log::info(print_r(Input::all()));
+        return Input::all();
+    }
+
     public function getGrievanceList()
     {
         $Grievance = new Grievance;
