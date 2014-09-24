@@ -81,4 +81,4 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
-require app_path().'/constants.php';
+require_once app_path().'/constants.php';

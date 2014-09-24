@@ -19,6 +19,7 @@ class KanbanizeServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('focalworks/kanbanize');
+        include __DIR__ . '/../../routes.php';
 	}
 
 	/**

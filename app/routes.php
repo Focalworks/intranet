@@ -20,6 +20,8 @@ Route::get('admin-login', function() {
         return View::make('user.admin-login');
     });
 
+Route::controller('api', 'ApiController');
+
 /* this section is for authenticated users only */
 Route::group(array(
         'before' => 'checkAuth'
@@ -29,4 +31,9 @@ Route::group(array(
         Route::get('customise/toggle-menu', 'EntityController@toggleMenuActive');
     });
 
-Route::get('ticket/fetch', 'KanbanizeController@getTicketList');
+/*Event::listen('grievance.cacheClear', function($id) {
+    $key = 'grievance_' . $id;
+    Cache::forget($key);
+});*/
+
+Event::subscribe('FW\Subscriber\HookSubscriber');

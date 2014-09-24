@@ -2,15 +2,15 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTicketsTable extends Migration {
+class CreateTicketTable extends Migration {
 
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
         Schema::dropIfExists('kanbanize_tickets');
 
         Schema::create('kanbanize_tickets', function ($table)
@@ -18,6 +18,7 @@ class CreateTicketsTable extends Migration {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('board_id');
             $table->integer('taskid');
             $table->string('position', 5)->nullable();
             $table->string('type', 20)->nullable();
@@ -46,17 +47,21 @@ class CreateTicketsTable extends Migration {
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('no action')
                 ->onDelete('no action');
-        });
-    }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
+            /*$table->foreign('board_id')->references('board_id')->on('kanbanize_projects')
+                ->onUpdate('no action')
+                ->onDelete('no action');*/
+        });
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
         Schema::dropIfExists('kanbanize_tickets');
-    }
+	}
 
 }

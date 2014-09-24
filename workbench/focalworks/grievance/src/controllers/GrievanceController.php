@@ -146,71 +146,15 @@ class GrievanceController extends BaseController
             return Redirect::to('grievance/add')->withInput()->withErrors($validator);
         }
 
-        try {
-            DB::beginTransaction();
+        $Grievance = new Grievance;
 
-            // fetch the user object from session
-            $userObj = Session::get('userObj');
-
-            // creating the grievance instance based on the post data.
-            $Grivance = new Grievance();
-            $Grivance->title = Input::get('title');
-            $Grivance->description = Input::Get('body');
-            $Grivance->category = Input::Get('category');
-            $Grivance->urgency = Input::Get('urgency');
-            $Grivance->status = 1;
-            $Grivance->user_id = $userObj->id;
-            $Grivance->save(); // save the grievance
-
-            // upload photo if present and entry in file managed table
-            if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
-                $photo = Input::file('photo');
-                $image = Image::make($photo->getRealPath());
-
-                $filename = GlobalHelper::sanitize($photo->getClientOriginalName(), true);
-                $filename = time() . '_' . $filename;
-                $folder = 'grievance/' . $userObj->id . '/';
-
-                $image->resize(null, 240, function ($constraint)
-                {
-                    $constraint->aspectRatio();
-                });
-
-                // create the folder if it is not present
-                if (! file_exists($folder)) {
-                    mkdir($folder, 0777, true);
-                }
-
-                // saving the image on desired folder
-                $image->save($folder . $filename);
-
-                // building the data before saving
-                $fileManagedData = array(
-                    'user_id' => $userObj->id,
-                    'entity' => GRIEVANCE,
-                    'entity_id' => $Grivance->id,
-                    'filename' => $filename,
-                    'url' => $folder . $filename,
-                    'filemime' => $photo->getMimeType(),
-                    'filesize' => $photo->getSize(),
-                    'status' => 1,
-                );
-
-                // saving the file information in file managed table
-                $FileManaged = new FileManaged;
-                $FileManaged->saveFileInfo($fileManagedData);
-            }
-
-            DB::commit();
-
+        if ($Grievance->saveGrievance(Input::all())) {
             SentryHelper::setMessage('A new Grievance has been saved');
-            return Redirect::to('grievance/list');
-        } catch (Exception $e) {
-            DB::rollback();
-            SentryHelper::setMessage($e->getMessage(), 'warning');
+        } else {
             SentryHelper::setMessage('Grievance has not been saved', 'warning');
-            return Redirect::to('grievance/list');
         }
+
+        return Redirect::to('grievance/list');
     }
 
     /**
@@ -220,7 +164,7 @@ class GrievanceController extends BaseController
     public function handleGrievanceView($id)
     {
         $Grievance = new Grievance;
-        $grievance = $Grievance->getGrievance($id)->first();
+        $grievance = $Grievance->getGrievance($id);
         $userObj = Session::get('userObj');
 
         // if the user is trying to edit / view an entry which he doesn't own
@@ -228,7 +172,14 @@ class GrievanceController extends BaseController
             PermApi::access_check('@');
         }
 
-        $this->layout->content = View::make('grievance::grievance-view')
+        // view will change to read only for tickets status not 1
+        if ($grievance->status != 1) {
+            $view = 'grievance::grievance-readonly';
+        } else {
+            $view = 'grievance::grievance-view';
+        }
+
+        $this->layout->content = View::make($view)
         ->with('grievance', $grievance);
     }
 
@@ -238,89 +189,15 @@ class GrievanceController extends BaseController
      */
     public function handleGrievanceUpdate()
     {
-        try {
-            DB::beginTransaction();
+        $Grievance = new Grievance;
 
-            // fetch the user object from session
-            $userObj = Session::get('userObj');
-
-            $Grivance = Grievance::find(Input::get('id'));
-            $Grivance->title = Input::get('title');
-            $Grivance->description = Input::Get('body');
-            $Grivance->category = Input::Get('category');
-            $Grivance->urgency = Input::Get('urgency');
-
-            // if the form is coming from managed view then save the status as well
-            if (Input::get('status')) {
-                $Grivance->status = Input::get('status');
-            }
-            $Grivance->save();
-
-            // upload photo if present and entry in file managed table
-            if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
-                // do when file is present in the post
-                if (Input::get('fid') != 0) {
-                    $file = FileManaged::find(Input::get('fid'));
-                    $urlToDelete = $file->url;
-                }
-
-                $photo = Input::file('photo');
-                $image = Image::make($photo->getRealPath());
-
-                $filename = GlobalHelper::sanitize($photo->getClientOriginalName(), true);
-                $filename = time() . '_' . $filename;
-                $folder = 'grievance/' . $userObj->id . '/';
-
-                $image->resize(null, 240, function ($constraint)
-                {
-                    $constraint->aspectRatio();
-                });
-
-                // create the folder if it is not present
-                if (! file_exists($folder)) {
-                    mkdir($folder, 0777, true);
-                }
-
-                // saving the image on desired folder
-                $image->save($folder . $filename);
-
-                // building the data before saving
-                $fileManagedData = array(
-                    'user_id' => $userObj->id,
-                    'entity' => GRIEVANCE,
-                    'filename' => $filename,
-                    'url' => $folder . $filename,
-                    'filemime' => $photo->getMimeType(),
-                    'filesize' => $photo->getSize(),
-                );
-
-                if (Input::get('fid') != 0) {
-                    // updating the file information in file managed table
-                    $FileManaged = new FileManaged;
-                    $FileManaged->updateFileInfo(Input::get('fid'), $fileManagedData);
-                } else {
-                    // saving the file information in file managed table
-                    $FileManaged = new FileManaged;
-                    $FileManaged->saveFileInfo($fileManagedData);
-                }
-
-                // removing the file only when new file has been uploaded
-                if (isset($urlToDelete)) {
-                    File::delete($urlToDelete);
-                }
-            }
-
-            DB::commit();
-
+        if ($Grievance->updateGrievance()) {
             SentryHelper::setMessage('Grievance has been updated');
-
-            return Redirect::to('grievance/list');
-
-        } catch (Exception $e) {
-            DB::rollback();
-            SentryHelper::setMessage($e->getMessage(), 'warning');
-            return Redirect::to('grievance/list');
+        } else {
+            SentryHelper::setMessage('Grievance has not been updated', 'warning');
         }
+
+        return Redirect::to('grievance/list');
     }
 
     public function handleGrievanceManage($id)
@@ -331,7 +208,7 @@ class GrievanceController extends BaseController
         PermApi::access_check('manage_grievance');
 
         $Grievance = new Grievance;
-        $grievance = $Grievance->getGrievance($id)->first();
+        $grievance = $Grievance->getGrievance($id);
 
         $this->layout->content = View::make('grievance::grievance-manage')
             ->with('grievance', $grievance);

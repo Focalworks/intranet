@@ -113,6 +113,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+        'Barryvdh\Debugbar\ServiceProvider',
 		'Cartalyst\Sentry\SentryServiceProvider',
 	    'Artdarek\OAuth\OAuthServiceProvider',
 		'Amitavroy\Sentryuser\SentryuserServiceProvider',
@@ -120,6 +121,7 @@ return array(
 	    'Intervention\Image\ImageServiceProvider',
 	    'Focalworks\Filemanaged\FilemanagedServiceProvider',
 	    'Komal\Comment\CommentServiceProvider',
+	    'Focalworks\Kanbanize\KanbanizeServiceProvider',
 
 	),
 

@@ -2,10 +2,34 @@
 
 class Grievance extends Eloquent
 {
-
     protected $table = 'grievances';
+
+    public function getGrievanceMultiple(array $ids)
+    {
+        $data = array();
+
+        foreach ($ids as $id) {
+            $data[] = $this->getGrievance($id);
+        }
+
+        return $data;
+    }
     
     public function getGrievance($id)
+    {
+        $key = 'grievance_' . $id;
+        $data = Cache::get($key);
+
+        if ($data) {
+            return $data;
+        } else {
+            // adding the code to invalidate the cache
+            Event::fire('grievance.cacheClear', [$id]);
+            return $this->loadGrievance($id);
+        }
+    }
+
+    private function loadGrievance($id)
     {
         $table = $this->table;
         $arrSelect = array(
@@ -13,13 +37,192 @@ class Grievance extends Eloquent
             $table.'.urgency', $table.'.user_id', $table.'.status', $table.'.created_at', $table.'.updated_at',
             'file_managed.id as fid', 'file_managed.url', 'file_managed.filemime', 'file_managed.filesize'
         );
-        $FileManaged = new FileManaged;
+
         $query = DB::table($this->table)->where($this->table.'.id', $id);
         $query->select($arrSelect);
         $query->join('file_managed', 'file_managed.entity_id', '=', $this->table . '.id', 'left');
-        return $query;
+
+        $data = $query->first();
+        $data->time_ago = GlobalHelper::timeAgo(strtotime($data->created_at));
+        $data->comment_count = DB::table('comments')->where('section', 'grievance_view')->where('nid', $id)->count();
+
+        $key = 'grievance_' . $id;
+        //Cache::forever($key, $data);
+
+        return $data;
     }
-    
+
+    public function saveGrievance($postData)
+    {
+        try {
+            DB::beginTransaction();
+
+            // fetch the user object from session
+            $userObj = Session::get('userObj');
+
+            // creating the grievance instance based on the post data.
+            $Grivance = new Grievance();
+            $Grivance->title = $postData['title'];
+            $Grivance->description = $postData['body'];
+            $Grivance->category = $postData['category'];
+            $Grivance->urgency = $postData['urgency'];
+            $Grivance->status = 1;
+            $Grivance->user_id = $userObj->id;
+            $Grivance->save(); // save the grievance
+
+            // upload photo if present and entry in file managed table
+            if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
+                $photo = Input::file('photo');
+                $image = Image::make($photo->getRealPath());
+
+                $filename = GlobalHelper::sanitize($photo->getClientOriginalName(), true);
+                $filename = time() . '_' . $filename;
+                $folder = 'grievance/' . $userObj->id . '/';
+
+                $image->resize(null, 240, function ($constraint)
+                {
+                    $constraint->aspectRatio();
+                });
+
+                // create the folder if it is not present
+                if (! file_exists($folder)) {
+                    mkdir($folder, 0777, true);
+                }
+
+                // saving the image on desired folder
+                $image->save($folder . $filename);
+
+                // building the data before saving
+                $fileManagedData = array(
+                    'user_id' => $userObj->id,
+                    'entity' => GRIEVANCE,
+                    'entity_id' => $Grivance->id,
+                    'filename' => $filename,
+                    'url' => $folder . $filename,
+                    'filemime' => $photo->getMimeType(),
+                    'filesize' => $photo->getSize(),
+                    'status' => 1,
+                );
+
+                // saving the file information in file managed table
+                $FileManaged = new FileManaged;
+                $FileManaged->saveFileInfo($fileManagedData);
+            }
+
+            DB::commit();
+
+            $data = $this->loadGrievance($Grivance->id);
+
+            // adding the code to invalidate the cache
+            Event::fire('grievance.cacheClear', [$Grivance->id]);
+            $key = 'grievance_' . $Grivance->id;
+            Cache::forever($key, $data);
+
+            return true;
+        } catch (Exception $e) {
+            DB::rollback();
+            SentryHelper::setMessage($e->getMessage(), 'warning');
+            return false;
+        }
+    }
+
+    public function updateGrievance()
+    {
+        try {
+            DB::beginTransaction();
+
+            // fetch the user object from session
+            $userObj = Session::get('userObj');
+
+            $Grivance = Grievance::find(Input::get('id'));
+            $Grivance->title = Input::get('title');
+            $Grivance->description = Input::Get('body');
+            $Grivance->category = Input::Get('category');
+            $Grivance->urgency = Input::Get('urgency');
+
+            // if the form is coming from managed view then save the status as well
+            if (Input::get('status')) {
+                $Grivance->status = Input::get('status');
+            }
+            $Grivance->save();
+
+            // upload photo if present and entry in file managed table
+            if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
+                // do when file is present in the post
+                if (Input::get('fid') != 0) {
+                    $file = FileManaged::find(Input::get('fid'));
+                    $urlToDelete = $file->url;
+                }
+
+                $photo = Input::file('photo');
+                $image = Image::make($photo->getRealPath());
+
+                $filename = GlobalHelper::sanitize($photo->getClientOriginalName(), true);
+                $filename = time() . '_' . $filename;
+                $folder = 'grievance/' . $userObj->id . '/';
+
+                $image->resize(null, 240, function ($constraint)
+                {
+                    $constraint->aspectRatio();
+                });
+
+                // create the folder if it is not present
+                if (! file_exists($folder)) {
+                    Log::info('Folder created' . $folder);
+                    mkdir($folder, 0777, true);
+                }
+
+
+                // saving the image on desired folder
+                $image->save($folder . $filename);
+
+                // building the data before saving
+                $fileManagedData = array(
+                    'user_id' => $userObj->id,
+                    'entity' => GRIEVANCE,
+                    'entity_id' => $Grivance->id,
+                    'filename' => $filename,
+                    'url' => $folder . $filename,
+                    'filemime' => $photo->getMimeType(),
+                    'filesize' => $photo->getSize(),
+                );
+
+                if (Input::get('fid') != 0) {
+                    // updating the file information in file managed table
+                    $FileManaged = new FileManaged;
+                    $FileManaged->updateFileInfo(Input::get('fid'), $fileManagedData);
+                    Log::info('updating the file information in file managed table');
+                } else {
+                    // saving the file information in file managed table
+                    $FileManaged = new FileManaged;
+                    $FileManaged->saveFileInfo($fileManagedData);
+                    Log::info('saving the file information in file managed table');
+                }
+
+                // removing the file only when new file has been uploaded
+                if (isset($urlToDelete)) {
+                    File::delete($urlToDelete);
+                }
+            }
+
+            DB::commit();
+
+            $data = $this->loadGrievance($Grivance->id);
+
+            // adding the code to invalidate the cache
+            Event::fire('grievance.cacheClear', [$Grivance->id]);
+            $key = 'grievance_' . $Grivance->id;
+            Cache::forever($key, $data);
+
+            return true;
+
+        } catch (Exception $e) {
+            DB::rollback();
+            SentryHelper::setMessage($e->getMessage(), 'warning');
+            return false;
+        }
+    }
+
     public function deleteGrievance($id)
     {
         $Grievance = Grievance::find($id);
