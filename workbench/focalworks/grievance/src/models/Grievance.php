@@ -70,44 +70,8 @@ class Grievance extends Eloquent
             $Grivance->user_id = $userObj->id;
             $Grivance->save(); // save the grievance
 
-            // upload photo if present and entry in file managed table
-            if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
-                $photo = Input::file('photo');
-                $image = Image::make($photo->getRealPath());
-
-                $filename = GlobalHelper::sanitize($photo->getClientOriginalName(), true);
-                $filename = time() . '_' . $filename;
-                $folder = 'grievance/' . $userObj->id . '/';
-
-                $image->resize(null, 240, function ($constraint)
-                {
-                    $constraint->aspectRatio();
-                });
-
-                // create the folder if it is not present
-                if (! file_exists($folder)) {
-                    mkdir($folder, 0777, true);
-                }
-
-                // saving the image on desired folder
-                $image->save($folder . $filename);
-
-                // building the data before saving
-                $fileManagedData = array(
-                    'user_id' => $userObj->id,
-                    'entity' => GRIEVANCE,
-                    'entity_id' => $Grivance->id,
-                    'filename' => $filename,
-                    'url' => $folder . $filename,
-                    'filemime' => $photo->getMimeType(),
-                    'filesize' => $photo->getSize(),
-                    'status' => 1,
-                );
-
-                // saving the file information in file managed table
-                $FileManaged = new FileManaged;
-                $FileManaged->saveFileInfo($fileManagedData);
-            }
+            // handling the file upload
+            $this->handleFileUpload($Grivance);
 
             DB::commit();
 
@@ -146,64 +110,8 @@ class Grievance extends Eloquent
             }
             $Grivance->save();
 
-            // upload photo if present and entry in file managed table
-            if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
-                // do when file is present in the post
-                if (Input::get('fid') != 0) {
-                    $file = FileManaged::find(Input::get('fid'));
-                    $urlToDelete = $file->url;
-                }
-
-                $photo = Input::file('photo');
-                $image = Image::make($photo->getRealPath());
-
-                $filename = GlobalHelper::sanitize($photo->getClientOriginalName(), true);
-                $filename = time() . '_' . $filename;
-                $folder = 'grievance/' . $userObj->id . '/';
-
-                $image->resize(null, 240, function ($constraint)
-                {
-                    $constraint->aspectRatio();
-                });
-
-                // create the folder if it is not present
-                if (! file_exists($folder)) {
-                    Log::info('Folder created' . $folder);
-                    mkdir($folder, 0777, true);
-                }
-
-
-                // saving the image on desired folder
-                $image->save($folder . $filename);
-
-                // building the data before saving
-                $fileManagedData = array(
-                    'user_id' => $userObj->id,
-                    'entity' => GRIEVANCE,
-                    'entity_id' => $Grivance->id,
-                    'filename' => $filename,
-                    'url' => $folder . $filename,
-                    'filemime' => $photo->getMimeType(),
-                    'filesize' => $photo->getSize(),
-                );
-
-                if (Input::get('fid') != 0) {
-                    // updating the file information in file managed table
-                    $FileManaged = new FileManaged;
-                    $FileManaged->updateFileInfo(Input::get('fid'), $fileManagedData);
-                    Log::info('updating the file information in file managed table');
-                } else {
-                    // saving the file information in file managed table
-                    $FileManaged = new FileManaged;
-                    $FileManaged->saveFileInfo($fileManagedData);
-                    Log::info('saving the file information in file managed table');
-                }
-
-                // removing the file only when new file has been uploaded
-                if (isset($urlToDelete)) {
-                    File::delete($urlToDelete);
-                }
-            }
+            // handling the file upload
+            $this->handleFileUpload($Grivance);
 
             DB::commit();
 
@@ -220,6 +128,71 @@ class Grievance extends Eloquent
             DB::rollback();
             SentryHelper::setMessage($e->getMessage(), 'warning');
             return false;
+        }
+    }
+
+    public function handleFileUpload($Grivance)
+    {
+        // fetch the user object from session
+        $userObj = Session::get('userObj');
+
+        // upload photo if present and entry in file managed table
+        if (Input::hasFile('photo') && Input::file('photo')->isValid()) {
+            // do when file is present in the post
+            if (Input::get('fid') != 0) {
+                $file = FileManaged::find(Input::get('fid'));
+                $urlToDelete = $file->url;
+            }
+
+            $photo = Input::file('photo');
+            $image = Image::make($photo->getRealPath());
+
+            $filename = GlobalHelper::sanitize($photo->getClientOriginalName(), true);
+            $filename = time() . '_' . $filename;
+            $folder = 'grievance/' . $userObj->id . '/';
+
+            $image->resize(null, 240, function ($constraint)
+            {
+                $constraint->aspectRatio();
+            });
+
+            // create the folder if it is not present
+            if (! file_exists($folder)) {
+                Log::info('Folder created' . $folder);
+                mkdir($folder, 0777, true);
+            }
+
+
+            // saving the image on desired folder
+            $image->save($folder . $filename);
+
+            // building the data before saving
+            $fileManagedData = array(
+              'user_id' => $userObj->id,
+              'entity' => GRIEVANCE,
+              'entity_id' => $Grivance->id,
+              'filename' => $filename,
+              'url' => $folder . $filename,
+              'filemime' => $photo->getMimeType(),
+              'filesize' => $photo->getSize(),
+            );
+
+            if (Input::get('fid') != 0) {
+                // updating the file information in file managed table
+                $FileManaged = new FileManaged;
+                $FileManaged->updateFileInfo(Input::get('fid'), $fileManagedData);
+                Log::info('updating the file information in file managed table');
+            } else {
+                // saving the file information in file managed table
+                $FileManaged = new FileManaged;
+                $FileManaged->saveFileInfo($fileManagedData);
+                Log::info('saving the file information in file managed table');
+            }
+
+            // removing the file only when new file has been uploaded
+            if (isset($urlToDelete)) {
+                File::delete($urlToDelete);
+            }
         }
     }
 

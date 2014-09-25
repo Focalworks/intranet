@@ -41,8 +41,23 @@ class ApiController extends BaseController
 
     public function postGrievanceSave()
     {
-        Log::info(print_r(Input::all()));
-        return Input::all();
+        $title = Input::get('title');
+        $body = Input::get('body');
+        $category = Input::get('category');
+        $urgency = Input::get('urgency');
+
+        $Grievance = new Grievance;
+
+        $Grievance->title = $title;
+        $Grievance->description = $body;
+        $Grievance->category = $category;
+        $Grievance->urgency = $urgency;
+        $Grievance->user_id = $this->user->id;
+        $Grievance->status = 1;
+
+        $Grievance->save();
+
+        return $Grievance;
     }
 
     public function getGrievanceList()
