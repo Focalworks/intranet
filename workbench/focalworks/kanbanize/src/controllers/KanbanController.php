@@ -14,4 +14,11 @@ class KanbanController extends BaseController
         $projects = $kanban->getAllProjects();
         return $projects;
     }
+
+    public function getAllTickets() {
+        $bid = Input::get('bid');
+        $kanban = new Kanban;
+        $tickets = $kanban->getAllTickets($bid);
+        return $tickets;
+    }
 }
