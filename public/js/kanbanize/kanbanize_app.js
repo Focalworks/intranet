@@ -45,13 +45,38 @@ kanbanize.factory('projectsFactory', ['$http', function($http) {
     return projects;
 }]);
 
+kanbanize.factory('ticketsFactory',  ['$http', function($http) {
+  var tickets = {};
+  tickets.data = "";
+
+  /**
+   * function to get ticket list
+   * @returns {string}
+  */
+
+  tickets.load = function(bid) {
+    this.data = $http.get("http://localhost/focalworks-intranet/public/kanban/all-tickets?bid="+bid).then(function(ticketsData){
+      return ticketsData;
+    });
+    return this.data;
+  };
+  tickets.get = function(bid) {
+    return this.data === '' ? this.load(bid) : this.data;
+  };
+  return tickets;
+}]);
+
+
+
 kanbanize.controller('projectCtrl', function($scope, projectsFactory) {
     projectsFactory.get().then(function(data) {
         $scope.projects = data.data;
     });
 });
 
-kanbanize.controller('ticketCtrl', function($scope, $routeParams, projectsFactory) {
+kanbanize.controller('ticketCtrl', function($scope, $routeParams, ticketsFactory) {
     $scope.boardId = $routeParams.board;
-    console.log($scope.boardId);
+    ticketsFactory.get($scope.boardId).then(function(data){
+      $scope.tickets = data.data;
+  });
 });

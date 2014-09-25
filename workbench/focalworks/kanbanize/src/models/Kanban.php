@@ -37,4 +37,20 @@ class Kanban extends Eloquent
             return $query;
         }
     }
+
+    public function getAllTickets($bid)
+    {
+        $boardList = 'board_list'.$bid;
+        $cacheBoard = Cache::get($boardList);
+        if(!empty($cacheBoard)) {
+            return $cacheBoard;
+        }
+        else {
+            $getBoardList = DB::table($this->ticketTbl)
+              ->where('board_id', $bid)
+              ->orderBy('board_id', 'desc')->get();
+            Cache::forever($boardList, $getBoardList);
+            return $getBoardList;
+        }
+    }
 }
