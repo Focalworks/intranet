@@ -11,6 +11,7 @@ class KanbanizeController extends BaseController
     protected $apikey;
     protected $ticket_table;
     protected $project_table;
+    protected $log_time_table;
 
     /**
      * Defining the master layout.
@@ -31,6 +32,7 @@ class KanbanizeController extends BaseController
         $this->apikey = 'sTez3KazHInejEC6F7vBqebHrGIATISh35PpqsIo';
         $this->ticket_table = 'kanbanize_tickets';
         $this->project_table = 'kanbanize_projects';
+        $this->log_time_table = 'kanbanize_log_time';
     }
 
     public function getLandingPage()
@@ -104,7 +106,6 @@ class KanbanizeController extends BaseController
 
     public function fetchAllTickets()
     {
-        DB::table($this->ticket_table)->truncate();
         $ids = DB::table($this->project_table)->lists('board_id');
 
         foreach ($ids as $id) {
@@ -162,6 +163,19 @@ class KanbanizeController extends BaseController
             * Pending : Skip the row with Columname Complete
             */
             DB::table($this->ticket_table)->insert($fieldData);
+            $this->saveLogTime($fieldData);
         }
+    }
+
+    private function saveLogTime($data)
+    {
+        $dataToSave = array(
+            'created_at' => date('Y-m-d h:m:s', time()),
+            'board_id' => $data['board_id'],
+            'taskid' => $data['taskid'],
+            'logedtime' => $data['logedtime'],
+        );
+
+        DB::table($this->log_time_table)->insert($dataToSave);
     }
 }
