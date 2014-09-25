@@ -110,7 +110,10 @@ class KanbanizeController extends BaseController
 
         foreach ($ids as $id) {
             $this->getTicketList($id);
+            $key = 'board_list'.$id;
+            Cache::forget($key);
         }
+
     }
 
     private function getTicketList($id)
