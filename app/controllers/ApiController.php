@@ -57,6 +57,43 @@ class ApiController extends BaseController
 
         $Grievance->save();
 
+        if (Input::get('image')) {
+            $image_binary_data = base64_decode(Input::get('image'));
+            $folder_path = 'grievance/' . $this->user->id . '/';
+            $filename = time() . '.jpg';
+            $file_with_path = $folder_path . $filename;
+            $source = imagecreatefromstring($image_binary_data);
+
+            if (!file_exists($folder_path)) {
+                mkdir($folder_path, 0777, true);
+            }
+
+            $imageSave = imagejpeg($source,$file_with_path,60);
+            imagedestroy($source);
+
+            // building the data before saving
+            $fileManagedData = array(
+              'user_id' => $this->user->id,
+              'entity' => GRIEVANCE,
+              'entity_id' => $Grievance->id,
+              'filename' => $filename,
+              'url' => $folder_path . $filename,
+              'filemime' => 'image/jpeg',
+              'filesize' => Input::get('file_size'),
+            );
+
+            $image = Image::make(public_path($folder_path . $filename));
+
+            $image->resize(null, 240, function ($constraint)
+            {
+                $constraint->aspectRatio();
+            });
+            $image->save(public_path($folder_path . $filename));
+
+            $FileManaged = new FileManaged;
+            $FileManaged->saveFileInfo($fileManagedData);
+        }
+
         return $Grievance;
     }
 

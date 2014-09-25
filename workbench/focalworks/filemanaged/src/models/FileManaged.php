@@ -11,7 +11,11 @@ class FileManaged extends Eloquent
     public function saveFileInfo($data)
     {
         $userObj = Session::get('userObj');
-        $data['user_id'] = $userObj->id;
+
+        if (!isset($data['user_id'])) {
+            $data['user_id'] = $userObj->id;
+        }
+
         $data['created_at'] = date('Y-m-d G:H:s', time());
         $data['updated_at'] = date('Y-m-d G:H:s', time());
         
