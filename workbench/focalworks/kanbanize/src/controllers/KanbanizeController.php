@@ -59,6 +59,7 @@ class KanbanizeController extends BaseController
         curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($handle, CURLOPT_POST, true);
+        curl_setopt($handle, CURLOPT_POSTFIELDS, array('json' => 'hello'));
         curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
 
         $call = (object) 'call';
