@@ -12,7 +12,7 @@ class ApiController extends BaseController
 
     public function __construct()
     {
-        /*header("Access-Control-Allow-Origin: *"); // this is required for cross domain.
+        header("Access-Control-Allow-Origin: *"); // this is required for cross domain.
         if (isset($_SERVER['HTTP_EMAIL']))
         {
             $user = Sentry::findUserByLogin($_SERVER['HTTP_EMAIL']);
@@ -21,7 +21,7 @@ class ApiController extends BaseController
             } else {
                 App::abort(500, 'Access denied');
             }
-        }*/
+        }
     }
 
     public function getGrievanceList()
@@ -109,7 +109,6 @@ class ApiController extends BaseController
             'correct_response' => 'The quick brown fox jumps over the lazy dog.',
           ),
         );
-
         return $data;
     }
 }
