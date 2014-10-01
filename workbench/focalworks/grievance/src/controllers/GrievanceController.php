@@ -102,7 +102,12 @@ class GrievanceController extends BaseController
 
         $data = $data->paginate(10);
 
+        $Grievance = new Grievance;
+        $userGrievanceCount = $Grievance->getGrievanceCount($userObj->id);
+        
+
         $this->layout->content = View::make('grievance::grievance-list')
+            ->with('grievanceCount', $userGrievanceCount)
             ->with('sortArray', $arrSortLinks)
             ->with('userObj', $userObj)
             ->with('sortBy', $sortBy)

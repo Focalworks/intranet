@@ -43,7 +43,9 @@ class Comment extends Eloquent
         $commentObj = new stdClass();
         $commentObj->comments = array();
         $temp = array();
+
         $commentObj = $this->buildNestedComments($commentData);
+        
         return $commentObj;
     }
 
@@ -57,6 +59,7 @@ class Comment extends Eloquent
     function buildNestedComments($comments, $parentId = 0) {
         $nestedObj = array();
         foreach ($comments as $comment) {
+            $comment->created_time=GlobalHelper::timeAgo($comment->created);
             if ($comment->pid == $parentId) {
                 $children = $this->buildNestedComments($comments, $comment->cid);
                 if ($children) {

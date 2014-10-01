@@ -29,6 +29,17 @@ class Grievance extends Eloquent
         }
     }
 
+    public function getGrievanceCount($id = null)
+    {
+        $query = DB::table($this->table);
+
+        if ($id != null) {
+            $query->where('user_id', $id);
+        }
+
+        return $query->count();
+    }
+
     private function loadGrievance($id)
     {
         $table = $this->table;
