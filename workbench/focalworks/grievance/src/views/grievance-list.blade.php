@@ -96,7 +96,7 @@
     </div>
 </div>
 @else
-    <h2>No records found. Reset your filter by clicking {{link_to('grievance/reset', 'here')}}</h2>
+    <h2>No records found.</h2>
 @endif
 
 @if ($sort)

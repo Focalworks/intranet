@@ -31,7 +31,11 @@ class Comment extends Eloquent
             $result['cid'] = $cid;
             $result['date'] = date('d/m/Y h:m a', time());
             $result['username'] = 'Komal Savla';
-
+            $userdata=  DB::table('users As us') 
+                        ->where('id',$uid)->first();
+            $result['first_name']=$userdata->first_name;
+            $result['last_name']=$userdata->last_name;
+            $result['created_time']=GlobalHelper::timeAgo($insertData['created']);
             return $result;
         }
     }
