@@ -189,6 +189,29 @@ class GrievanceController extends BaseController
      */
     public function handleGrievanceUpdate()
     {
+        $rules = array(
+            'title' => 'required|min:3',
+            'body' => 'required|min:10',
+            'category' => 'required',
+            'urgency' => 'required',
+        );
+
+        $messages = array(
+            'title.required' => 'A title is required',
+            'title.min' => 'Title should be longer. Min 3 characters',
+        );
+
+        // doing the validation, passing post data, rules and the messages
+        $validator = Validator::make(Input::all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            // send back to the page with the input data and errors
+            GlobalHelper::setMessage('Fix the errors........', 'warning'); // setting the error message
+            $gid=Input::get('id');
+            return Redirect::to('grievance/view/'.$gid)->withInput()->withErrors($validator);
+
+        }
+
         $Grievance = new Grievance;
 
         if ($Grievance->updateGrievance()) {
