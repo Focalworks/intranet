@@ -38,7 +38,10 @@ class Comment extends Eloquent
 
     /** Function to get all comments **/
     function get_comments($nid, $section) {
-        $commentData = DB::table('comments')->where('nid', $nid)->where('section', $section)->orderBy(DB::raw('SUBSTRING(thread, 1, (LENGTH(thread) - 1))'))->get();
+        $commentData = DB::table('comments as cm')
+                ->leftJoin('users As us', 'cm.user_id', '=', 'us.id')
+                ->where('nid', $nid)->where('section', $section)
+                ->orderBy(DB::raw('SUBSTRING(thread, 1, (LENGTH(thread) - 1))'))->get();
 
         $commentObj = new stdClass();
         $commentObj->comments = array();
