@@ -46,6 +46,9 @@ class Grievance extends Eloquent
         $data->time_ago = GlobalHelper::timeAgo(strtotime($data->created_at));
         $data->comment_count = DB::table('comments')->where('section', 'grievance_view')->where('nid', $id)->count();
 
+        $comments = new Comment;
+        $data->comments = $comments->get_comments($id, 'grievance_view');
+
         $key = 'grievance_' . $id;
         //Cache::forever($key, $data);
 

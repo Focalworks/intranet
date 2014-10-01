@@ -5,7 +5,7 @@ class Comment extends Eloquent
     /** Save comments **/
     function save_comments($commentsObj, $nid, $parent_cid, $uid, $op) {
         if($op && $op == 'Edit') {
-            $cid = DB::table('comments')->update(array('comment' => $commentsObj->comment));
+            $cid = DB::table('comments')->where('cid', $parent_cid)->update(array('comment' => $commentsObj->comment));
         }else {
             $result = array();
 
