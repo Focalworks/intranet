@@ -59,7 +59,7 @@
 @if (isset($grievances) && count($grievances) > 0)
 <div class="row">
     <div class="col-md-12">
-        <p>Your total Grievances: {{$grievanceCount}}</p>
+        <p>Total Grievances: {{$grievanceCount}}</p>
         <table class="table table-striped table-hover">
             <thead>
                 <tr class="info">

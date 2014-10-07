@@ -95,16 +95,19 @@ class GrievanceController extends BaseController
         // check if the user has access to manage permissions. Based on this, manage link will come
         $access = PermApi::user_has_permission('manage_grievance');
 
-        // if the permission is not applicable, then see only own 
+        // fetch Grievance count before admin check
+        $Grievance = new Grievance;
+        $userGrievanceCount = $Grievance->getGrievanceCount($userObj->id);
+
+        // if the permission is not applicable, then see only own
         if (!$access) {
             $data = $data->where('user_id', $userObj->id);
+        } else {
+            // for admin the Grievance count is total because we are checking count condition.
+            $userGrievanceCount = $Grievance->getGrievanceCount();;
         }
 
         $data = $data->paginate(10);
-
-        $Grievance = new Grievance;
-        $userGrievanceCount = $Grievance->getGrievanceCount($userObj->id);
-        
 
         $this->layout->content = View::make('grievance::grievance-list')
             ->with('grievanceCount', $userGrievanceCount)
