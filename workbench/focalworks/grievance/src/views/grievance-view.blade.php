@@ -61,7 +61,7 @@
 {{ Form::close() }}
 
 <div ng-app="articleApp" ng-controller="mainCntrl">
-<comment data-section="grievance_view" data-nid="{{$grievance->id}}"></comment>
+<comment data-section="grievance_view" data-  ="{{$grievance->id}}"></comment>
 </div>
 
 <script>

@@ -122,6 +122,7 @@ return array(
 	    'Focalworks\Filemanaged\FilemanagedServiceProvider',
 	    'Komal\Comment\CommentServiceProvider',
 	    'Focalworks\Kanbanize\KanbanizeServiceProvider',
+        'Focalworks\Quiz\QuizServiceProvider',
 
 	),
 
