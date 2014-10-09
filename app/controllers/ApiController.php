@@ -12,7 +12,7 @@ class ApiController extends BaseController
 
     public function __construct()
     {
-        header("Access-Control-Allow-Origin: *"); // this is required for cross domain.
+        /*header("Access-Control-Allow-Origin: *"); // this is required for cross domain.
         if (isset($_SERVER['HTTP_EMAIL']))
         {
             $user = Sentry::findUserByLogin($_SERVER['HTTP_EMAIL']);
@@ -21,7 +21,7 @@ class ApiController extends BaseController
             } else {
                 App::abort(500, 'Access denied');
             }
-        }
+        }*/
     }
 
     public function getGrievanceList()
@@ -110,5 +110,23 @@ class ApiController extends BaseController
           ),
         );
         return $data;
+    }
+
+    public function getQuizQuestions()
+    {
+        $questions = array(
+          array(
+            'question' => 'What does PHP stand for',
+            'options' => array('Paragraph Hypertext processor', 'PHP', 'Point Hypertext Processor', 'Print'),
+            'correct' => 'PHP'
+          ),
+          array(
+            'question' => 'Which function runs when a class is executed?',
+            'options' => array('__init()', '__construct', 'As as class name', 'None'),
+            'correct' => '__construct'
+          ),
+        );
+
+        return $questions;
     }
 }
