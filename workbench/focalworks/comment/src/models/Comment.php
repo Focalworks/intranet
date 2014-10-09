@@ -51,7 +51,8 @@ class Comment extends Eloquent
 
     /** Function to delete comments **/
     function delete_comment($comment_data) {
-        DB::table('comments')->where('pid', '=', $comment_data->cid)->delete(); /* Delete all child comments */
+        /* Delete all child comments */
+        DB::table('comments')->where('pid', '=', $comment_data->cid)->delete();
         DB::table('comments')->where('cid', '=', $comment_data->cid)->delete();
     }
 
