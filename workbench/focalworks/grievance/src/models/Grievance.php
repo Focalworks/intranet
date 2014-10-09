@@ -29,6 +29,17 @@ class Grievance extends Eloquent
         }
     }
 
+    public function getGrievanceCount($id = null)
+    {
+        $query = DB::table($this->table);
+
+        if ($id != null) {
+            $query->where('user_id', $id);
+        }
+
+        return $query->count();
+    }
+
     private function loadGrievance($id)
     {
         $table = $this->table;
@@ -45,6 +56,9 @@ class Grievance extends Eloquent
         $data = $query->first();
         $data->time_ago = GlobalHelper::timeAgo(strtotime($data->created_at));
         $data->comment_count = DB::table('comments')->where('section', 'grievance_view')->where('nid', $id)->count();
+
+        $comments = new Comment;
+        $data->comments = $comments->get_comments($id, 'grievance_view');
 
         $key = 'grievance_' . $id;
         //Cache::forever($key, $data);

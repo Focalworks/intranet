@@ -10,7 +10,9 @@
         <p><a href="{{url('grievance/add')}}" class="btn btn-success btn-md">+ Add New</a></p>
     </div>
 </div>
-@if (isset($grievances) && count($grievances) > 0)
+@if ($grievanceCount <= 0)
+<h2>You have not submitted an Grievances or suggestions. To add click {{link_to('grievance/add', 'here')}}</h2>
+@else
 <div class="filter-container clearfix">
     {{ Form::open(array('url' => 'grievance/filter', 'role' => 'form', 'class' => 'form-inline')) }}
     <div class="col-lg-2 col-md-2 col-sm-4">
@@ -54,38 +56,39 @@
     </div>
     {{Form::close()}}
 </div><br />
-
+@if (isset($grievances) && count($grievances) > 0)
 <div class="row">
     <div class="col-md-12">
+        <p>Total Grievances: {{$grievanceCount}}</p>
         <table class="table table-striped table-hover">
             <thead>
                 <tr class="info">
-                	<th>Title</th>
+                    <th>Title</th>
                     <th>{{Grievance::sortColumnLinkHelper($sortArray, 'category', $sortBy)}}</th>
                     <th>{{Grievance::sortColumnLinkHelper($sortArray, 'urgency', $sortBy)}}</th>
                     <th>{{Grievance::sortColumnLinkHelper($sortArray, 'created_at', $sortBy)}}</th>
                     <th>{{Grievance::sortColumnLinkHelper($sortArray, 'status', $sortBy)}}</th>
-                	@if ($access)
-                	<th></th>
-                	@endif
+                    @if ($access)
+                    <th></th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
                 @foreach($grievances as $grievance)
                 <tr>
-                	<td>{{link_to('grievance/view/' . $grievance->id, $grievance->title)}}</td>
-                	<td class="col-md-2">{{ucwords($grievance->category)}}</td>
-                	<td class="col-md-2">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</td>
-                	<td class="col-md-2">{{GlobalHelper::formatDate($grievance->created_at, 'dS M Y')}}</td>
-                	<td class="col-md-2">{{Grievance::getStatusName($grievance->status)}}</td>
-                	@if ($access)
-                	<td>
-                	{{link_to('grievance/manage/' . $grievance->id, 'Manage')}} / 
-                	{{link_to('grievance/list', 'Delete', array('class' => 'delete-link',
+                    <td>{{link_to('grievance/view/' . $grievance->id, $grievance->title)}}</td>
+                    <td class="col-md-2">{{ucwords($grievance->category)}}</td>
+                    <td class="col-md-2">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</td>
+                    <td class="col-md-2">{{GlobalHelper::formatDate($grievance->created_at, 'dS M Y')}}</td>
+                    <td class="col-md-2">{{Grievance::getStatusName($grievance->status)}}</td>
+                    @if ($access)
+                    <td>
+                    {{link_to('grievance/manage/' . $grievance->id, 'Manage')}} / 
+                    {{link_to('grievance/list', 'Delete', array('class' => 'delete-link',
                         'data-delete-id' => $grievance->id,
                         'data-delete-entity' => GRIEVANCE))}}
-                	</td>
-                	@endif
+                    </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
@@ -93,13 +96,15 @@
     </div>
 </div>
 @else
-    <h2>You have not submitted an Grievances or suggestions. To add click {{link_to('grievance/add', 'here')}}</h2>
+    <h2>No records found.</h2>
 @endif
 
 @if ($sort)
 {{$grievances->appends($sort)->links()}}
 @else
 {{$grievances->links()}}
+@endif
+
 @endif
 
 @stop

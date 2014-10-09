@@ -18,8 +18,8 @@
 			</div>
 			<div class="comment-display-content">
 				<div class="comment-display-name-wrapper clearfix">
-					<div class="pull-left comment-display-name">Name</div>
-					<div class="pull-left comment-post-date">10mins ago &nbsp;&nbsp;<span class="fw-icons glyphicon glyphicon-time"></span></div>
+					<div class="pull-left comment-display-name">{{comment.first_name}} {{comment.last_name}}</div>
+					<div class="pull-left comment-post-date">{{comment.created_time}}<span class="fw-icons glyphicon glyphicon-time"></span></div>
 				</div>
 				<div class="clearfix">
 					<div ng-show="editComment[comment.cid]">{{comment.comment}}</div>

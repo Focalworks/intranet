@@ -95,14 +95,22 @@ class GrievanceController extends BaseController
         // check if the user has access to manage permissions. Based on this, manage link will come
         $access = PermApi::user_has_permission('manage_grievance');
 
-        // if the permission is not applicable, then see only own 
+        // fetch Grievance count before admin check
+        $Grievance = new Grievance;
+        $userGrievanceCount = $Grievance->getGrievanceCount($userObj->id);
+
+        // if the permission is not applicable, then see only own
         if (!$access) {
             $data = $data->where('user_id', $userObj->id);
+        } else {
+            // for admin the Grievance count is total because we are checking count condition.
+            $userGrievanceCount = $Grievance->getGrievanceCount();;
         }
 
         $data = $data->paginate(10);
 
         $this->layout->content = View::make('grievance::grievance-list')
+            ->with('grievanceCount', $userGrievanceCount)
             ->with('sortArray', $arrSortLinks)
             ->with('userObj', $userObj)
             ->with('sortBy', $sortBy)
@@ -189,6 +197,29 @@ class GrievanceController extends BaseController
      */
     public function handleGrievanceUpdate()
     {
+        $rules = array(
+            'title' => 'required|min:3',
+            'body' => 'required|min:10',
+            'category' => 'required',
+            'urgency' => 'required',
+        );
+
+        $messages = array(
+            'title.required' => 'A title is required',
+            'title.min' => 'Title should be longer. Min 3 characters',
+        );
+
+        // doing the validation, passing post data, rules and the messages
+        $validator = Validator::make(Input::all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            // send back to the page with the input data and errors
+            GlobalHelper::setMessage('Fix the errors........', 'warning'); // setting the error message
+            $gid=Input::get('id');
+            return Redirect::to('grievance/view/'.$gid)->withInput()->withErrors($validator);
+
+        }
+
         $Grievance = new Grievance;
 
         if ($Grievance->updateGrievance()) {

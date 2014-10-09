@@ -15,22 +15,27 @@
         <div class="form-group">
             <label for="title">Grievance title</label>
             <input type="text" placeholder="Grievance title" class="form-control" id="title" placeholder="Grievance title" name="title" value="{{$grievance->title}}">
+            <span class="error-display">{{$errors->first('title')}}</span>
         </div>
         
         <div class="form-group">
             <label for="body">Body</label>
             <textarea name="body" id="body" class="form-control">{{$grievance->description}}</textarea>
+            <span class="error-display">{{$errors->first('body')}}</span>
         </div>
     </div>
     <div class="col-md-4">
         <div class="form-group">
             <label for="category">Category</label>
             {{GlobalHelper::getDropdownFromArray('category', Grievance::getGrievanceCategories(), $grievance->category)}}
+            <span class="error-display">{{$errors->first('category')}}</span>
         </div>
+
         
         <div class="form-group">
             <label for="urgency">Urgency</label>
             {{GlobalHelper::getDropdownFromArray('urgency', Grievance::getUrgencies(), $grievance->urgency)}}
+            <span class="error-display">{{$errors->first('urgency')}}</span>
         </div>
     </div>
     <div class="col-md-4">
