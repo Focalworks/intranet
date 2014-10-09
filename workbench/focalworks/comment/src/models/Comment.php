@@ -34,13 +34,23 @@ class Comment extends Eloquent
             $result['date'] = date('d/m/Y h:m a', time());
             $result['username'] = 'Komal Savla';
 
+            $userdata=  DB::table('users As us') 
+                        ->where('id',$uid)->first();
+            $result['first_name']=$userdata->first_name;
+            $result['last_name']=$userdata->last_name;
+            $result['created_time']=GlobalHelper::timeAgo($insertData['created']);
+
             return $result;
         }
     }
 
     /** Function to get all comments **/
     function get_comments($nid, $section) {
-        $commentData = DB::table('comments')->where('nid', $nid)->where('section', $section)->orderBy(DB::raw('SUBSTRING(thread, 1, (LENGTH(thread) - 1))'))->get();
+        //$commentData = DB::table('comments')->where('nid', $nid)->where('section', $section)->orderBy(DB::raw('SUBSTRING(thread, 1, (LENGTH(thread) - 1))'))->get();
+        $commentData = DB::table('comments as cm')
+               ->leftJoin('users As us', 'cm.user_id', '=', 'us.id')
+                ->where('nid', $nid)->where('section', $section)
+                ->orderBy(DB::raw('SUBSTRING(thread, 1, (LENGTH(thread) - 1))'))->get();
 
         $commentObj = new stdClass();
         $commentObj->comments = array();
@@ -60,6 +70,7 @@ class Comment extends Eloquent
     function buildNestedComments($comments, $parentId = 0) {
         $nestedObj = array();
         foreach ($comments as $comment) {
+            $comment->created_time=GlobalHelper::timeAgo($comment->created);
             if ($comment->pid == $parentId) {
                 $children = $this->buildNestedComments($comments, $comment->cid);
                 if ($children) {
