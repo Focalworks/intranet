@@ -12,6 +12,10 @@ class AddAnonymousGrievance extends Migration {
 	public function up()
 	{
 		//
+		Schema::table('grievances', function($table)
+		{
+    		$table->integer('anonymous')->default(0)->after('status');
+		});
 	}
 
 	/**
@@ -22,6 +26,9 @@ class AddAnonymousGrievance extends Migration {
 	public function down()
 	{
 		//
+		Schema::table('grievances', function($table) {
+                $table->dropColumn('anonymous');
+        });
 	}
 
 }

@@ -175,9 +175,12 @@ class GrievanceController extends BaseController
         $grievance = $Grievance->getGrievance($id);
         $userObj = Session::get('userObj');
 
+        $grievance->disable_val='';
+    
         // if the user is trying to edit / view an entry which he doesn't own
         if ($grievance->user_id != $userObj->id) {
             PermApi::access_check('@');
+            $grievance->disable_val='disabled';
         }
 
         // view will change to read only for tickets status not 1
@@ -237,9 +240,16 @@ class GrievanceController extends BaseController
         $this->layout->content = View::make('grievance::grievance-manage')
         ->with('grievance', $grievance);*/
         PermApi::access_check('manage_grievance');
+        $userObj = Session::get('userObj');
 
         $Grievance = new Grievance;
         $grievance = $Grievance->getGrievance($id);
+        $grievance->disable_val='';
+        // if the user is trying to edit / view an entry which he doesn't own
+        if ($grievance->user_id != $userObj->id) {
+            $grievance->disable_val='disabled';
+        }
+
 
         $this->layout->content = View::make('grievance::grievance-manage')
             ->with('grievance', $grievance);

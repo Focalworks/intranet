@@ -45,7 +45,7 @@ class Grievance extends Eloquent
         $table = $this->table;
         $arrSelect = array(
             $table.'.id', $table.'.title', $table.'.description', $table.'.category',
-            $table.'.urgency', $table.'.user_id', $table.'.status', $table.'.created_at', $table.'.updated_at',
+            $table.'.urgency', $table.'.user_id', $table.'.status', $table.'.created_at', $table.'.updated_at',$table.'.anonymous',
             'file_managed.id as fid', 'file_managed.url', 'file_managed.filemime', 'file_managed.filesize'
         );
 
@@ -62,6 +62,9 @@ class Grievance extends Eloquent
 
         $key = 'grievance_' . $id;
         //Cache::forever($key, $data);
+        $data->anonymous_val='';
+        if($data->anonymous==1)
+            $data->anonymous_val='checked';
 
         return $data;
     }
@@ -81,6 +84,11 @@ class Grievance extends Eloquent
             $Grivance->category = $postData['category'];
             $Grivance->urgency = $postData['urgency'];
             $Grivance->status = 1;
+            $Grivance->anonymous = 0;
+            if(isset($postData['anonymous']) && $postData['anonymous']){
+                $Grivance->anonymous = 1;
+            }
+
             $Grivance->user_id = $userObj->id;
             $Grivance->save(); // save the grievance
 
@@ -117,7 +125,8 @@ class Grievance extends Eloquent
             $Grivance->description = Input::Get('body');
             $Grivance->category = Input::Get('category');
             $Grivance->urgency = Input::Get('urgency');
-
+            $Grivance->anonymous = Input::Get('anonymous');
+            
             // if the form is coming from managed view then save the status as well
             if (Input::get('status')) {
                 $Grivance->status = Input::get('status');
@@ -244,6 +253,21 @@ class Grievance extends Eloquent
         }
     }
 
+    /**
+     * Mapping the username with their DB ids.
+     * @param unknown $id
+     * @return User name <string>
+     */
+    public static function getUserName($uid,$anonymous)
+    {
+        $uname="Anonymous";
+        if(!$anonymous)
+        {
+            $uname1 = DB::table('users')->select('first_name','last_name')->where('id', $uid)->first();
+            $uname=$uname1->first_name.' '.$uname1->last_name;
+        }
+        return $uname;
+    }
     /**
      * This is the array of Categories for the grievance / suggestion
      * The array is used to map and also generate the drop downs.

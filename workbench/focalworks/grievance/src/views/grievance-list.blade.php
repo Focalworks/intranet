@@ -69,6 +69,7 @@
                     <th>{{Grievance::sortColumnLinkHelper($sortArray, 'created_at', $sortBy)}}</th>
                     <th>{{Grievance::sortColumnLinkHelper($sortArray, 'status', $sortBy)}}</th>
                     @if ($access)
+                    <th>Created User</th>
                     <th></th>
                     @endif
                 </tr>
@@ -82,6 +83,7 @@
                     <td class="col-md-2">{{GlobalHelper::formatDate($grievance->created_at, 'dS M Y')}}</td>
                     <td class="col-md-2">{{Grievance::getStatusName($grievance->status)}}</td>
                     @if ($access)
+                    <td>{{Grievance::getUserName($grievance->user_id,$grievance->anonymous)}}</td>
                     <td>
                     {{link_to('grievance/manage/' . $grievance->id, 'Manage')}} / 
                     {{link_to('grievance/list', 'Delete', array('class' => 'delete-link',

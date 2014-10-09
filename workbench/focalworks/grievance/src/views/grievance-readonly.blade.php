@@ -52,6 +52,10 @@
                 <input type="file" class="custom-file-input" id="photo" placeholder="Photo" name="photo">
             </div>
         </div>
+        <div class="form-group">
+            <input type="checkbox" name="anonymous" id="anonymous" value="1" {{$grievance->anonymous_val}} disabled>
+            <label for="urgency">Anonymous</label>
+        </div> 
     </div>
 </div>
 <div class="row">

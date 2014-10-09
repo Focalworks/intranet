@@ -168,7 +168,7 @@ Comments.directive('commentItem', ['$compile', 'commentsService', function($comp
       $scope.delete_comment = function(CommentData) {
         commentsService.removeComments(CommentData).then(function(commentObj) {
           $scope.comment = {};
-          $scope.deleted = {}
+          $scope.deleted = {};
           $scope.deleted[$scope.comment.cid] = true;
           $scope.hideReply[$scope.comment.cid] = true;
           $scope.editComment[$scope.comment.cid] = true;
