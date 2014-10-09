@@ -23,8 +23,8 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     @section('scripts')
-    <script type="text/javascript" src="{{ asset('packages/l4mod/sentryuser/jquery-1.11.1.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('packages/l4mod/sentryuser/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/libs/jquery-1.11.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/libs/bootstrap.min.js') }}"></script>
     @show
 
     <script type="text/javascript">

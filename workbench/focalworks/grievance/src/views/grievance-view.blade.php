@@ -1,7 +1,7 @@
 @section('scripts')
 @parent<script src="//cdn.ckeditor.com/4.4.3/basic/ckeditor.js"></script>
-<script type="text/javascript" src="{{ asset('packages/focalworks/comment/js/app.js') }}"></script>
-<script type="text/javascript" src="{{ asset('packages/focalworks/comment/js/custom/add_comments.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/dev/comment/app.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/dev/comment/add_comments.js') }}"></script>
 @stop
 @section('content')
 <div class="row">

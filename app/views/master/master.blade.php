@@ -24,12 +24,12 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     @section('scripts')
-    <script type="text/javascript" src="{{ asset('packages/l4mod/sentryuser/jquery-1.11.1.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('packages/l4mod/sentryuser/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/vendor/angular.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/vendor/angular-route.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('global-script.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/menu_slider.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/libs/jquery-1.11.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/libs/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/libs/angular.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/libs/angular-route.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dev/global/global-script.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/dev/global/menu_slider.js') }}"></script>
     @show
 
     <script type="text/javascript">
