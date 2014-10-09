@@ -9,8 +9,7 @@
 		<link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 		@section('scripts')
 		  <script type="text/javascript" src="{{ asset('js/libs/jquery-1.11.1.min.js') }}"></script>
-		  <script type="text/javascript" src="{{ asset('js/dev/global/global-script.js') }}"></script>
-		  <script type="text/javascript" src="{{ asset('js/dev/global/login.js') }}"></script>
+		  <script type="text/javascript" src="{{ asset('js/prod/global.min.js') }}"></script>
 	  @show
 </head>
 <body class="login">

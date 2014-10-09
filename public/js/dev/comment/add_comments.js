@@ -2,7 +2,6 @@ var Comments = angular.module('Comments', []);
 
 Comments.factory('commentsService', ['$http', '$rootScope', function($http, $rootScope) {
     var comments = [];
-    // var nid = 129;
 
     return {
         fetchComments: function(nid, section) {
@@ -10,7 +9,7 @@ Comments.factory('commentsService', ['$http', '$rootScope', function($http, $roo
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 url: base_url + 'comment/get',
                 method: "POST",
-                data: $.param({'nid' : nid, 'section' : section}),
+                data: $.param({'nid' : nid, 'section' : section})
             })
                 .success(function(json_comment_data) {
                     if(json_comment_data) {
@@ -31,7 +30,7 @@ Comments.factory('commentsService', ['$http', '$rootScope', function($http, $roo
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 url: base_url + 'comment/save',
                 method: "POST",
-                data: $.param({'data' : JSON.stringify(commentData), 'nid': nid, 'parent_cid': parent_cid, 'op' : op}),
+                data: $.param({'data' : JSON.stringify(commentData), 'nid': nid, 'parent_cid': parent_cid, 'op' : op})
             })
                 .success(function(json_comment_data) {
                     comments = json_comment_data;
@@ -43,7 +42,7 @@ Comments.factory('commentsService', ['$http', '$rootScope', function($http, $roo
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 url: base_url + 'comment/delete',
                 method: "POST",
-                data: $.param({'data' : JSON.stringify(commentData)}),
+                data: $.param({'data' : JSON.stringify(commentData)})
             })
                 .success(function() {
                 });
@@ -103,7 +102,7 @@ Comments.directive('commentTree', function () {
             nid: '=',
             section : '='
         },
-        template: '<ul class="comments-wrapper"><comment_item ng-repeat="comment in collection" comment="comment" nid="nid" section="section"></comment_item></ul>',
+        template: '<ul class="comments-wrapper"><comment_item ng-repeat="comment in collection" comment="comment" nid="nid" section="section"></comment_item></ul>'
     }
 })
 
@@ -174,7 +173,6 @@ Comments.directive('commentItem', ['$compile', 'commentsService', function($comp
                     $scope.editComment[$scope.comment.cid] = true;
                 });
             }
-
-        },
+        }
     }
 }]);

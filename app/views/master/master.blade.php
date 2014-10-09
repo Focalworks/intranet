@@ -28,8 +28,7 @@
     <script type="text/javascript" src="{{ asset('js/libs/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/libs/angular.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/libs/angular-route.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dev/global/global-script.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/dev/global/menu_slider.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/prod/global.min.js') }}"></script>
     @show
 
     <script type="text/javascript">

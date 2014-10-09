@@ -1,5 +1,5 @@
 @section('scripts')
-@parent<script type="text/javascript" src="{{ asset('js/dev/sentryuser/sentry-scripts.js') }}"></script>
+@parent<script type="text/javascript" src="{{ asset('js/prod/sentryuser.min.js') }}"></script>
 @stop
 @section('content')
 <div class="row">
