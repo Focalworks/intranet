@@ -26,7 +26,7 @@ kanbanize.factory('projectsFactory', ['$http', function($http) {
      * @returns {string}
      */
     projects.load = function() {
-        this.data = $http.get("http://localhost/focalworks-intranet/public/kanban/all-projects").then(function(projectData) {
+        this.data = $http.get(base_url + "kanban/all-projects").then(function(projectData) {
             return projectData;
         });
         return this.data;
@@ -74,17 +74,17 @@ kanbanize.factory('ticketsFactory',  ['$http', function($http) {
     return tickets;
 }]);
 
-
-
-kanbanize.controller('projectCtrl', function($scope, projectsFactory) {
+function projectCtrl($scope, projectsFactory) {
     projectsFactory.get().then(function(data) {
         $scope.projects = data.data;
     });
-});
+}
+projectCtrl.$inject = ['$scope', 'projectsFactory'];
 
-kanbanize.controller('ticketCtrl', function($scope, $routeParams, ticketsFactory) {
+function ticketCtrl($scope, $routeParams, ticketsFactory) {
     $scope.boardId = $routeParams.board;
     ticketsFactory.load($scope.boardId).then(function(data){
         $scope.tickets = data.data;
     });
-});
+}
+ticketCtrl.$inject = ['$scope', '$routeParams', 'ticketsFactory'];
