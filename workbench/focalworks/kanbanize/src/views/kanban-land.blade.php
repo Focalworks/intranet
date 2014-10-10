@@ -3,5 +3,5 @@
     <div ng-view></div>
 </div>
 
-<script type="text/javascript" src="{{ asset('js/kanbanize/kanbanize_app.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/prod/kanbanize.min.js') }}"></script>
 @stop
