@@ -1,5 +1,6 @@
 <li class="comment-list-item" ng-show ="!deleted[comment.cid]">
     <div class="comment-group clearfix">
+		<span ng-if="@{{comment.isaccess}}">
         <div class="comment-controles-wrapper pull-right">
             <div class="comment-controle-icon comment-controle-icon-normal"><span class="fw-icons glyphicon glyphicon-chevron-down"></span><span class="fw-icons glyphicon glyphicon-chevron-up"></span></div>
             <ul class="comment-controles clearfix">
@@ -11,7 +12,7 @@
                 </li>
             </ul>
         </div>
-
+		</span>
         <div class="comment-display-wrapper clearfix">
             <div class="user-picture">
                 <div class="user-picture-inner"><img src="@{{comment.userimage}}" alt="No Image" class="user-picture-inner" /></div>

@@ -35,10 +35,11 @@ class Comment extends Eloquent
             $result['username'] = 'Komal Savla';
 
             $userdata = $this->get_userdata($insertData['created'],$insertData['user_id'],$insertData['nid']);
-            $result['first_name']=$userdata->first_name;
-            $result['last_name']=$userdata->last_name;
-            $result['userimage']=$userdata->userimage;
-            $result['created_time']=$userdata->created_time;
+            $result['first_name'] = $userdata->first_name;
+            $result['last_name'] = $userdata->last_name;
+            $result['userimage'] = $userdata->userimage;
+            $result['created_time'] = $userdata->created_time;
+            $result['isaccess'] = $userdata->isaccess;
 
             return $result;
         }
@@ -73,10 +74,11 @@ class Comment extends Eloquent
             //Comment time ago
            
             $userdata = $this->get_userdata($comment->created,$comment->user_id,$comment->nid);
-            $comment->first_name=$userdata->first_name;
-            $comment->last_name=$userdata->last_name;
-            $comment->userimage=$userdata->userimage;
-            $comment->created_time=$userdata->created_time;
+            $comment->first_name = $userdata->first_name;
+            $comment->last_name = $userdata->last_name;
+            $comment->userimage = $userdata->userimage;
+            $comment->created_time = $userdata->created_time;
+            $comment->isaccess = $userdata->isaccess;
 
             if ($comment->pid == $parentId) {
                 $children = $this->buildNestedComments($comments, $comment->cid);
@@ -95,17 +97,26 @@ class Comment extends Eloquent
     function get_userdata($created,$comment_userid,$nid)
     {
         $userdata = new stdClass();
-        $userdata->created_time=GlobalHelper::timeAgo($created);
-        $userdata->first_name='Anonymous';
-        $userdata->last_name='';
-        $userdata->userimage="../../".Config::get('sentryuser::sentryuser.default-pic');
+        $userdata->created_time = GlobalHelper::timeAgo($created);
+        $userdata->first_name = 'Anonymous';
+        $userdata->last_name = '';
+        $userdata->userimage = "../../".Config::get('sentryuser::sentryuser.default-pic');
 
         /* code for Anonymous user Grievance -> Anonymous -> username as Anonymous otherwise username*/
-        $grievances_data=DB::table('grievances')->select('anonymous','user_id')->where('id', '=', $nid)->first();
-        $anonymous=$grievances_data->anonymous;
-        $gri_user_id=$grievances_data->user_id;
-        
-        if(!($anonymous==1 && $comment_userid==$gri_user_id))
+        $grievances_data = DB::table('grievances')->select('anonymous','user_id')->where('id', '=', $nid)->first();
+        $anonymous = $grievances_data->anonymous;
+        $gri_user_id = $grievances_data->user_id;
+
+        //if 0 then edit and delete not display otherwise edit and delete will display
+        $userObj = Session::get('userObj');
+        $userdata->isaccess = 0;
+        if($comment_userid == $userObj->id)
+        {
+            $userdata->isaccess = 1;
+        }
+
+        /* if user is not anonymous then get name and image*/
+        if(!($anonymous == 1 && $comment_userid == $gri_user_id))
         {
             $user_table=  DB::table('users As us')->select('first_name','last_name') ->where('id',$comment_userid)->first();
             $userdata->first_name=$user_table->first_name;
