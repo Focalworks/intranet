@@ -34,10 +34,24 @@ class Comment extends Eloquent
             $result['date'] = date('d/m/Y h:m a', time());
             $result['username'] = 'Komal Savla';
 
-            $userdata=  DB::table('users As us') 
-                        ->where('id',$uid)->first();
-            $result['first_name']=$userdata->first_name;
-            $result['last_name']=$userdata->last_name;
+            /* code for Anonymous user Grievance -> Anonymous -> username as Anonymous otherwise username*/
+            $comment_userid=$uid;
+            $grievances_data=DB::table('grievances')->select('anonymous','user_id')->where('id', '=', $nid)->first();
+            $anonymous=$grievances_data->anonymous;
+            $gri_user_id=$grievances_data->user_id;
+            if($anonymous==1 && $comment_userid==$gri_user_id)
+            {
+                $result['first_name']='Anonymous';
+                $result['last_name']='';
+            }
+            else
+            {
+                $userdata=  DB::table('users As us') 
+                            ->where('id',$uid)->first();
+                $result['first_name']=$userdata->first_name;
+                $result['last_name']=$userdata->last_name;
+            }
+            //code for timeago
             $result['created_time']=GlobalHelper::timeAgo($insertData['created']);
 
             return $result;
@@ -56,6 +70,7 @@ class Comment extends Eloquent
         $commentObj->comments = array();
         $temp = array();
         $commentObj = $this->buildNestedComments($commentData);
+       
         return $commentObj;
     }
 
@@ -70,7 +85,19 @@ class Comment extends Eloquent
     function buildNestedComments($comments, $parentId = 0) {
         $nestedObj = array();
         foreach ($comments as $comment) {
+            //Comment time ago
             $comment->created_time=GlobalHelper::timeAgo($comment->created);
+             /* code for Anonymous user Grievance -> Anonymous -> username as Anonymous otherwise username*/
+            $comment_userid=$comment->user_id;
+            $grievances_data=DB::table('grievances')->select('anonymous','user_id')->where('id', '=', $comment->nid)->first();
+            $anonymous=$grievances_data->anonymous;
+            $gri_user_id=$grievances_data->user_id;
+            if($anonymous==1 && $comment_userid==$gri_user_id)
+            {
+                $comment->first_name='Anonymous';
+                $comment->last_name='';
+            }
+
             if ($comment->pid == $parentId) {
                 $children = $this->buildNestedComments($comments, $comment->cid);
                 if ($children) {
