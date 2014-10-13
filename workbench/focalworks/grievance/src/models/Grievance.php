@@ -221,13 +221,15 @@ class Grievance extends Eloquent
 
     public function deleteGrievance($id)
     {
-        $Grievance = Grievance::find($id);
-        
+        //Deletes should be soft delete. Should not go away from Database
+         DB::table($this->table)
+            ->where('id', $id)
+            ->update(array('deleted' => 1));
+
+        /*$Grievance = Grievance::find($id);
         $Grievance->delete();
-        
         $FileManaged = FileManaged::find($Grievance->id);
-        
-        File::delete($FileManaged->url);
+        File::delete($FileManaged->url);*/
     }
 
     /**

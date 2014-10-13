@@ -1,5 +1,7 @@
 @section('scripts')
-@parent<script src="//cdn.ckeditor.com/4.4.3/basic/ckeditor.js"></script>
+@parent
+<script type="text/javascript" src="{{ asset('js/dev/comment/app.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/dev/comment/add_comments.js') }}"></script>
 @stop
 @section('content')
 <div class="row">
@@ -12,24 +14,30 @@
         
         <div class="form-group">
             <label for="title">Grievance title</label>
-            <input type="text" class="form-control" id="title" placeholder="Grievance title" name="title" value="{{$grievance->title}}">
+            <input type="text" class="form-control" id="" name="" value="{{$grievance->title}}" readonly>
+             {{ Form::hidden('title', $grievance->title) }}
         </div>
         
         <div class="form-group">
             <label for="body">Body</label>
-            <textarea name="body" id="body" class="form-control">{{$grievance->description}}</textarea>
+             <div>{{$grievance->description}}</div>
         </div>
+         {{ Form::hidden('body', $grievance->description) }}
     </div>
 
     <div class="col-md-4">
         <div class="form-group">
             <label for="category">Category</label>
-            {{GlobalHelper::getDropdownFromArray('category', Grievance::getGrievanceCategories(), $grievance->category)}}
+             <select name="category" class="form-control">
+                <option value="{{$grievance->category}}">{{ucwords($grievance->category)}}</option>
+            </select>
         </div>
         
         <div class="form-group">
             <label for="urgency">Urgency</label>
-            {{GlobalHelper::getDropdownFromArray('urgency', Grievance::getUrgencies(), $grievance->urgency)}}
+            <select name="urgency" class="form-control">
+                <option value="{{$grievance->urgency}}">{{Grievance::getUrgencies($grievance->urgency)}}</option>
+            </select>
         </div>
         
         <div class="form-group">
@@ -61,10 +69,8 @@
 {{ Form::hidden('id', $grievance->id) }}
 {{ Form::close() }}
 
-<script>
-    $(window).load(function ()
-    {
-        CKEDITOR.replace('body');
-    });
-</script>
+<div ng-app="articleApp" ng-controller="mainCntrl">
+<comment data-section="grievance_view" data-nid  ="{{$grievance->id}}"></comment>
+</div>
+
 @stop

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class AddAnonymousGrievance extends Migration {
+class AddSoftDeleteToGrievanceTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -14,7 +14,7 @@ class AddAnonymousGrievance extends Migration {
 		//
 		Schema::table('grievances', function($table)
 		{
-    		$table->integer('anonymous')->default(0)->after('status');
+    		$table->integer('deleted')->default(0)->after('updated_at');
 		});
 	}
 
@@ -28,7 +28,7 @@ class AddAnonymousGrievance extends Migration {
 		Schema::table('grievances',  function($table)
 		{
 			//
-			$table->dropColumn('anonymous');
+			$table->dropColumn('deleted');
 		});
 	}
 

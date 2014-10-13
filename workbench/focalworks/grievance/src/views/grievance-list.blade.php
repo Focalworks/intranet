@@ -77,15 +77,18 @@
             <tbody>
                 @foreach($grievances as $grievance)
                 <tr>
-                    <td>{{link_to('grievance/view/' . $grievance->id, $grievance->title)}}</td>
+                    @if ($access)
+                        <td>{{link_to('grievance/manage/' . $grievance->id, $grievance->title." (".substr(strip_tags($grievance->description),0,10)."... )" )}}</td>
+                    @else
+                        <td>{{link_to('grievance/view/' . $grievance->id,  $grievance->title." (".substr(strip_tags($grievance->description),0,10)."... )" )}}</td>
+                    @endif
                     <td class="col-md-2">{{ucwords($grievance->category)}}</td>
                     <td class="col-md-2">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</td>
                     <td class="col-md-2">{{GlobalHelper::formatDate($grievance->created_at, 'dS M Y')}}</td>
                     <td class="col-md-2">{{Grievance::getStatusName($grievance->status)}}</td>
                     @if ($access)
                     <td>{{Grievance::getUserName($grievance->user_id,$grievance->anonymous)}}</td>
-                    <td>
-                    {{link_to('grievance/manage/' . $grievance->id, 'Manage')}} / 
+                    <td> 
                     {{link_to('grievance/list', 'Delete', array('class' => 'delete-link',
                         'data-delete-id' => $grievance->id,
                         'data-delete-entity' => GRIEVANCE))}}
@@ -98,7 +101,7 @@
     </div>
 </div>
 @else
-    <h2>No records found.</h2>
+    <!--h2>No records found.</h2-->
 @endif
 
 @if ($sort)

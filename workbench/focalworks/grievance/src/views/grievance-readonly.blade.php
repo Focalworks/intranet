@@ -32,7 +32,7 @@
         <div class="form-group">
             <label for="urgency">Urgency</label>
             <select name="" id="" class="form-control" disabled>
-                <option value="">{{ucwords($grievance->urgency)}}</option>
+                <option value="">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</option>
             </select>
         </div>
     </div>

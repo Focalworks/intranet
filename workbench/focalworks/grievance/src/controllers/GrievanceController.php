@@ -33,7 +33,7 @@ class GrievanceController extends BaseController
         $sortBy = Input::get('sortby');
         $orderBy = Input::get('order');
 
-        $data = DB::table('grievances');
+        $data = DB::table('grievances')->where('deleted', 0);
 
         // populating the array for default sorting
         $arrSortLinks = array(
@@ -212,17 +212,19 @@ class GrievanceController extends BaseController
             'title.min' => 'Title should be longer. Min 3 characters',
         );
 
-        // doing the validation, passing post data, rules and the messages
-        $validator = Validator::make(Input::all(), $rules, $messages);
+        //If update come form mange then not run validation
+        if (!(Input::get('status'))) {
+            // doing the validation, passing post data, rules and the messages
+            $validator = Validator::make(Input::all(), $rules, $messages);
 
-        if ($validator->fails()) {
-            // send back to the page with the input data and errors
-            GlobalHelper::setMessage('Fix the errors........', 'warning'); // setting the error message
-            $gid=Input::get('id');
-            return Redirect::to('grievance/view/'.$gid)->withInput()->withErrors($validator);
+            if ($validator->fails()) {
+                // send back to the page with the input data and errors
+                GlobalHelper::setMessage('Fix the errors........', 'warning'); // setting the error message
+                $gid=Input::get('id');
+                return Redirect::to('grievance/view/'.$gid)->withInput()->withErrors($validator);
 
+            }
         }
-
         $Grievance = new Grievance;
 
         if ($Grievance->updateGrievance()) {
