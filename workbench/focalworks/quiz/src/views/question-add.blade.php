@@ -1,56 +1,59 @@
-@section('content')
-<script type="text/javascript" src="{{ asset('packages/focalworks/quiz/js/add_question.js') }}"></script>
-<?php
-    $qq_id=0;
-    if(isset($question[0])) {
-        $question=$question[0];
-        $qq_id=$question->qq_id;
-    }
-
-?>
 <div class="row">
     <div class="col-md-12"><h1>Add Question</h1></div>
 </div>
+<div ng-controller="add_question">
+    <form method="post" ng-submit="save_form()">
+    <div class="row">
+        <span class="error-display">@{{ error.global }}</span>
+         <div class="col-md-6">
 
-{{ Form::open(array('url' => 'quiz/question_save', 'role' => 'form')) }}
-<div class="row" ng-app="add_question" ng-controller="add_questionCtrl">
-    <input type="hidden" name="qq_id" value="{{$qq_id}}" ng-model="qq_id" />
-    <div class="col-md-6">
-
-        <div class="form-group">
-            <label for="title">Question title</label>
-            <input type="text" class="form-control" id="qq_text" placeholder="Question title" name="qq_text" value="{{Input::old('qq_text')}}">
-            <span class="error-display">{{$errors->first('qq_text')}}</span>
-        </div>
-
-    </div>
-    <div class="col-md-6">
-        <h3>
-             <label for="title">&nbsp;</label>
-            <input type="btn btn-primary btn-md" class="btn btn-primary btn-md" value="Add Option" ng-click="add_filed()" />
-        </h3>
-
-        <!-- repeat for options  -->
-        <div class="form-group col-xs-6"  ng-repeat="option in options">
-            <label for="title">Option Text</label>
-            <input type="text" class="form-control" id="qo_text" placeholder="Option Text" name="qo_text[@{{option.id}}]" value="" />
-            <div class="checkbox">
-              <label>
-                <input type="radio" name="correct" value="@{{option.id}}" />
-                This is correct answer.
-              </label>
+            <div class="form-group">
+                <label for="title">Question title</label>
+                <input type="text" class="form-control" id="qq_text" placeholder="Question title" name="qq_text" ng-model="question.question[0].qq_text">
+                <span class="error-display">@{{error.question}}</span>
             </div>
-            <span class="error-display">{{$errors->first('qo_text')}}</span>
+
+            <div class="form-group">
+                <label for="title">Select Designation</label>
+                <?php
+                    $values=array_values($designation);
+                    $designation=array_combine($values,$values);
+                ?>
+
+                   {{Form::select('designation',$designation,'',array('ng-model'=>'question.question[0].designation','class'=>'form-control')) }}
+                <span class="error-display">@{{error.designation}}</span>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <h3>
+                 <label for="title">&nbsp;</label>
+                <input type="btn btn-primary btn-md" class="btn btn-primary btn-md" value="Add Option" ng-click="option_add()" />
+            </h3>
+
+            <!-- repeat for options  -->
+            <div class="form-group col-xs-6"  ng-repeat="option in question.options">
+                <label for="title">Option Text</label>
+                <a href="" class="float-right fc-red" ng-click="option_remove($index,option.qo_id)" title="Remove Option"><i class="glyphicon glyphicon-remove"></i></a>
+                <input type="text" class="form-control" id="qo_text" placeholder="Option Text" ng-model="option.qo_text" />
+                <div class="checkbox">
+                  <label>
+
+                    <input type="radio" ng-model="option.is_correct" name="correct" ng-value="1" ng-change="onchanging(this)" />
+                    This is correct answer.
+                  </label>
+                </div>
+                <span class="error-display">@{{error.option[$index]}}</span>
+            </div>
+
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-12">
-        <input type="submit" name="save" class="btn btn-success btn-md" value="Save" />&nbsp;&nbsp;
-        <a href="{{url('grievance/list')}}" class="btn btn-primary btn-md">Back</a>
+    <div class="row">
+        <div class="col-md-12">
+            <input type="submit" name="save" class="btn btn-success btn-md" value="Save" />&nbsp;&nbsp;
+            <a href="{{url('script')}}" class="btn btn-primary btn-md">Back</a>
+        </div>
     </div>
+</form>
 </div>
-{{ Form::close() }}
-
-@stop

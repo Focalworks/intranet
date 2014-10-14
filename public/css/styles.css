@@ -732,6 +732,17 @@ Sidebar */
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
+
+.float-right {
+	text-align: right;
+	float: right;
+}
+
+.fc-red{
+	color: red;
+}
+
+
 /* ==========================================
 Footer */
 /* ==========================================
