@@ -123,6 +123,7 @@ return array(
 	    'Komal\Comment\CommentServiceProvider',
 	    'Focalworks\Kanbanize\KanbanizeServiceProvider',
         'Focalworks\Quiz\QuizServiceProvider',
+        'Amitavroy\Mailing\MailingServiceProvider',
 
 	),
 

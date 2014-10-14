@@ -60,6 +60,7 @@ class ReBaseApp extends Command {
         $this->call('asset:publish', array('debugbar/laravel-debugbar'));
         $this->call('asset:publish', array('--bench' => 'l4mod/sentryuser'));
         $this->call('asset:publish', array('--bench' => 'focalworks/comment'));
+        $this->call('asset:publish', array('--bench' => 'focalworks/mailing'));
 
         // calling default migrations
         $this->call('migrate');

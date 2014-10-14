@@ -1,0 +1,25 @@
+{
+    "name": "amitavroy/mailing",
+    "description": "",
+    "authors": [
+        {
+            "name": "Amitav Roy",
+            "email": "reachme@amitavroy.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations",
+            "src/controllers",
+            "src/models"
+        ],
+        "psr-0": {
+            "Amitavroy\\Mailing\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
