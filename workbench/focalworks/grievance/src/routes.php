@@ -19,5 +19,6 @@ Route::group(array(
         Route::post('grievance/save', 'GrievanceController@handleGrievanceSave');
         Route::post('grievance/update', 'GrievanceController@handleGrievanceUpdate');
         Route::post('grievance/filter', 'GrievanceController@handleGrievanceFilter');
+        Route::post('grievance/request_reopen', 'GrievanceController@handleGrievanceRequestReopen');
     });
 });
