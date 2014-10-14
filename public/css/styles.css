@@ -53,6 +53,12 @@ Mixins */
 .clear {
   clear: both;
 }
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: #9eb2c0;
+}
+.tooltip.bottom .tooltip-inner {
+  background-color: #9eb2c0;
+}
 /* ==========================================
 Functions & Operations */
 /* ==========================================
