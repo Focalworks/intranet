@@ -34,7 +34,7 @@ class Grievance extends Eloquent
         $query = DB::table($this->table);
 
         if ($id != null) {
-            $query->where('user_id', $id);
+            $query->where('user_id', $id)->where('deleted', 0);
         }
 
         return $query->count();
@@ -45,7 +45,8 @@ class Grievance extends Eloquent
         $table = $this->table;
         $arrSelect = array(
             $table.'.id', $table.'.title', $table.'.description', $table.'.category',
-            $table.'.urgency', $table.'.user_id', $table.'.status', $table.'.created_at', $table.'.updated_at',$table.'.anonymous',
+            $table.'.urgency', $table.'.user_id', $table.'.status', $table.'.created_at', $table.'.updated_at',
+            $table.'.anonymous',$table.'.req_reopen',
             'file_managed.id as fid', 'file_managed.url', 'file_managed.filemime', 'file_managed.filesize'
         );
 
@@ -129,7 +130,12 @@ class Grievance extends Eloquent
             
             // if the form is coming from managed view then save the status as well
             if (Input::get('status')) {
+                $ch_status=Input::get('status');
                 $Grivance->status = Input::get('status');
+                if($ch_status==4)
+                {
+                    $Grivance->req_reopen=null;
+                }
             }
             $Grivance->save();
 
@@ -334,5 +340,22 @@ class Grievance extends Eloquent
         }
 
         return $aLink;
+    }
+    public function RequestReoopenGrievance()
+    {
+        try {
+            DB::beginTransaction();
+            $Grivance = Grievance::find(Input::get('id'));
+            $Grivance->req_reopen = Input::get('reason');
+
+            $Grivance->save();
+             DB::commit();
+             return true;
+
+        } catch (Exception $e) {
+            DB::rollback();
+            SentryHelper::setMessage($e->getMessage(), 'warning');
+            return false;
+        }
     }
 }

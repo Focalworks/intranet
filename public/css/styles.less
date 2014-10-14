@@ -74,6 +74,16 @@ Mixins */
 .clear {
   clear: both;
 }
+.tooltip {
+  &.bottom {
+    .tooltip-arrow {
+      border-bottom-color: #9eb2c0;
+    }
+    .tooltip-inner {
+      background-color: #9eb2c0;
+    }
+  }
+}
 
 /* ==========================================
 Functions & Operations */
@@ -691,7 +701,7 @@ Sidebar */
                       color: #ffffff;
                       padding: 10px 20px;
                       &:hover, &.active {
-                        color: #2e3641;
+                        color: #2e3641
                       }
                     }
                     &.last {
@@ -726,4 +736,4 @@ Sidebar */
 Footer */
 
 /* ==========================================
-Media Query */
+Media Query */ 

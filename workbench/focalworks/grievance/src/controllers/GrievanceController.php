@@ -292,4 +292,18 @@ class GrievanceController extends BaseController
 
         return Redirect::to('grievance/list');
     }
+
+    //Handle for Request for Reopen 
+    public function handleGrievanceRequestReopen()
+    {
+        //code for request to reopen
+        $Grievance = new Grievance;
+        if ($Grievance->RequestReoopenGrievance()) {
+            SentryHelper::setMessage('Request sent ....');
+        } else {
+            SentryHelper::setMessage('Request Not sent', 'warning');
+        }
+
+        return Redirect::to('grievance/list');
+    }
 }
