@@ -1,7 +1,14 @@
 @section('scripts')
-@parent<script src="//cdn.ckeditor.com/4.4.3/basic/ckeditor.js"></script>
+@parent 
 <script type="text/javascript" src="{{ asset('js/dev/comment/app.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/dev/comment/add_comments.js') }}"></script>
+<style type="text/css">
+    #myModal {
+top:10%;
+right:10%;
+outline: none;
+}
+</style>
 @stop
 @section('content')
 <div class="row">
@@ -61,10 +68,41 @@
 <div class="row">
     <div class="col-md-12">
         <a href="{{url('grievance/list')}}" class="btn btn-primary btn-md">Back</a>
+        @if(isset($grievance->status) && ($grievance->status==3) )
+            @if (isset($grievance->req_reopen))
+                Request to Reopen is already sent
+            @else
+                <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Request to ReOpen</button>
+            @endif
+        @endif
     </div>
 </div>
 
 <div ng-app="articleApp" ng-controller="mainCntrl">
 <comment data-section="grievance_view" data-nid="{{$grievance->id}}"></comment>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Reason For Request to reopen</h4>
+      </div>
+      {{ Form::open(array('url' => 'grievance/request_reopen', 'role' => 'form')) }}
+      <div class="modal-body">
+        <label for >Reason for Request to Reopen</label>
+        <textarea class="form-control"  id="reason" name="reason"></textarea>
+        {{ Form::hidden('id', $grievance->id) }}
+      </div>
+      <div class="modal-footer">
+        <input type="submit" name="save" class="btn btn-success btn-md" value="Send Request" />
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+      {{ Form::close() }}
+    </div>
+  </div>
+</div>
+
 @stop
