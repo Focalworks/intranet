@@ -1,7 +1,7 @@
 @section('scripts')
 @parent
 <script type="text/javascript">
-    $(function() {
+$(function() {
     $('.mytest').tooltip();
 });
 </script>
@@ -84,16 +84,14 @@
                 <tr>
                     @if ($access)
                         <td>
-                            {{link_to('grievance/manage/' . $grievance->id, $grievance->title )}}<br>
-                            <span>{{substr(strip_tags($grievance->description),0,20)}}</span>
+                            {{link_to('grievance/manage/' . $grievance->id, $grievance->title." (".substr(strip_tags($grievance->description),0,10)."... )" )}}
+
                             @if(isset($grievance->status) && ($grievance->status==3) && isset($grievance->req_reopen))
-                                <u><i><a href="#" class="mytest" data-toggle="tooltip" data-placement='bottom' title="{{$grievance->req_reopen}}">Request to reopen</a></i></u>
+                                <a href="#" class="mytest" data-toggle="tooltip" data-placement='right' title="{{$grievance->req_reopen}}"><span class="text-danger glyphicon glyphicon-info-sign"></span></a>
                             @endif
                         </td>
                     @else
-                        <td>{{link_to('grievance/view/' . $grievance->id,  $grievance->title)}}<br>
-                         <span>{{substr(strip_tags($grievance->description),0,20)}}</span>
-                        </td>
+                        <td>{{link_to('grievance/view/' . $grievance->id,  $grievance->title." (".substr(strip_tags($grievance->description),0,10)."... )" )}}</td>
                     @endif
                     <td class="col-md-2">{{ucwords($grievance->category)}}</td>
                     <td class="col-md-2">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</td>
