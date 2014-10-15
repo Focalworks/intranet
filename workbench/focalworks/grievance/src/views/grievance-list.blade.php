@@ -1,7 +1,7 @@
 @section('scripts')
 @parent
 <script type="text/javascript">
-    $(function() {
+$(function() {
     $('.mytest').tooltip();
 });
 </script>
@@ -85,8 +85,9 @@
                     @if ($access)
                         <td>
                             {{link_to('grievance/manage/' . $grievance->id, $grievance->title." (".substr(strip_tags($grievance->description),0,10)."... )" )}}
+
                             @if(isset($grievance->status) && ($grievance->status==3) && isset($grievance->req_reopen))
-                                <u><i><a href="#" class="mytest" data-toggle="tooltip" data-placement='bottom' title="{{$grievance->req_reopen}}">Request to reopen</a></i></u>
+                                <a href="#" class="mytest" data-toggle="tooltip" data-placement='right' title="{{$grievance->req_reopen}}"><span class="text-danger glyphicon glyphicon-info-sign"></span></a>
                             @endif
                         </td>
                     @else

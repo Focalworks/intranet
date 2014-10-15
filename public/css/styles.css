@@ -30,13 +30,10 @@ Mixins */
 .box-sizing {
   -webkit-box-sizing: border-box;
   /* Safari/Chrome, other WebKit */
-
   -moz-box-sizing: border-box;
   /* Firefox, other Gecko */
-
   box-sizing: border-box;
   /* Opera/IE 8+ */
-
 }
 .float-left {
   float: left;
@@ -53,11 +50,14 @@ Mixins */
 .clear {
   clear: both;
 }
-.tooltip.bottom .tooltip-arrow {
-  border-bottom-color: #9eb2c0;
+.tooltip.right .tooltip-arrow {
+  border-right-color: #bce8f1;
 }
-.tooltip.bottom .tooltip-inner {
-  background-color: #9eb2c0;
+.tooltip.right .tooltip-inner {
+  color: #31708f;
+  background-color: #d9edf7;
+  padding: 5px;
+  border: 1px solid #bce8f1;
 }
 /* ==========================================
 Functions & Operations */
@@ -306,15 +306,10 @@ Main Container */
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
   /******* Dashboard (main container) *******/
-
   /******* Grievance List *******/
-
   /* filter block */
-
   /******* Add Grievance *******/
-
   /******** Coments ********/
-
 }
 .main-wrapper.main-wrapper-normal {
   margin-left: 60px;
@@ -323,8 +318,13 @@ Main Container */
   margin-left: 250px;
 }
 .main-wrapper .filter-container {
-  border: 1px solid #cccccc;
+  border: 1px solid #eaedf2;
   padding: 10px 0;
+}
+.main-wrapper .filter-container .form-group select {
+  border: 1px solid #eaedf2;
+  text-transform: lowercase;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .main-wrapper .table {
   font-size: inherit;
@@ -352,7 +352,6 @@ Main Container */
   color: #2e3641;
   font-weight: bold;
   /*text-decoration: underline;*/
-
 }
 .main-wrapper .table.table-striped tbody tr:nth-child(odd) td {
   background-color: #eff3f9;
