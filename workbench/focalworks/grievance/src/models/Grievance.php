@@ -31,10 +31,10 @@ class Grievance extends Eloquent
 
     public function getGrievanceCount($id = null)
     {
-        $query = DB::table($this->table);
+        $query = DB::table($this->table)->where('deleted', 0);
 
         if ($id != null) {
-            $query->where('user_id', $id)->where('deleted', 0);
+            $query->where('user_id', $id);
         }
 
         return $query->count();
