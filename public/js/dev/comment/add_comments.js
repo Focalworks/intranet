@@ -2,7 +2,7 @@ var Comments = angular.module('Comments', []);
 
 Comments.factory('commentsService', ['$http', '$rootScope', function($http, $rootScope) {
     var comments = [];
-
+ 
     return {
         fetchComments: function(nid, section) {
             return $http({

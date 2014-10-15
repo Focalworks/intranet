@@ -4,23 +4,24 @@ Route::group(array(
         'before' => 'checkAuth'
     ), function ()
     {
-        Route::get('quiz/add_user', 'QuizController@addUser');
-        Route::get('quiz/exam_list', 'QuizController@examList');
+        Route::get('quiz', 'QuizController@mainView');
         Route::get('quiz/question_list', 'QuizController@questionList');
         Route::get('quiz/question_add', 'QuizController@questionAdd');
-        Route::get('quiz/question_view/{id}', 'QuizController@questionView');
         Route::get('quiz/question_delete/{id}', 'QuizController@questionDelete');
-        Route::get('quiz/user_save', 'QuizController@saveUser');
-        Route::get('quiz/json_question/{id}','QuizeController@json_question');
+        Route::post('quiz/question_save', 'QuizController@questionSave');
 
-        Route::group(array(
-                'before' => 'csrf'
-            ), function ()
-            {
-                Route::post('quiz/question_save', 'QuizController@questionSave');
-                Route::post('quiz/filter', 'QuizController@handlequizFilter');
-            });
+        Route::get('quiz/exam_list', 'QuizController@examList');
+        Route::get('quiz/exam_add', 'QuizController@examAdd');
+        Route::get('quiz/exam_view/{id}', 'QuizController@examView');
+
+
+        Route::get('quiz/user_save', 'QuizController@saveUser');
+        Route::get('quiz/json_question/{id}','QuizController@jsonQuestion');
+        Route::get('quiz/json_question_list','QuizController@jsonQuestionList');
+
     });
+
+Route::post('quiz/user_save', 'QuizController@saveUser');
 
 
 ?>

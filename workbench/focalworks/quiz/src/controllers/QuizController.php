@@ -22,18 +22,24 @@ class QuizController extends BaseController
              $this->layout = Config::get('packages/l4mod/sentryuser/sentryuser.master-tpl');
     }
 
+    public function mainView() {
+        $this->layout->content = View::make('quiz::quiz');
+    }
+
     /*
      *  display list of quiz exam conducted
      * */
     public function examList() {
-
+        echo "examList method";
     }
 
     /*
      *  All added questions list for exam
      * */
-    public function questionList($qq_id) {
-        
+    public function questionList() {
+        $quiz = new Quiz();
+        $department = $quiz->get_departments();
+        return View::make('quiz::question-list')->with('department', $department);
     }
 
 
@@ -41,47 +47,77 @@ class QuizController extends BaseController
      *  Add question form
      * */
     public function questionAdd() {
-        $this->layout->content = View::make('quiz::question-add');
+        $quiz = new Quiz();
+        $designation = $quiz->get_departments();
+        return View::make('quiz::question-add')->with('designation', $designation);
     }
 
     /*
      * Handle question form submit
      * */
     public function questionSave() {
-       /* echo "<pre>".print_r(Input::all(),true)."</pre>";
-        die;*/
 
-        $rules=array(
+       // print_r(Input::all());die;
+
+        $question=Input::get('question');
+        $question=$question[0];
+
+        $options=Input::get('option');
+
+        $queRules=array(
             'qq_text' => 'required|min:3',
-            'correct' => 'required'
+            'designation'=>'required'
         );
 
-        $messages = array(
+        $optRule=array(
+            'qo_text' => 'required|min:3',
+            'is_correct' => 'required'
+        );
+
+        $queMessages = array(
             'qq_text.required' => 'Question text is required',
-            'qq_text.min' => 'Question text should be longer. Min 3 characters',
-            'correct.required' => 'Please select correct option'
+            'designation.required' => 'designation is required',
+            'qq_text.min' => 'Question text should be longer. Min 3 characters'
         );
 
-        $validator = Validator::make(Input::all(), $rules, $messages);
+        $optMessage=array(
+            'qo_text.required' => 'Option text is required',
+            'qo_text.min' => 'Question text should be longer. Min 3 characters'
+        );
 
-        if ($validator->fails()) {
-            // send back to the page with the input data and errors
-            GlobalHelper::setMessage('Fix the errors.', 'warning');
-            /* setting the error message */
-            return Redirect::to('quiz/question_add')->withInput()->withErrors($validator);
+        $return = array(
+            'status' => 1
+        );
+
+        $queValidator = Validator::make($question, $queRules, $queMessages);
+
+        if ($queValidator->fails()) {
+            $return['status']=0;
+            $return['message'][]=$queValidator->messages()->all();
         }
 
-        $quiz = new Quiz;
+        foreach($options as $option) {
+            $optValidator = Validator::make($option, $optRule, $optMessage);
+            if ($optValidator->fails()) {
+                $return['status']=0;
+                $return['message'][]=$optValidator->messages()->all();
+            }
+        }
+
+        if($return['status'] == 0) {
+            return $return;
+        }
+
+        $quiz = new Quiz();
 
         if ($quiz->saveQuestions(Input::all())) {
-            SentryHelper::setMessage('A Question has been saved');
+            $return['status'] = 1;
+            $return['message'] = "Question inserted successfully";
         } else {
-            SentryHelper::setMessage('Question has not been saved', 'warning');
+            $return['status'] = 0;
+            $return['message'] = "Something went wrong";
         }
-
-        return Redirect::to('quiz/question_add');
-
-
+        return json_encode($return);
     }
 
     /*
@@ -96,25 +132,74 @@ class QuizController extends BaseController
     /*
      *  Delete any question
      * */
-    public function questionDelete() {
+    public function questionDelete($qq_id) {
+        $quiz = new Quiz();
 
+        if(!$quiz->deleteQuestion($qq_id)) {
+            App::abort(500,'Error while deleting question');
+        }
     }
 
     /*
      *  Handle action of add user form
      * */
-    public function userSave() {
+    public function saveUser() {
 
+        //return Input::all();
+
+        $rules=array(
+            'qu_fname' => 'required',
+            'qu_designation' => 'required',
+            'qu_email' => 'required|email',
+            'qu_mobile' => 'required'
+        );
+
+        $messages = array(
+            'qq_text.required' => 'First name is required',
+            'qu_designation.required' => 'Designation type is required',
+            'qu_email.required' => 'Email address is required',
+            'qu_mobile.required' => 'Mobile number is required',
+            'qu_email.email' => 'Invalid email address',
+        );
+
+        $validator = Validator::make(Input::all(), $rules, $messages);
+
+
+
+        if ($validator->fails()) {
+
+            return $validator->messages();
+            //App::abort(500,$validator->messages());
+
+        }
+        else {
+            $quiz = new Quiz();
+            if($quiz->saveUser()) {
+                return "Success";
+            }
+            else {
+                return "save fail";
+            }
+        }
+    }
+
+    /*
+    * get question list
+    * */
+    public function jsonQuestionList() {
+        $quiz = new Quiz();
+        $question = $quiz->get_question();
+        return json_encode($question);
     }
 
     /*
      * get question and its options as a json data
      * */
-    public function json_question($qq_id) {
-        $quiz = new Quiz;
+    public function jsonQuestion($qq_id) {
+        $quiz = new Quiz();
 
         $question = $quiz->question_with_options($qq_id);
-        echo json_encode($question);
+        return json_encode($question);die;
     }
 
 }
