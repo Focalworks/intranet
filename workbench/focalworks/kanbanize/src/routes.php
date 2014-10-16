@@ -15,7 +15,7 @@ Route::group(array(
     Route::get('kanban-api/templates/project-list', function() {return View::make('kanbanize::templates.projects');});
     Route::get('kanban-api/templates/tickets', function() {return View::make('kanbanize::templates.tickets');});
 
-    Route::get('ticket/fetch', 'KanbanizeController@fetchAllTickets');
+    Route::get('ticket/fetch/{cron_key}', 'KanbanizeController@fetchAllTickets');
     Route::get('project/fetch', 'KanbanizeController@getProjectList');
 
     Route::group(array(

@@ -102,7 +102,12 @@ class KanbanizeController extends BaseController
         DB::table($this->project_table)->insert($finalArr);
     }
 
-    public function fetchAllTickets() {
+    public function fetchAllTickets($cron_key) {
+        $model = new Kanban();
+        if(!$model->checkCronKey($cron_key)) {
+            return "Invalid Cron key";
+        }
+
         $ids = DB::table($this->project_table)->lists('board_id');
 
         foreach ($ids as $id) {
@@ -112,6 +117,8 @@ class KanbanizeController extends BaseController
         }
 
         $kanban = new Kanban();
+
+        /* save logtime in   */
         $kanban->saveLogTime();
     }
 
@@ -129,26 +136,5 @@ class KanbanizeController extends BaseController
 
         $kanban = new Kanban();
         $kanban->saveTicketList($dataArr,$id);
-    }
-
-    private function saveLogTime() {
-
-        $sql="insert into kanbanize_log_time(`created_at`, `board_id`, `taskid`,`assignee`, `logedtime`)
-                select now(),t2.board_id,t2.taskid,t2.assignee,t2.logedtime-t1.logedtime
-                from kanbanize_tickets t1,
-                kanbanize_tickets t2
-                where
-                t1.taskid=t2.taskid and
-                t1.assignee=t2.assignee and
-                t1.created_at = CURDATE() and
-                t2.created_at = DATE_SUB(CURDATE(),INTERVAL 1 DAY)";
-        try {
-            DB::statement($sql);
-            return true;
-        }
-        catch(Exception $e) {
-            Log::error('Error while save task log :  '.$e->getMessage());
-            return false;
-        }
     }
 }

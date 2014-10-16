@@ -126,4 +126,18 @@ class Kanban extends Eloquent
             return false;
         }
     }
+
+    function checkCronKey($cron_key) {
+        $row=DB::table('variables')
+            ->where('name','cron_key')
+            ->where('value',$cron_key)
+            ->get();
+
+        if($row) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
