@@ -14,8 +14,11 @@ class KanbanizeTicketsAddDate extends Migration {
         /* add created_at column in KanbanizeTickets */
         Schema::table('kanbanize_tickets', function($table) {
             $table->date('created_at');
-            $table->string('assignee')->after('taskid');
         });
+
+        Schema::table('kanbanize_log_time', function($table) {
+              $table->string('assignee');
+          });
     }
 
     /**
@@ -27,8 +30,11 @@ class KanbanizeTicketsAddDate extends Migration {
     {
         Schema::table('kanbanize_tickets', function($table) {
             $table->dropColumn('created_at');
-            $table->dropColumn('assignee');
         });
+
+        Schema::table('kanbanize_log_time', function($table) {
+              $table->dropColumn('assignee');
+          });
     }
 
 }
