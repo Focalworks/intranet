@@ -120,6 +120,7 @@ class Kanban extends Eloquent
         try {
             DB::statement($sql);
             return true;
+
         }
         catch(Exception $e) {
             Log::error('Error while save task log :  '.$e->getMessage());
