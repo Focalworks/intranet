@@ -35,6 +35,10 @@ Parametric Mixins */
   -o-transition:      			@transition;
   transition: 							@transition;
 }
+.opcity(@opacity: 0, @ieOpacity: 0) {
+  opacity: @opacity;
+  filter: alpha(opacity=@ieOpacity); /* For IE8 and earlier */
+}
 
 /* ==========================================
 Mixins */
@@ -76,6 +80,7 @@ Mixins */
 }
 .tooltip {
   &.right {
+    .opcity(1, 100);
     .tooltip-arrow {
       border-right-color: #bce8f1;
     }
