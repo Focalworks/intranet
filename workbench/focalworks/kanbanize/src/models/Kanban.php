@@ -114,8 +114,8 @@ class Kanban extends Eloquent
                 where
                 t1.taskid=t2.taskid and
                 t1.assignee=t2.assignee and
-                t1.created_at = CURDATE() and
-                t2.created_at = DATE_SUB(CURDATE(),INTERVAL 1 DAY)";
+                t2.created_at = CURDATE() and
+                t1.created_at = DATE_SUB(CURDATE(),INTERVAL 1 DAY)";
 
         try {
             DB::statement($sql);
