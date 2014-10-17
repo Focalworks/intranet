@@ -32,3 +32,4 @@ Route::group(array(
     });
 
 Event::subscribe('FW\Subscriber\HookSubscriber');
+Event::subscribe('FW\Emails\EmailEvents');
