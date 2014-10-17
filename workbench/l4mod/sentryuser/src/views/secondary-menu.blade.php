@@ -14,7 +14,7 @@
 </div>
 @endif
 
-@if (in_array('Amitavroy\Mailing\MailingServiceProvider', Config::get('app.providers')))
+@if (in_array('Amitavroy\Mailing\MailingServiceProvider', Config::get('app.providers')) && PermApi::user_has_permission('manage_mailing'))
 <div class="btn-group">
     <a href="{{url('mailing/list')}}" class="btn btn-primary">Mailing List</a>
 </div>

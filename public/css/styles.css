@@ -50,6 +50,11 @@ Mixins */
 .clear {
   clear: both;
 }
+.tooltip.right {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  /* For IE8 and earlier */
+}
 .tooltip.right .tooltip-arrow {
   border-right-color: #bce8f1;
 }
@@ -731,17 +736,6 @@ Sidebar */
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
-
-.float-right {
-	text-align: right;
-	float: right;
-}
-
-.fc-red{
-	color: red;
-}
-
-
 /* ==========================================
 Footer */
 /* ==========================================

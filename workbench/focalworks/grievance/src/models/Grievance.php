@@ -101,7 +101,9 @@ class Grievance extends Eloquent
             $data = $this->loadGrievance($Grivance->id);
 
             // adding the code to invalidate the cache
+            Log::info('I was here inside save');
             Event::fire('grievance.cacheClear', [$Grivance->id]);
+            Event::fire('grievance.save', [$Grivance]);
             $key = 'grievance_' . $Grivance->id;
             Cache::forever($key, $data);
 
