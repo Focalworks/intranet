@@ -39,6 +39,7 @@ class KanbanizeController extends BaseController
     }
 
     public function setCurlInit($url) {
+        $this->layout = '';
         $api_key = $this->apikey;
         /**
          * Assigning Variables
@@ -71,6 +72,7 @@ class KanbanizeController extends BaseController
     }
 
     public function getProjectList($cron_key) {
+        $this->layout = '';
 
         // checking the authentication before running cron
         $model = new Kanban();
@@ -110,6 +112,8 @@ class KanbanizeController extends BaseController
     }
 
     public function fetchAllTickets($cron_key) {
+        $this->layout = '';
+
         $model = new Kanban();
         if(!$model->checkCronKey($cron_key)) {
             return "Invalid Cron key";
@@ -130,10 +134,11 @@ class KanbanizeController extends BaseController
     }
 
     private function getTicketList($id) {
+        $this->layout = '';
         /**
          * Assigning Variables
          */
-       $url = "http://kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/{$id}/container/yes/fromdate/now/todate/now/format/json";
+        $url = "http://kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/{$id}/container/yes/fromdate/now/todate/now/format/json";
 
         $response = $this->setCurlInit($url);
 
