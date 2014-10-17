@@ -331,6 +331,9 @@ Main Container */
   text-transform: lowercase;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+.main-wrapper .filter-container .col-lg-3 .form-group select {
+  min-width: 200px;
+}
 .main-wrapper .table {
   font-size: inherit;
 }
@@ -349,6 +352,10 @@ Main Container */
 .main-wrapper .table thead tr.info th a:visited {
   color: #fff;
 }
+.main-wrapper .table thead tr.info th a:link span.glyphicon,
+.main-wrapper .table thead tr.info th a:visited span.glyphicon {
+  margin-left: 5px;
+}
 .main-wrapper .table.table-striped tbody tr td {
   color: #2e3641;
 }
@@ -357,6 +364,9 @@ Main Container */
   color: #2e3641;
   font-weight: bold;
   /*text-decoration: underline;*/
+}
+.main-wrapper .table.table-striped tbody tr td span {
+  font-size: 80%;
 }
 .main-wrapper .table.table-striped tbody tr:nth-child(odd) td {
   background-color: #eff3f9;
@@ -740,3 +750,8 @@ Sidebar */
 Footer */
 /* ==========================================
 Media Query */
+@media (max-width: 991px) and (min-width: 768px) {
+  .main-wrapper .filter-container .col-sm-4 .form-group select {
+    min-width: 130px;
+  }
+}

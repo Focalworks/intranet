@@ -145,11 +145,11 @@ label, .control-label, .help-block, .checkbox, .radio {
       border-color: #99ae32;
     }
   }
-
 }
 .form-control:focus {
   border-color: #cccccc;
 }
+
 /****** Icons ******/
 .fw-icons {
   cursor: pointer;
@@ -334,6 +334,13 @@ Main Container */
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
     }
+    .col-lg-3 {
+      .form-group {
+        select {
+          min-width: 200px;
+        }
+      }
+    }
   }
   .table> {
     font-size: inherit;
@@ -351,6 +358,9 @@ Main Container */
           }
           a:link, a:visited {
             color: #fff;
+            span.glyphicon {
+              margin-left: 5px;
+            }
           }
         }
       }
@@ -364,6 +374,9 @@ Main Container */
               color: #2e3641;
               font-weight: bold;
               /*text-decoration: underline;*/
+            }
+            span {
+              font-size: 80%;
             }
           }
           &:nth-child(odd)> {
@@ -752,3 +765,19 @@ Footer */
 
 /* ==========================================
 Media Query */
+@media (max-width: 767px) {}
+@media (max-width: 991px) and (min-width: 768px) {
+  .main-wrapper {
+    .filter-container {
+      .col-sm-4 {
+        .form-group {
+          select {
+            min-width: 130px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1199px) and (min-width: 992px) {}
+@media (min-width: 1200px) {}
