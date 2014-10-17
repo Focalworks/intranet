@@ -70,7 +70,14 @@ class KanbanizeController extends BaseController
         return $call;
     }
 
-    public function getProjectList() {
+    public function getProjectList($cron_key) {
+
+        // checking the authentication before running cron
+        $model = new Kanban();
+        if(!$model->checkCronKey($cron_key)) {
+            return "Invalid Cron key";
+        }
+
         /**
          * Assigning Variables
          */
