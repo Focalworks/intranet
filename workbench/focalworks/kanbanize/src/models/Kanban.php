@@ -134,11 +134,25 @@ class Kanban extends Eloquent
             ->where('value',$cron_key)
             ->get();
 
-        if($row) {
+        if($row && $this->isFirstEntry()) {
             return true;
         }
         else {
             return false;
         }
     }
+
+    function isFirstEntry() {
+        $row=DB::table('kanbanize_tickets')
+            ->where('created_at',date('Y-m-d'))
+            ->get();
+
+        if(!$row) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 }
