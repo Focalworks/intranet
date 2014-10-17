@@ -20,8 +20,7 @@ class KanbanizeController extends BaseController
      */
     protected $layout = 'sentryuser::master';
 
-    public function __construct()
-    {
+    public function __construct() {
         /**
          * Setting the layout of the controller to something else
          * if the configuration is present.
@@ -35,13 +34,11 @@ class KanbanizeController extends BaseController
         $this->log_time_table = 'kanbanize_log_time';
     }
 
-    public function getLandingPage()
-    {
+    public function getLandingPage() {
         $this->layout->content = View::make('kanbanize::kanban-land');
     }
 
-    public function setCurlInit($url)
-    {
+    public function setCurlInit($url) {
         $api_key = $this->apikey;
         /**
          * Assigning Variables
@@ -66,14 +63,14 @@ class KanbanizeController extends BaseController
         $response = curl_exec($handle);
         $call->request_error = curl_error($handle);
         $call->response = $response;
+
         $call->response_code = (int) curl_getinfo($handle, CURLINFO_HTTP_CODE);
         curl_close($handle);
 
         return $call;
     }
 
-    public function getProjectList()
-    {
+    public function getProjectList() {
         /**
          * Assigning Variables
          */
@@ -105,8 +102,12 @@ class KanbanizeController extends BaseController
         DB::table($this->project_table)->insert($finalArr);
     }
 
-    public function fetchAllTickets()
-    {
+    public function fetchAllTickets($cron_key) {
+        $model = new Kanban();
+        if(!$model->checkCronKey($cron_key)) {
+            return "Invalid Cron key";
+        }
+
         $ids = DB::table($this->project_table)->lists('board_id');
 
         foreach ($ids as $id) {
@@ -115,71 +116,25 @@ class KanbanizeController extends BaseController
             Cache::forget($key);
         }
 
+        $kanban = new Kanban();
+
+        /* save logtime in   */
+        $kanban->saveLogTime();
     }
 
-    private function getTicketList($id)
-    {
+    private function getTicketList($id) {
         /**
          * Assigning Variables
          */
-        $url = "http://kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/{$id}/format/json";
+       $url = "http://kanbanize.com/index.php/api/kanbanize/get_all_tasks/boardid/{$id}/container/yes/fromdate/now/todate/now/format/json";
 
         $response = $this->setCurlInit($url);
 
         $dataArr = json_decode($response->response, true);
 
-        foreach($dataArr as $index => $data) {
-            /*
-                * Building field array
-            */
-            $fieldData = array(
-                'taskid' => $data['taskid'],
-                'user_id' => 1,
-                'board_id' => $id,
-                'position' => $data['position'],
-                'type' => $data['type'],
-                'assignee' => $data['assignee'],
-                'title' => $data['title'],
-                'description' => $data['description'],
-                'subtasks' => $data['subtasks'],
-                'subtaskscomplete' => $data['subtaskscomplete'],
-                'color' => $data['color'],
-                'priority' => $data['priority'],
-                'size' => $data['size'],
-                'deadline' => $data['deadline'],
-                'deadlineoriginalformat' => $data['deadlineoriginalformat'],
-                'extlink' => $data['extlink'],
-                'tags' => $data['tags'],
-                'columnid' => $data['columnid'],
-                'laneid' => $data['laneid'],
-                'leadtime' => $data['leadtime'],
-                'blocked' => $data['blocked'],
-                'blockedreason' => $data['blockedreason'],
-                'columnname' => $data['columnname'],
-                'lanename' => $data['lanename'],
-                'columnpath' => $data['columnpath'],
-                'logedtime' => $data['logedtime'],
-            );
+        //GlobalHelper::dsm($dataArr);
 
-            /*
-            * Checking if task alread there in database
-            * If taskid found only update the row
-            * Pending : Skip the row with Columname Complete
-            */
-            DB::table($this->ticket_table)->insert($fieldData);
-            $this->saveLogTime($fieldData);
-        }
-    }
-
-    private function saveLogTime($data)
-    {
-        $dataToSave = array(
-            'created_at' => date('Y-m-d h:m:s', time()),
-            'board_id' => $data['board_id'],
-            'taskid' => $data['taskid'],
-            'logedtime' => $data['logedtime'],
-        );
-
-        DB::table($this->log_time_table)->insert($dataToSave);
+        $kanban = new Kanban();
+        $kanban->saveTicketList($dataArr,$id);
     }
 }

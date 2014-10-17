@@ -117,7 +117,7 @@ class QuizController extends BaseController
             $return['status'] = 0;
             $return['message'] = "Something went wrong";
         }
-        return json_encode($return);
+        return $return;
     }
 
     /*
@@ -145,8 +145,6 @@ class QuizController extends BaseController
      * */
     public function saveUser() {
 
-        //return Input::all();
-
         $rules=array(
             'qu_fname' => 'required',
             'qu_designation' => 'required',
@@ -167,18 +165,12 @@ class QuizController extends BaseController
 
 
         if ($validator->fails()) {
-
-            return $validator->messages();
-            //App::abort(500,$validator->messages());
-
+            App::abort(500,$validator->messages());
         }
         else {
             $quiz = new Quiz();
-            if($quiz->saveUser()) {
-                return "Success";
-            }
-            else {
-                return "save fail";
+            if(!$quiz->saveUser()) {
+                App::abort(500,"Fail to add user");
             }
         }
     }
@@ -189,7 +181,7 @@ class QuizController extends BaseController
     public function jsonQuestionList() {
         $quiz = new Quiz();
         $question = $quiz->get_question();
-        return json_encode($question);
+        return $question;
     }
 
     /*
@@ -199,7 +191,7 @@ class QuizController extends BaseController
         $quiz = new Quiz();
 
         $question = $quiz->question_with_options($qq_id);
-        return json_encode($question);die;
+        return $question;
     }
 
 }

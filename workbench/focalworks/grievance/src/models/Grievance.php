@@ -31,10 +31,10 @@ class Grievance extends Eloquent
 
     public function getGrievanceCount($id = null)
     {
-        $query = DB::table($this->table);
+        $query = DB::table($this->table)->where('deleted', 0);
 
         if ($id != null) {
-            $query->where('user_id', $id)->where('deleted', 0);
+            $query->where('user_id', $id);
         }
 
         return $query->count();
@@ -101,7 +101,9 @@ class Grievance extends Eloquent
             $data = $this->loadGrievance($Grivance->id);
 
             // adding the code to invalidate the cache
+            Log::info('I was here inside save');
             Event::fire('grievance.cacheClear', [$Grivance->id]);
+            Event::fire('grievance.save', [$Grivance]);
             $key = 'grievance_' . $Grivance->id;
             Cache::forever($key, $data);
 

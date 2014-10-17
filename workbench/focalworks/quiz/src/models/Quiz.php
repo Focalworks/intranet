@@ -85,8 +85,7 @@ class Quiz extends Eloquent
         }
         catch (Exception $e) {
             DB::rollback();
-            echo $e->getMessage();
-            SentryHelper::setMessage($e->getMessage(), 'error');
+            SentryHelper::setMessage('error',$e->getMessage());
             return false;
         }
     }
@@ -135,7 +134,6 @@ class Quiz extends Eloquent
             return true;
         }
         catch (Exception $e) {
-            //return $e->getMessage();
             Log::error('Error while creating quiz user :  '.$e->getMessage());
             return false;
         }
