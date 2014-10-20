@@ -91,7 +91,7 @@ class Kanban extends Eloquent
                 'created_at' => date('Y-m-d'),
             );
         }
-
+       // GlobalHelper::dsm($fieldData);
         try {
             DB::table($this->ticketTbl)->insert($fieldData);
             return true;
@@ -107,7 +107,15 @@ class Kanban extends Eloquent
      * */
     function saveLogTime() {
 
-        $sql="insert into kanbanize_log_time(`created_at`, `board_id`, `taskid`,`assignee`, `logedtime`)
+        $row=DB::table('kanbanize_log_time')
+            ->get();
+        if(!$row) {
+            $sql="insert into kanbanize_log_time(`created_at`, `board_id`, `taskid`,`assignee`, `logedtime`)
+                select now(),board_id,taskid,assignee,logedtime
+                from kanbanize_tickets";
+        }
+        else {
+            $sql="insert into kanbanize_log_time(`created_at`, `board_id`, `taskid`,`assignee`, `logedtime`)
                 select now(),t2.board_id,t2.taskid,t2.assignee,t2.logedtime-t1.logedtime
                 from kanbanize_tickets t1,
                 kanbanize_tickets t2
@@ -115,10 +123,13 @@ class Kanban extends Eloquent
                 t1.taskid=t2.taskid and
                 t1.assignee=t2.assignee and
                 t2.created_at = CURDATE() and
-                t1.created_at = DATE_SUB(CURDATE(),INTERVAL 1 DAY)";
+                t1.created_at = (SELECT max(`created_at`) FROM `kanbanize_tickets` where  `created_at` < CURDATE())";
+        }
 
         try {
+            //GlobalHelper::dsm($sql);
             DB::statement($sql);
+            Log::info('Log data added date :  '.date('d-m-Y h:i:s'));
             return true;
 
         }
@@ -138,6 +149,7 @@ class Kanban extends Eloquent
             return true;
         }
         else {
+            Log::error('Invalid Cron key on date:'.date('d-m-Y'));
             return false;
         }
     }
@@ -151,6 +163,7 @@ class Kanban extends Eloquent
             return true;
         }
         else {
+            Log::error('Invalid cron running, Already cron is run for date :'.date('d-m-Y'));
             return false;
         }
     }

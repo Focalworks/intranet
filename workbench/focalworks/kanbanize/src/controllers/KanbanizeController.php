@@ -88,7 +88,7 @@ class KanbanizeController extends BaseController
         $response = $this->setCurlInit($url);
 
         $dataArr = json_decode($response->response, true);
-
+        //GlobalHelper::dsm($dataArr);
         $finalArr = array();
 
         $numOfProjects = count($dataArr['projects']);
@@ -116,6 +116,7 @@ class KanbanizeController extends BaseController
 
         $model = new Kanban();
         if(!$model->checkCronKey($cron_key)) {
+
             return "Invalid Cron key";
         }
 
@@ -126,6 +127,8 @@ class KanbanizeController extends BaseController
             $key = 'board_list'.$id;
             Cache::forget($key);
         }
+
+        Log::info('Kanbanise ticket entry added:'.date('d-m-Y h:i:s'));
 
         $kanban = new Kanban();
 
