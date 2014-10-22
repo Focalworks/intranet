@@ -10,11 +10,11 @@ return array(
      */
     'method' => 'smtp',
     'smtp' => array(
-        'username' => '',
-        'password' => '',
-        'server' => '',
-        'port' => '',
-        'encryption' => ''
+        'username' => 'AKIAI3PJYGG4HWSNAQUQ',
+        'password' => 'Aq+FRu8GTGuVVdDVH3f31QoF75aQU4NGz74PgX38MVbT',
+        'server' => 'email-smtp.us-east-1.amazonaws.com',
+        'port' => '25',
+        'encryption' => 'tls'
     ),
     
 );

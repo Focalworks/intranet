@@ -27,6 +27,7 @@ class MailTracker extends Eloquent
     public function sendMail ($mail_to_address, $mail_from_address, $mail_subject,
         $mail_body, $mail_to_name = null, $mail_from_name = null)
     {
+        Log::info('Mail send function');
         // adding the entry to the table
         $mail_id = $this->addMailTrackerEntry($mail_to_address, $mail_from_address,
             $mail_subject, $mail_body, $mail_to_name, $mail_from_name);

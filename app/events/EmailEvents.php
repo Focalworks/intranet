@@ -4,12 +4,14 @@
  * All events related to sending email is handled through this class.
  */
 
+use Focalworks\Grievance\GrievanceMails;
+
 class EmailEvents {
     
     public function onGrievanceSave($grievance)
     {
-        \Log::info('I was here inside class');
-        \Log::info(print_r($grievance, true));
+        $grievanceMails = new GrievanceMails;
+        $grievanceMails->sendGrievanceSaveEmail($grievance);
     }
 
     /**

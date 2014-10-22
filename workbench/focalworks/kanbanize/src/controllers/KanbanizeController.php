@@ -147,7 +147,7 @@ class KanbanizeController extends BaseController
 
         $dataArr = json_decode($response->response, true);
 
-        //GlobalHelper::dsm($dataArr);
+        // GlobalHelper::dsm($dataArr, true);
 
         $kanban = new Kanban();
         $kanban->saveTicketList($dataArr,$id);
