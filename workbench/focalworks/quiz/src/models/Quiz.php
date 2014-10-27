@@ -129,12 +129,23 @@ class Quiz extends Eloquent
         $insert['qu_mobile'] = Input::get('qu_mobile');
         $insert['created']= date('Y-m-d h:i:s');
 
+        $json_data=Input::get('quiz');
+
         try {
-            DB::table('quiz_users')->insert($insert);
+            $quid = DB::table('quiz_users')->insertGetId($insert);
+
+            $quiz_insert=array(
+                "qu_id" => $quid,
+                "answers" => $json_data,
+                "created" => date('Y-m-d h:i:s'),
+            );
+
+            DB::table('quiz_exams')->insert($quiz_insert);
+
             return true;
         }
         catch (Exception $e) {
-            Log::error('Error while creating quiz user :  '.$e->getMessage());
+            Log::error('Error while creating quiz user and saving quiz exam :  '.$e->getMessage());
             return false;
         }
     }
@@ -158,4 +169,51 @@ class Quiz extends Eloquent
         }
 
     }
+
+    public function getQuizQuestions($designation) {
+       $sql="select qq_id,qq_text
+            from quiz_questions
+            where designation=?
+            order by rand()
+            limit 0,10";
+        $data = DB::select($sql,array($designation));
+        $return = array();
+        $i=0;
+        foreach($data as $row) {
+            $options=$this->get_options($row->qq_id);
+            $return[$i]['question']=$row->qq_text;
+            $return[$i]['question_id']=$row->qq_id;
+            $j=0;
+            foreach($options as $option) {
+                $return[$i]['options'][$j]['option'] = $option->qo_text;
+                $return[$i]['options'][$j]['option_id'] = $option->qo_id;
+                $j++;
+            }
+            $i++;
+        }
+        return $return;
+    }
+
+    public function getQuestions($limit=10) {
+        $sql="select qq_idqq_text
+            from quiz_questions
+            order by rand()
+            limit 0,".$limit;
+        $data = DB::statement($sql);
+        return $data;
+    }
+
+    public function getDesignation() {
+        $designation=DB::table('designation')
+            ->get();
+        return $designation;
+    }
+
+    public function getExams() {
+        $data = DB::table('quiz_exams')
+            ->join('quiz_users','quiz_exams.qu_id','=','quiz_users.qu_id')
+            ->get();
+        return $data;
+    }
+
 }

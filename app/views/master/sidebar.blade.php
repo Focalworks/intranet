@@ -27,7 +27,7 @@
                 <span class="enlarge">Quiz</span>
             </div>
             <ul class="sub-menu-wrapper sub-menu-normal clearfix">
-                <li class="leaf last clearfix">{{ link_to('quiz#/', 'Quiz Exams') }}</li>
+                <li class="leaf last clearfix">{{ link_to('quiz#/examList', 'Quiz Exams') }}</li>
                 <li class="leaf first clearfix">{{ link_to('quiz#/', 'Questions') }}</li>
                 <li class="leaf first clearfix">{{ link_to('quiz#/new', 'Add Questions') }}</li>
 

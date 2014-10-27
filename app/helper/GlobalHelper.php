@@ -162,4 +162,14 @@ class GlobalHelper {
         }
         return $result;
     }
+
+    public function last_query() {
+        $queries = DB::getQueryLog();
+        return $last_query = end($queries);
+    }
+
+    public function print_last_query() {
+        $this->dsm($this->last_query());
+    }
+
 }

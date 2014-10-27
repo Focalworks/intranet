@@ -26,11 +26,19 @@ class QuizController extends BaseController
         $this->layout->content = View::make('quiz::quiz');
     }
 
+
+    public function examListTemplate() {
+        return View::make('quiz::exam-list');
+    }
+
     /*
      *  display list of quiz exam conducted
      * */
     public function examList() {
-        echo "examList method";
+        $quiz = new Quiz();
+        $data=$quiz->getExams();
+        //GlobalHelper::dsm($data);
+        return $data;
     }
 
     /*
@@ -141,15 +149,16 @@ class QuizController extends BaseController
     }
 
     /*
-     *  Handle action of add user form
+     *  Handle action of save quiz with user
      * */
-    public function saveUser() {
+    public function saveQuiz() {
 
         $rules=array(
             'qu_fname' => 'required',
             'qu_designation' => 'required',
             'qu_email' => 'required|email',
-            'qu_mobile' => 'required'
+            'qu_mobile' => 'required',
+            'quiz' => 'required'
         );
 
         $messages = array(
@@ -158,6 +167,7 @@ class QuizController extends BaseController
             'qu_email.required' => 'Email address is required',
             'qu_mobile.required' => 'Mobile number is required',
             'qu_email.email' => 'Invalid email address',
+            'quiz.required' => 'Quiz answers are required'
         );
 
         $validator = Validator::make(Input::all(), $rules, $messages);
@@ -194,4 +204,17 @@ class QuizController extends BaseController
         return $question;
     }
 
+    /*
+     * return json data of question and option
+     * */
+    public function getQuizQuestions($designation) {
+        $quiz = new Quiz();
+        $array = $quiz->getQuizQuestions($designation);
+        return $array;
+    }
+
+    public function getDesignation() {
+        $quiz = new Quiz();
+        return $quiz->getDesignation();
+    }
 }
