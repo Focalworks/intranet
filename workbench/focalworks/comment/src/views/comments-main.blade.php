@@ -25,11 +25,11 @@
                 <div class="clearfix">
                     <div ng-show="editComment[comment.cid]">@{{comment.comment}}</div>
                     <div ng-hide="editComment[comment.cid]">
-                        <textarea class="form-control textare-comment" rows="6" ng-model="comment.comment"></textarea>
+                        <textarea class="form-control textare-comment" rows="3" ng-model="comment.comment"></textarea>
                         <div class="btn-action"><button class="btn btn-success btn-xs" ng-click="post_comment(comment, 'Edit')">Save</button></div>
                     </div>
                     <div ng-hide="hideReply[comment.cid]">
-                        <textarea class="form-control textare-comment" rows="6" ng-model="comment_message"></textarea>
+                        <textarea class="form-control textare-comment" rows="3" ng-model="comment_message"></textarea>
                         <div class="btn-action"><button class="btn btn-success btn-xs" ng-click="post_comment(comment)">Post</button></div>
                     </div>
                 </div>
