@@ -1,6 +1,7 @@
 <li class="comment-list-item" ng-show ="!deleted[comment.cid]">
     <div class="comment-group clearfix">
-		<span ng-if="@{{comment.isaccess}}">
+        
+        <span ng-if="comment.isaccess">
         <div class="comment-controles-wrapper pull-right">
             <div class="comment-controle-icon comment-controle-icon-normal"><span class="fw-icons glyphicon glyphicon-chevron-down"></span><span class="fw-icons glyphicon glyphicon-chevron-up"></span></div>
             <ul class="comment-controles clearfix">
@@ -12,10 +13,11 @@
                 </li>
             </ul>
         </div>
-		</span>
+        </span>
+
         <div class="comment-display-wrapper clearfix">
             <div class="user-picture">
-                <div class="user-picture-inner"><img src="@{{comment.userimage}}" alt="No Image" class="user-picture-inner" /></div>
+                <div class="user-picture-inner"><img ng-src="@{{comment.userimage}}" alt="No Image" class="user-picture-inner" /></div>
             </div>
             <div class="comment-display-content">
                 <div class="comment-display-name-wrapper clearfix">
@@ -25,11 +27,11 @@
                 <div class="clearfix">
                     <div ng-show="editComment[comment.cid]">@{{comment.comment}}</div>
                     <div ng-hide="editComment[comment.cid]">
-                        <textarea class="form-control textare-comment" rows="3" ng-model="comment.comment"></textarea>
+                        <textarea class="form-control textare-comment" rows="6" ng-model="comment.comment"></textarea>
                         <div class="btn-action"><button class="btn btn-success btn-xs" ng-click="post_comment(comment, 'Edit')">Save</button></div>
                     </div>
                     <div ng-hide="hideReply[comment.cid]">
-                        <textarea class="form-control textare-comment" rows="3" ng-model="comment_message"></textarea>
+                        <textarea class="form-control textare-comment" rows="6" ng-model="comment_message"></textarea>
                         <div class="btn-action"><button class="btn btn-success btn-xs" ng-click="post_comment(comment)">Post</button></div>
                     </div>
                 </div>

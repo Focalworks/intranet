@@ -4,31 +4,77 @@
 <script type="text/javascript" src="{{ asset('js/dev/comment/add_comments.js') }}"></script>
 <style type="text/css">
     #myModal {
-top:10%;
-right:10%;
-outline: none;
-}
+        top:10%;
+        right:10%;
+        outline: none;
+    }
 </style>
 @stop
 @section('content')
 <div class="row">
-    <div class="col-md-12"><h1>Details</h1></div>
+    <div class="col-md-6"><h1></h1></div>
+    <div class="col-md-6">
+        <a href="{{url('grievance/list')}}" class="float-right margin-R margin-T">Back</a>
+        @if(isset($grievance->status) && ($grievance->status==3) )
+            @if (isset($grievance->req_reopen))
+                Request to Reopen is already sent
+            @else
+                <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Request to ReOpen</button>
+            @endif
+        @endif
+    </div>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-
-        <div class="form-group">
-            <label for="title">Grievance title</label>
-            <input type="text" placeholder="Grievance title" class="form-control" id="title" name="title" value="{{$grievance->title}}" readonly>
+    <div class="col-md-12">
+        <div class="cards-view">
+            <h3>{{$grievance->title}}</h3>
+            <div class="row user">
+                <div class="col-md-2 user-pic"><img src="./../3/user-pic.png"></div>
+                <div class="col-md-5 user-details border-R">
+                    <span id="name">Chandrakant D</span><br>
+                    <span id="time">03rd Oct 2014</span>
+                </div>
+                <div class="col-md-5 user-destails">
+                    <span>Category- {{ucwords($grievance->category)}}</span><br>
+                    <span>Urgency - {{ucwords(Grievance::getUrgencies($grievance->urgency))}}</span><br>
+                    <span>
+                        <input type="checkbox" name="anonymous" id="anonymous" value="1" {{$grievance->anonymous_val}} disabled>
+                        <label for="anonymous">Anonymous</label>
+                    </span>
+                </div>
+            </div>
+            <div class="row content-body">
+                <div class="col-md-4 ">
+                     @if (isset($grievance->url))
+                    <div class="form-group image-preview">
+                        <label></label>
+                        <img src="{{url($grievance->url)}}" alt="" class="img-thumbnail" />
+                    </div>
+                    {{ Form::hidden('fid', $grievance->fid) }}
+                    @else
+                    {{ Form::hidden('fid', '0') }}
+                    @endif
+                </div>
+                <div class="col-md-8">
+                    {{$grievance->description}}
+                </div>
+            </div>
+            <div ng-app="articleApp" ng-controller="mainCntrl">
+                <comment data-section="grievance_view" data-nid="{{$grievance->id}}"></comment>
+            </div>
+        </div>
+        <div class="">
+           <!-- <label for="title">Grievance title</label>-->
+            <input type="hidden" placeholder="Grievance title" class="form-control" id="title" name="title" value="{{$grievance->title}}" readonly>
         </div>
 
-        <div class="form-group">
+       <!-- <div class="form-group">
             <label for="body">Body</label>
             <div>{{$grievance->description}}</div>
-        </div>
+        </div>-->
     </div>
-    <div class="col-md-4">
+   <!-- <div class="col-md-4">
         <div class="form-group">
             <label for="category">Category</label>
             <select name="" id="" class="form-control" disabled>
@@ -63,23 +109,7 @@ outline: none;
             <input type="checkbox" name="anonymous" id="anonymous" value="1" {{$grievance->anonymous_val}} disabled>
             <label for="urgency">Anonymous</label>
         </div> 
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <a href="{{url('grievance/list')}}" class="btn btn-primary btn-md">Back</a>
-        @if(isset($grievance->status) && ($grievance->status==3) )
-            @if (isset($grievance->req_reopen))
-                Request to Reopen is already sent
-            @else
-                <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Request to ReOpen</button>
-            @endif
-        @endif
-    </div>
-</div>
-
-<div ng-app="articleApp" ng-controller="mainCntrl">
-<comment data-section="grievance_view" data-nid="{{$grievance->id}}"></comment>
+    </div>-->
 </div>
 
 <!-- Modal -->
@@ -104,5 +134,4 @@ outline: none;
     </div>
   </div>
 </div>
-
 @stop
