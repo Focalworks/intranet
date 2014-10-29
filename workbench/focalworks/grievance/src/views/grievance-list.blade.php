@@ -7,8 +7,9 @@ $(function() {
 </script>
 @stop
 @section('content')
+<div class="cards-view">
 <div class="row">
-    <div class="col-md-12"><h1>List of Grievances / Suggestions</h1></div>
+    <div class="col-md-12"><h2>List of Grievances / Suggestions</h2></div>
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -69,6 +70,7 @@ $(function() {
             <thead>
                 <tr class="info">
                     <th>Title</th>
+                    <th></th>
                     <th>{{Grievance::sortColumnLinkHelper($sortArray, 'category', $sortBy)}}</th>
                     <th>{{Grievance::sortColumnLinkHelper($sortArray, 'urgency', $sortBy)}}</th>
                     <th>{{Grievance::sortColumnLinkHelper($sortArray, 'created_at', $sortBy)}}</th>
@@ -97,6 +99,7 @@ $(function() {
                         <span>{{substr(strip_tags($grievance->description),0,10)}}</span>
                         </td>
                     @endif
+                    <td class="col-md-1"><span class="glyphicon glyphicon-edit"></span></td>
                     <td class="col-md-2">{{ucwords($grievance->category)}}</td>
                     <td class="col-md-2">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</td>
                     <td class="col-md-2">{{GlobalHelper::formatDate($grievance->created_at, 'dS M Y')}}</td>
@@ -114,6 +117,7 @@ $(function() {
             </tbody>
         </table>
     </div>
+</div>
 </div>
 @else
     <!--h2>No records found.</h2-->
