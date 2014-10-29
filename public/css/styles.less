@@ -7,6 +7,8 @@
 Variables */
 @path: '../images/';
 @blue: #4196fe;
+@dark-grey:#cccccc;
+@light-grey:#eaedf2;
 
 
 /* ==========================================
@@ -92,7 +94,30 @@ Mixins */
     }
   }
 }
-
+img {
+  display: block;
+  outline: 0;
+  max-width:100%;
+}
+.margin-T {
+  margin-top: 10px;
+}
+.margin-B {
+  margin-bottom: 10px;
+}
+.margin-L {
+  margin-left:10px;
+}
+.margin-R {
+  margin-right:10px;
+}
+.border-R {
+  border-right:1px solid #cccccc;
+}
+.border-complete {
+  border:1px solid #cccccc;
+  padding:3px;
+}
 /* ==========================================
 Functions & Operations */
 
@@ -120,9 +145,9 @@ img {
   display: block;
   outline: 0;
 }
-input[type="text"], select, textarea {
+/*input[type="text"], select {
   font-family: 'Bree Serif', serif;
-}
+}*/
 label, .control-label, .help-block, .checkbox, .radio {
   font-size: 15px;
   font-family: 'Bree Serif', serif;
@@ -148,6 +173,7 @@ label, .control-label, .help-block, .checkbox, .radio {
 }
 .form-control:focus {
   border-color: #cccccc;
+  background: #f9f9f9;
 }
 
 /****** Icons ******/
@@ -157,6 +183,11 @@ label, .control-label, .help-block, .checkbox, .radio {
   &:hover {
     color: @blue;
   }
+}
+
+/** Boostrap Customise Elements **/
+.form-control {
+  background: #f9f9f9;
 }
 
 /* ==========================================
@@ -325,11 +356,11 @@ Main Container */
   /******* Grievance List *******/
   /* filter block */
   .filter-container {
-    border: 1px solid #eaedf2;
+    border: 1px solid @light-grey;
     padding: 10px 0;
     .form-group {
       select {
-        border: 1px solid #eaedf2;
+        border: 1px solid @dark-grey;
         text-transform: lowercase;
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
@@ -370,6 +401,8 @@ Main Container */
         tr> {
           td {
             color: #2e3641;
+            background-color: #f8fbff;
+            border-color:@light-grey;
             a:link, a:visited {
               color: #2e3641;
               font-weight: bold;
@@ -382,11 +415,12 @@ Main Container */
           &:nth-child(odd)> {
             td {
               background-color: #eff3f9;
+              border-color:@light-grey;
             }
           }
           &:hover> {
             td {
-              background-color: #f5f5f5;
+              background-color: #ffffff;
             }
           }
         }
@@ -421,14 +455,46 @@ Main Container */
       }
     }
   }
-  /******** Coments ********/
+  /******** View Grievance ********/
+  
+  .cards-view {
+    background:#fff;
+    border:1px solid #eaedf2;
+    margin:15px 0;
+    padding:10px;
+   
+  }
+  .user {
+    border-top:1px solid #cccccc;
+    border-bottom:1px solid #cccccc;
+    padding:10px 0;
+    margin:10px 0;
+    .user-details {
+      height: 70px;
+      #name {}
+      #time {
+        font-size:12px;
+      }
+    }
+  }
+  .content-body {
+    padding:10px 0;
+    margin:10px 0;
+    .content-img {
+      .border-complete;
+    }
+  }
+
+
+
+  /******** Comments ********/
   ul.comments-wrapper {
     list-style: none;
     margin: 20px 0;
     padding: 0;
     .comment-list-item {
       background: #fff;
-      border: 1px solid #eaedf2;
+      border-top: 1px solid #eaedf2;
       margin-bottom: 10px;
       padding: 20px;
       position: relative;
@@ -461,6 +527,7 @@ Main Container */
                 color: #a8bd44;
                 .glyphicon-time {
                   color: #222222;
+                  margin-left: 10px;
                 }
               }
             }
@@ -489,7 +556,7 @@ Main Container */
           .comment-controle-icon {
             position: absolute;
             right: 10px;
-            top: 0;
+            top: 10px;
             z-index: 9;
             .fw-icons {
               font-size: 12px;
@@ -517,7 +584,7 @@ Main Container */
             padding: 0;
             position: absolute;
             right: 0;
-            top: 20px;
+            top: 30px;
             .shadow(0 0px 5px 0px rgba(0, 0, 0, 0.175));
             li.comment-controle {
               .comment-controle-inner {
@@ -545,7 +612,7 @@ Main Container */
           background: none;
           border: none;
           padding: 0;
-          border-top: 1px solid #cccccc;
+          border-top: 1px solid #eaedf2;
           padding-top: 10px;
           margin-top: 10px;
           .comment-group {
@@ -594,10 +661,11 @@ Main Container */
         background: #f9f9f9;
       }
     }
-    .comment-action-arapper {
-      margin-top: 20px;
-      text-align: right;
-    }
+    
+  }
+  .comment-action-wrapper {
+    margin-top: 10px;
+    text-align: right;
   }
 }
 
