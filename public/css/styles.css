@@ -88,6 +88,10 @@ img {
   border: 1px solid #cccccc;
   padding: 3px;
 }
+.btn-wrap {
+  margin-top: 20px;
+  float: right;
+}
 /* ==========================================
 Functions & Operations */
 /* ==========================================
@@ -132,7 +136,7 @@ label,
 .help-block,
 .checkbox,
 .radio {
-  font-size: 15px;
+  font-size: 20px;
   font-family: 'Bree Serif', serif;
 }
 .btn {
@@ -153,6 +157,32 @@ label,
 .btn.btn-success:hover {
   background-color: #99ae32;
   border-color: #99ae32;
+}
+.btn.btn-default {
+  background: #f5f3f3;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #f5f3f3 0%, #ffffff 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f5f3f3), color-stop(100%, #ffffff));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #f5f3f3 0%, #ffffff 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #f5f3f3 0%, #ffffff 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #f5f3f3 0%, #ffffff 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #f5f3f3 0%, #ffffff 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f3f3', endColorstr='#ffffff', GradientType=0);
+  /* IE6-9 */
+  border-color: #cccccc;
+}
+.btn.btn-default .glyphicon {
+  font-size: 12px;
+}
+.btn.btn-default:hover {
+  background-color: #f5f3f3;
+  border-color: #cccccc;
 }
 .form-control:focus {
   border-color: #cccccc;
