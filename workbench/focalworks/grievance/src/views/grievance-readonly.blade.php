@@ -11,22 +11,23 @@
 </style>
 @stop
 @section('content')
-<div class="row">
-    <div class="col-md-6"><h1></h1></div>
-    <div class="col-md-6">
-        <a href="{{url('grievance/list')}}" class="float-right margin-R margin-T">Back</a>
-        @if(isset($grievance->status) && ($grievance->status==3) )
-            @if (isset($grievance->req_reopen))
-                Request to Reopen is already sent
-            @else
-                <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Request to ReOpen</button>
-            @endif
-        @endif
-    </div>
-</div>
+
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{{url('grievance/list')}}" class="float-left margin-R margin-T">Back</a>
+                @if(isset($grievance->status) && ($grievance->status==3) )
+                    @if (isset($grievance->req_reopen))
+                        Request to Reopen is already sent
+                    @else
+                        <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Request to ReOpen</button>
+                    @endif
+                @endif
+            </div>
+            <div class="col-md-4"><h1></h1></div>
+        </div>
         <div class="cards-view">
             <h3>{{$grievance->title}}</h3>
             <div class="row user">
@@ -74,6 +75,7 @@
             <div>{{$grievance->description}}</div>
         </div>-->
     </div>
+    <div class="col-md-4"></div>
    <!-- <div class="col-md-4">
         <div class="form-group">
             <label for="category">Category</label>
