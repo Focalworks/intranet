@@ -9,6 +9,7 @@ Route::group(array(
     Route::get('grievance/list', 'GrievanceController@handleList');
     Route::get('grievance/add', 'GrievanceController@handleAdd');
     Route::get('grievance/view/{id}', 'GrievanceController@handleGrievanceView');
+    Route::get('grievance/readonly/{id}', 'GrievanceController@handleGrievanceReadonly');
     Route::get('grievance/manage/{id}', 'GrievanceController@handleGrievanceManage');
     Route::get('grievance/reset', 'GrievanceController@handleGrievanceFilterRest');
     
