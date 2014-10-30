@@ -11,7 +11,15 @@ class CreateAssessmentUserScore extends Migration {
 	 */
 	public function up()
 	{
+        Schema::dropIfExists('assessment_user_score');
 
+        Schema::create('assessment_user_score', function($table) {
+                $table->engine = 'InnoDB';
+                $table->increments('id');
+                $table->unsignedInteger('user_id');
+                $table->integer('correct_answers');
+                $table->integer('score');
+            });
 	}
 
 	/**
@@ -21,7 +29,7 @@ class CreateAssessmentUserScore extends Migration {
 	 */
 	public function down()
 	{
-
+        Schema::dropIfExists('assessment_user_score');
 	}
 
 }

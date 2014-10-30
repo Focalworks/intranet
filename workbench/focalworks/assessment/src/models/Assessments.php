@@ -107,30 +107,50 @@ class Assessments extends Eloquent {
 
     public function saveAssessmentData($data)
     {
-        // saving the user data
-        $userData = array(
-            'name' => $data['name'],
-            'phone' => $data['phone'],
-            'email' => $data['email'],
-            'post_applied' => $data['post_applied'],
-            'created_at' => date('Y-m-d h:m:s', time()),
-            'updated_at' => date('Y-m-d h:m:s', time()),
-        );
-        $user_id = DB::table('assessment_user_data')->insertGetId($userData);
+        try {
+            DB::beginTransaction();
 
-        $result = $data['result_new'];
-        $finalResultData = array();
-        foreach ($result as $r) {
-//            Log::info('<pre>' . print_r($result, true) . '</pre>');die;
-            $finalResultData[] = array(
-                'user_id' => $user_id,
-                'question_id' => $r->q_id,
-                'option_id' => isset($r->option_id) ? $r->option_id : null,
-                'status' => $r->status,
+            // saving the user data
+            $userData = array(
+                'name' => $data['name'],
+                'phone' => $data['phone'],
+                'email' => $data['email'],
+                'post_applied' => $data['post_applied'],
+                'created_at' => date('Y-m-d h:m:s', time()),
+                'updated_at' => date('Y-m-d h:m:s', time()),
             );
-        }
+            $user_id = DB::table('assessment_user_data')->insertGetId($userData);
 
-        DB::table('assessment_user_result')->insert($finalResultData);
+            // saving the final user result
+            $result = $data['result_new'];
+            $finalResultData = array();
+            foreach ($result as $r) {
+                $finalResultData[] = array(
+                    'user_id' => $user_id,
+                    'question_id' => $r->q_id,
+                    'option_id' => isset($r->option_id) ? $r->option_id : null,
+                    'status' => $r->status,
+                );
+            }
+
+            DB::table('assessment_user_result')->insert($finalResultData);
+
+            // saving the score of the user
+            $score = $this->calculateScore($user_id);
+            DB::table('assessment_user_score')->insert(array(
+                    'user_id' => $user_id,
+                    'correct_answers' => $score,
+                ));
+
+            DB::commit();
+
+            return true;
+        } catch (Exception $e) {
+            DB::rollback();
+            SentryHelper::setMessage('error',$e->getMessage());
+            throw $e;
+            return false;
+        }
     }
 
     public function calculateScore($user_id)
