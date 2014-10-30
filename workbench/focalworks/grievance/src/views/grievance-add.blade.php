@@ -8,12 +8,12 @@ if ($urgency == '') {
     $urgency = 1;
 }
 ?>
-<div class="row">
-    <div class="col-md-12"><h1>Add Grievance</h1></div>
-</div>
+
+    <div><h2>Add Grievance</h2></div>
+
 
 {{ Form::open(array('url' => 'grievance/save', 'role' => 'form', 'files' => true)) }}
-<div class="row">
+<div class="row cards-view">
     <div class="col-md-6">
         
         <div class="form-group">
