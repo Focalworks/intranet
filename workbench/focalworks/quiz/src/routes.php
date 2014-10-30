@@ -32,5 +32,5 @@ Route::post('quiz/quiz_save', 'QuizController@saveQuiz');
 /* get json data for question and option */
 Route::get('quiz/get_quiz_questisons/{designation}', 'QuizController@getQuizQuestions');
 
-
+Route::controller('quiz-api', 'QuizApiController');
 ?>

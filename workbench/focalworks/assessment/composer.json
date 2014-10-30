@@ -1,0 +1,25 @@
+{
+    "name": "focalworks/assessment",
+    "description": "",
+    "authors": [
+        {
+            "name": "Focalworks",
+            "email": "mobile.dev@focalworks.in"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/models",
+            "src/controllers",
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Focalworks\\Assessment\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

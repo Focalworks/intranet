@@ -124,7 +124,7 @@ return array(
 	    'Focalworks\Kanbanize\KanbanizeServiceProvider',
         'Focalworks\Quiz\QuizServiceProvider',
         'Amitavroy\Mailing\MailingServiceProvider',
-
+        'Focalworks\Assessment\AssessmentServiceProvider',
 	),
 
 	/*

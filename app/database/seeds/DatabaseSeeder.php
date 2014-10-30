@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder {
 
         $this->call('VariableSeed');
         $this->command->info('Variables table seeded!');
+
+        $this->call('AssessmentSeed');
+        $this->command->info('Assessment table seeded!');
 	}
 
 }
