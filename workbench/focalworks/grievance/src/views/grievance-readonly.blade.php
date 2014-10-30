@@ -20,7 +20,7 @@
                 <a href="{{url('grievance/list')}}" class="float-left margin-R margin-T">Back</a>
                 @if(isset($grievance->status) && ($grievance->status==3) )
                     @if (isset($grievance->req_reopen))
-                        Request to Reopen is already sent
+                        Request to Reopen is already sent.
                     @else
                         <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Request to ReOpen</button>
                     @endif
