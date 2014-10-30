@@ -99,6 +99,9 @@ $(function() {
                             <a href="view/{{$grievance->id}}"><span class="glyphicon glyphicon-edit"></span></a>
                         @endif
                     @endif
+                    @if ($access)
+                        {{link_to('grievance/manage/' . $grievance->id, 'Manage')}}
+                    @endif
                     </td>
                     <td class="col-md-2">{{ucwords($grievance->category)}}</td>
                     <td class="col-md-2">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</td>

@@ -53,7 +53,7 @@ class Grievance extends Eloquent
         $query = DB::table($this->table)->where($this->table.'.id', $id);
         $query->select($arrSelect);
         $query->join('file_managed', 'file_managed.entity_id', '=', $this->table . '.id', 'left');
-
+        
         $data = $query->first();
         $data->time_ago = GlobalHelper::timeAgo(strtotime($data->created_at));
         $data->comment_count = DB::table('comments')->where('section', 'grievance_view')->where('nid', $id)->count();
@@ -63,9 +63,28 @@ class Grievance extends Eloquent
 
         $key = 'grievance_' . $id;
         //Cache::forever($key, $data);
+        $data->first_name = 'Anonymous';
+        $data->last_name = '';
+        $data->userimage = "../../".Config::get('sentryuser::sentryuser.default-pic');
+        $data->cre_time=date("jS F Y", strtotime($data->created_at));;
+
         $data->anonymous_val='';
         if($data->anonymous==1)
+        {
             $data->anonymous_val='checked';
+        }
+        else
+        {
+            $user_table=  DB::table('users As us')->select('first_name','last_name') ->where('id',$data->user_id)->first();
+            $data->first_name=$user_table->first_name;
+            $data->last_name=$user_table->last_name;
+
+             $user_detail_data=DB::table('user_details')->select('oauth_pic')->where('user_id', '=', $data->user_id)->first();
+             if ($user_detail_data->oauth_pic != '')
+             {
+                $data->userimage=$user_detail_data->oauth_pic;
+             }
+        }
 
         return $data;
     }

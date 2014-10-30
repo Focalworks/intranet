@@ -31,18 +31,20 @@
         <div class="cards-view">
             <h3>{{$grievance->title}}</h3>
             <div class="row user">
-                <div class="col-md-2 user-pic"><img src="./../3/user-pic.png"></div>
+                <div class="col-md-2 user-pic">
+                    <img src="{{$grievance->userimage}}" alt="User Image">
+                </div>
                 <div class="col-md-5 user-details border-R">
-                    <span id="name">Chandrakant D</span><br>
-                    <span id="time">03rd Oct 2014</span>
+                    <span id="name">{{$grievance->first_name}} {{$grievance->last_name}}</span><br>
+                    <span id="time">{{$grievance->cre_time}}</span>
                 </div>
                 <div class="col-md-5 user-destails">
                     <span>Category- {{ucwords($grievance->category)}}</span><br>
                     <span>Urgency - {{ucwords(Grievance::getUrgencies($grievance->urgency))}}</span><br>
-                    <span>
+                    <!--span>
                         <input type="checkbox" name="anonymous" id="anonymous" value="1" {{$grievance->anonymous_val}} disabled>
                         <label for="anonymous">Anonymous</label>
-                    </span>
+                    </span-->
                 </div>
             </div>
             <div class="row content-body">
