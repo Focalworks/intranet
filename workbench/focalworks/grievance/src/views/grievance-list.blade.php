@@ -84,22 +84,22 @@ $(function() {
             <tbody>
                 @foreach($grievances as $grievance)
                 <tr>
+                    <td>{{link_to('grievance/readonly/' . $grievance->id,  $grievance->title )}}
+                    <br>
+                    <span>{{substr(strip_tags($grievance->description),0,10)}}</span>
                     @if ($access)
-                        <td>
-                            {{link_to('grievance/manage/' . $grievance->id, $grievance->title)}}
-                            <br>
-                            <span>{{substr(strip_tags($grievance->description),0,10)}}</span>
-                            @if(isset($grievance->status) && ($grievance->status==3) && isset($grievance->req_reopen))
-                                <a href="#" class="mytest" data-toggle="tooltip" data-placement='right' title="{{$grievance->req_reopen}}"><span class="text-danger glyphicon glyphicon-info-sign"></span></a>
-                            @endif
-                        </td>
-                    @else
-                        <td>{{link_to('grievance/view/' . $grievance->id,  $grievance->title )}}
-                        <br>
-                        <span>{{substr(strip_tags($grievance->description),0,10)}}</span>
-                        </td>
+                        @if(isset($grievance->status) && ($grievance->status==3) && isset($grievance->req_reopen))
+                            <a href="#" class="mytest" data-toggle="tooltip" data-placement='right' title="{{$grievance->req_reopen}}"><span class="text-danger glyphicon glyphicon-info-sign"></span></a>
+                        @endif
                     @endif
-                    <td class="col-md-1"><span class="glyphicon glyphicon-edit"></span></td>
+                    </td>
+                    <td class="col-md-1">
+                    @if($grievance->user_id==$my_user_id)
+                        @if($grievance->status==1)
+                            <a href="view/{{$grievance->id}}"><span class="glyphicon glyphicon-edit"></span></a>
+                        @endif
+                    @endif
+                    </td>
                     <td class="col-md-2">{{ucwords($grievance->category)}}</td>
                     <td class="col-md-2">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</td>
                     <td class="col-md-2">{{GlobalHelper::formatDate($grievance->created_at, 'dS M Y')}}</td>

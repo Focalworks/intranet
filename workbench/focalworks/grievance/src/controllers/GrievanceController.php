@@ -117,7 +117,8 @@ class GrievanceController extends BaseController
             ->with('filters', (isset($whereClause)) ? $whereClause : false)
             ->with('sort', ($sort === true) ? $paginateSort : false)
             ->with('grievances', $data)
-            ->with('access', $access);
+            ->with('access', $access)
+            ->with('my_user_id',$userObj->id);
     }
 
     /**
@@ -193,6 +194,33 @@ class GrievanceController extends BaseController
         $this->layout->content = View::make($view)
         ->with('grievance', $grievance);
     }
+
+    /**
+     * This is the view readonly.
+     * @param unknown $id
+     */
+    public function handleGrievanceReadonly($id)
+    {
+        $Grievance = new Grievance;
+        $grievance = $Grievance->getGrievance($id);
+        $userObj = Session::get('userObj');
+
+        $grievance->disable_val='';
+    
+        // if the user is trying to edit / view an entry which he doesn't own
+        if ($grievance->user_id != $userObj->id) {
+            PermApi::access_check('@');
+            $grievance->disable_val='disabled';
+        }
+
+        //make change for view is only readonly
+        $view = 'grievance::grievance-readonly';
+
+        $this->layout->content = View::make($view)
+        ->with('grievance', $grievance);
+
+    }
+
 
     /**
      * Handling the update of the post.
