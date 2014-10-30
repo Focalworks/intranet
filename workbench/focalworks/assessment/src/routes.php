@@ -7,5 +7,6 @@
  */
 Route::controller('assessment-api', 'AssessmentApiController');
 Route::get('assessment/test', function() {
-
-});
+        $assessments = new Assessments;
+        GlobalHelper::dsm($assessments->calculateScore(4), true);
+    });
