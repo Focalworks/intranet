@@ -94,10 +94,8 @@ $(function() {
                     @endif
                     </td>
                     <td class="col-md-1">
-                    @if($grievance->user_id==$my_user_id)
-                        @if($grievance->status==1)
-                            <a href="view/{{$grievance->id}}"><span class="glyphicon glyphicon-edit"></span></a>
-                        @endif
+                    @if($grievance->status==1 && ($grievance->user_id==$my_user_id))
+                        <a href="view/{{$grievance->id}}"><span class="glyphicon glyphicon-edit"></span></a>
                     @endif
                     @if ($access)
                         {{link_to('grievance/manage/' . $grievance->id, 'Manage')}}

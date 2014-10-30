@@ -18,6 +18,11 @@
         <div class="row">
             <div class="col-md-6">
                 <a href="{{url('grievance/list')}}" class="float-left margin-R margin-T">Back</a>
+                
+                @if($grievance->status==1 && ($grievance->user_id==$grievance->my_user_id))
+                    edit
+                @endif
+                
                 @if(isset($grievance->status) && ($grievance->status==3) )
                     @if (isset($grievance->req_reopen))
                         Request to Reopen is already sent.
