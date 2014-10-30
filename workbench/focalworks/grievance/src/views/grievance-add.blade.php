@@ -41,16 +41,16 @@ if ($urgency == '') {
             <span class="error-display">{{$errors->first('urgency')}}</span>
         </div>
     
+        <div class="form-group">
+            <label for="urgency">Anonymous</label> &nbsp;
+            <input type="checkbox" name="anonymous" id="anonymous" value="1" >
+        </div>   
         <div class="form-group upload-img-wrapper">
             <label for="photo">Photo if any</label>
             <div class="upload-img">
                 <input type="file" class="form-input custom-file-input" placeholder="Photo" name="photo">
             </div>
         </div> 
-        <div class="form-group">
-            <input type="checkbox" name="anonymous" id="anonymous" value="1" >
-            <label for="urgency">Anonymous</label>
-        </div>   
     </div>
 </div>
 <div class="row">
