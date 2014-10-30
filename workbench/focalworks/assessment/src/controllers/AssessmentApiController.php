@@ -10,7 +10,7 @@ class AssessmentApiController extends BaseController {
 
     public function getTest()
     {
-        $ids = array(5,6,7,8);
+        $ids = array(1,2,3,4,5);
 
         $assessment = new Assessments;
 
