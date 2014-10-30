@@ -56,11 +56,14 @@ class ReBaseApp extends Command {
         $this->call('migrate', array('--bench' => 'focalworks/comment'));
         $this->call('migrate', array('--bench' => 'focalworks/kanbanize'));
         $this->call('migrate', array('--bench' => 'focalworks/quiz'));
+        $this->call('migrate', array('--bench' => 'focalworks/assessment'));
 
         $this->call('asset:publish', array('debugbar/laravel-debugbar'));
         $this->call('asset:publish', array('--bench' => 'l4mod/sentryuser'));
         $this->call('asset:publish', array('--bench' => 'focalworks/comment'));
         $this->call('asset:publish', array('--bench' => 'focalworks/mailing'));
+
+        $this->call('db:seed');
 
         // calling default migrations
         $this->call('migrate');
