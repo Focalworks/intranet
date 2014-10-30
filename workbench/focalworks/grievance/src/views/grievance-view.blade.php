@@ -12,13 +12,8 @@
     </div>
     <div class="col-md-4">
         <div class="btn-wrap">
-           <!-- <input type="submit" name="save" class="btn btn-default btn-md" value="Save" />&nbsp;&nbsp;
-            <a href="{{url('grievance/list')}}" class="btn btn-default btn-md">Back</a>&nbsp;&nbsp;
-            <input type="submit" name="edit" class="btn btn-default btn-md" value="Edit" />-->
-
-            <button class="btn btn-default btn-md"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit</button>
-            <button class="btn btn-default btn-md"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>
-            <button class="btn btn-default btn-md"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</button>
+            <button type="submit" class="btn btn-default btn-md"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>
+            <a href="{{url('grievance/list')}}" class="btn btn-default btn-md"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
         </div>
     </div>
 </div>
