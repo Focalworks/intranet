@@ -460,6 +460,17 @@ Main Container */
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   width: 136px !important;
 }
+.main-wrapper .upload-img-wrapper .reload-img {
+  background: url('../images/btn-change.png') no-repeat;
+  border: none;
+  height: 39px !important;
+  margin-right: -10px;
+  overflow: hidden !important;
+  width: 136px !important;
+}
+.main-wrapper .upload-img-wrapper .reload-img:hover {
+  background: url('../images/btn-change-hover.png') no-repeat;
+}
 .main-wrapper .cards-view {
   background: #fff;
   border: 1px solid #eaedf2;
