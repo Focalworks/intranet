@@ -9,9 +9,9 @@
 class AssessmentSeed extends Seeder {
     public function run()
     {
-        DB::table('assessments')->delete();
-        DB::table('assessment_options')->delete();
-        DB::table('tags_in_assessment')->delete();
+        DB::table('assessments')->truncate();
+        DB::table('assessment_options')->truncate();
+        DB::table('tags_in_assessment')->truncate();
 
         $questions = array(
             array(
@@ -104,6 +104,24 @@ class AssessmentSeed extends Seeder {
                     array(
                         'option' => '</php>',
                         'correct' => 0,
+                    )
+                ),
+                'tags' => array(1,2),
+            )
+        );
+        $assessments->saveQuiz($questions);
+
+        $questions = array(
+            array(
+                'question' => 'When using the POST method, variables are displayed in the URL:',
+                'options' => array(
+                    array(
+                        'option' => 'True',
+                        'correct' => 0,
+                    ),
+                    array(
+                        'option' => 'False',
+                        'correct' => 1,
                     )
                 ),
                 'tags' => array(1,2),

@@ -144,6 +144,8 @@ class Assessments extends Eloquent {
 
             DB::commit();
 
+            Event::fire('score.submit', [$user_id]);
+
             return true;
         } catch (Exception $e) {
             DB::rollback();

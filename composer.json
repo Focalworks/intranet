@@ -8,7 +8,8 @@
 		"barryvdh/laravel-debugbar": "~1.6",
 		"cartalyst/sentry": "2.1.*",
 		"artdarek/oauth-4-laravel": "dev-master",
-		"intervention/image": "2.*"
+		"intervention/image": "2.*",
+        "barryvdh/laravel-dompdf": "0.4.*"
 	},
 	"autoload": {
 		"classmap": [
