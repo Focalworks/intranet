@@ -7,13 +7,13 @@ $(function() {
 </script>
 @stop
 @section('content')
+<div class="cards-view">
 <div class="row">
     <div class="col-md-12"><h2>List of Grievances / Suggestions</h2></div>
 </div>
-<div class="cards-view">
 <div class="row">
     <div class="col-md-12">
-        <p><a href="{{url('grievance/add')}}" class="btn btn-success btn-md"><span class="glyphicon glyphicon-plus"></span>&nbsp;ADD NEW</a></p>
+        <p><a href="{{url('grievance/add')}}" class="btn btn-success btn-md">+ Add New</a></p>
     </div>
 </div>
 @if ($grievanceCount <= 0)
@@ -54,9 +54,9 @@ $(function() {
     <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="form-group">
            <label class="">&nbsp;</label><br />
-            <button class="btn btn-primary"><span class="glyphicon glyphicon-filter"></span>&nbsp;Filter</button>
+            <button class="btn btn-primary">Filter</button>
             @if(isset($userObj->grievanceFilter))
-              <a href="{{url('grievance/reset')}}" class="btn btn-primary"><span class="glyphicon glyphicon-repeat"></span>&nbsp;Reset</a>
+              <a href="{{url('grievance/reset')}}" class="btn btn-primary">Reset</a>
             @endif
         </div>
     </div>
@@ -86,7 +86,7 @@ $(function() {
                 <tr>
                     <td>{{link_to('grievance/readonly/' . $grievance->id,  $grievance->title )}}
                     <br>
-                    <span>{{substr(strip_tags($grievance->description),0,100)}}</span>
+                    <span>{{substr(strip_tags($grievance->description),0,10)}}</span>
                     @if ($access)
                         @if(isset($grievance->status) && ($grievance->status==3) && isset($grievance->req_reopen))
                             <a href="#" class="mytest" data-toggle="tooltip" data-placement='right' title="{{$grievance->req_reopen}}"><span class="text-danger glyphicon glyphicon-info-sign"></span></a>
@@ -99,23 +99,20 @@ $(function() {
                             <a href="view/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Edit" class="mytest"><span class="glyphicon glyphicon-edit" ></span></a>
                         @endif
                     @endif
-                    </td>
-                    <td class="col-md-1">{{ucwords($grievance->category)}}</td>
-                    <td class="col-md-1">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</td>
-                    <td class="col-md-1">{{GlobalHelper::formatDate($grievance->created_at, 'dS M Y')}}</td>
-                    <td class="col-md-1">{{Grievance::getStatusName($grievance->status)}}</td>
                     @if ($access)
-                    <td class="col-md-1">{{Grievance::getUserName($grievance->user_id,$grievance->anonymous)}}</td>
-                    <td class="col-md-1"> 
-
-                    {{link_to('grievance/manage/' . $grievance->id, '')}}
-                     <a href="view/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Manage" class="mytest"><span class="glyphicon glyphicon-briefcase" ></span></a>
-                     &nbsp;&nbsp;&nbsp;
-
-                    {{link_to('grievance/list', '', array('class' => 'delete-link glyphicon glyphicon-remove',
+                        {{link_to('grievance/manage/' . $grievance->id, 'Manage')}}
+                    @endif
+                    </td>
+                    <td class="col-md-2">{{ucwords($grievance->category)}}</td>
+                    <td class="col-md-2">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</td>
+                    <td class="col-md-2">{{GlobalHelper::formatDate($grievance->created_at, 'dS M Y')}}</td>
+                    <td class="col-md-2">{{Grievance::getStatusName($grievance->status)}}</td>
+                    @if ($access)
+                    <td>{{Grievance::getUserName($grievance->user_id,$grievance->anonymous)}}</td>
+                    <td> 
+                    {{link_to('grievance/list', 'Delete', array('class' => 'delete-link',
                         'data-delete-id' => $grievance->id,
                         'data-delete-entity' => GRIEVANCE))}}
-
                     </td>
                     @endif
                 </tr>

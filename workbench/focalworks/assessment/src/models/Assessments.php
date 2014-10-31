@@ -144,8 +144,6 @@ class Assessments extends Eloquent {
 
             DB::commit();
 
-            Event::fire('score.submit', [$user_id]);
-
             return true;
         } catch (Exception $e) {
             DB::rollback();
@@ -202,56 +200,5 @@ class Assessments extends Eloquent {
         }
 
         return $data;
-    }
-
-    public function getAssessmentResult($user_id)
-    {
-        $user_details = DB::table('assessment_user_data')->where('id', $user_id)->first();
-
-        $user_result = array();
-        $query = DB::table('assessment_user_data as aud')->where('aud.id', $user_id);
-        $query->join('assessment_user_result as aur', 'aur.user_id', '=', 'aud.id');
-        $data = $query->get();
-
-        // forming the user result
-        $qid = 0;
-        foreach ($data as $d) {
-            if ($qid != $d->question_id) {
-                $qid = $d->question_id;
-                $user_result[] = array(
-                    'question_id' => $d->question_id,
-                    'option_select' => $d->option_id,
-                );
-            }
-        }
-
-        // get all the question ids
-        $qids = array();
-        foreach ($user_result as $ur) {
-            $qids[] = $ur['question_id'];
-        }
-
-        // fetch questions and options
-        $question_data = array();
-        $query = DB::table('assessments as a')->whereIn('a.id', $qids);
-        $query->join('assessment_options as ao', 'ao.question_id', '=', 'a.id');
-        $questions = $query->get();
-
-        foreach ($questions as $q) {
-            $question_data[$q->question_id]['question'] = $q->title;
-            $question_data[$q->question_id]['option'][] = $q->option;
-
-            if ($q->correct != 0) {
-                $question_data[$q->question_id]['correct'] = $q->option;
-            }
-        }
-
-        $finalData = array(
-            'question_data' => $question_data,
-            'user_data' => $user_details,
-            'user_result' => $user_result,
-        );
-
-        return $finalData;
     }
 }

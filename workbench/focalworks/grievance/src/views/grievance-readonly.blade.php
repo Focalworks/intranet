@@ -12,36 +12,32 @@
 @stop
 @section('content')
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>View Details</h2>
-    </div>
-    <div class="col-md-4">
-        <div class="btn-wrap">
-            @if($grievance->status==1 && ($grievance->user_id==$grievance->my_user_id))
-                <a href="../view/{{$grievance->id}}" class="btn btn-edit btn-md"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit</a>
-            @endif
-            <a href="{{url('grievance/list')}}" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
-            @if(isset($grievance->status) && ($grievance->status==3) )
-                @if (isset($grievance->req_reopen))
-                    Request to Reopen is already sent.
-                @else
-                    <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Request to ReOpen</button>
-                @endif
-            @endif
-        </div>
-    </div>
-</div>
 
 <div class="row">
     <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{{url('grievance/list')}}" class="float-left margin-R margin-T">Back</a>
+                
+                @if($grievance->status==1 && ($grievance->user_id==$grievance->my_user_id))
+                    edit
+                @endif
+                
+                @if(isset($grievance->status) && ($grievance->status==3) )
+                    @if (isset($grievance->req_reopen))
+                        Request to Reopen is already sent.
+                    @else
+                        <button class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Request to ReOpen</button>
+                    @endif
+                @endif
+            </div>
+            <div class="col-md-4"><h1></h1></div>
+        </div>
         <div class="cards-view">
             <h3>{{$grievance->title}}</h3>
             <div class="row user">
-                <div class="col-md-2">
-                    <div class="user-pic">
+                <div class="col-md-2 user-pic">
                     <img src="{{$grievance->userimage}}" alt="User Image">
-                    </div>
                 </div>
                 <div class="col-md-5 user-details border-R">
                     <span id="name">{{$grievance->first_name}} {{$grievance->last_name}}</span><br>
@@ -72,9 +68,9 @@
                     {{$grievance->description}}
                 </div>
             </div>
-        </div>
-        <div ng-app="articleApp" ng-controller="mainCntrl">
-            <comment data-section="grievance_view" data-nid="{{$grievance->id}}"></comment>
+            <div ng-app="articleApp" ng-controller="mainCntrl">
+                <comment data-section="grievance_view" data-nid="{{$grievance->id}}"></comment>
+            </div>
         </div>
         <div class="">
            <!-- <label for="title">Grievance title</label>-->

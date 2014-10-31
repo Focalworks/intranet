@@ -125,7 +125,6 @@ return array(
         'Focalworks\Quiz\QuizServiceProvider',
         'Amitavroy\Mailing\MailingServiceProvider',
         'Focalworks\Assessment\AssessmentServiceProvider',
-        'Barryvdh\DomPDF\ServiceProvider',
 	),
 
 	/*
@@ -194,7 +193,6 @@ return array(
 		'Sentry' 		  => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 	    'OAuth'           => 'Artdarek\OAuth\Facade\OAuth',
 	    'Image'           => 'Intervention\Image\Facades\Image',
-        'PDF'             => 'Barryvdh\DomPDF\Facade',
 	),
 
 );

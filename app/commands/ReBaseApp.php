@@ -63,10 +63,10 @@ class ReBaseApp extends Command {
         $this->call('asset:publish', array('--bench' => 'focalworks/comment'));
         $this->call('asset:publish', array('--bench' => 'focalworks/mailing'));
 
+        $this->call('db:seed');
+
         // calling default migrations
         $this->call('migrate');
-
-        $this->call('db:seed');
     }
 
     /**
