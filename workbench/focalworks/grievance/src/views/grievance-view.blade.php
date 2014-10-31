@@ -60,7 +60,11 @@
                     @endif
                     <div class="form-group upload-img-wrapper">
                         <!--<label for="photo">Photo if any</label>-->
-                        <div class="upload-img">
+						@if (isset($grievance->url))
+						 <div class="reload-img">
+						 @else
+						 <div class="upload-img">
+						 @endif
                             <input type="file" class="custom-file-input" id="photo" placeholder="Photo" name="photo">
                         </div>
                     </div>
