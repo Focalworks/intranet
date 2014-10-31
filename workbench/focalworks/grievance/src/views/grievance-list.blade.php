@@ -96,7 +96,7 @@ $(function() {
                     <td class="col-md-1">
                     @if($grievance->user_id==$my_user_id)
                         @if($grievance->status==1)
-                            <a href="view/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Title" class="mytest"><span class="glyphicon glyphicon-edit" ></span></a>
+                            <a href="view/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Edit" class="mytest"><span class="glyphicon glyphicon-edit" ></span></a>
                         @endif
                     @endif
                     </td>

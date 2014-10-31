@@ -151,6 +151,7 @@ img {
 }
 input[type="text"], select {
   color:black;
+  text-transform: capitalize;
 }
 label, .control-label, .help-block, .checkbox, .radio {
   font-size: 20px; 
@@ -396,7 +397,7 @@ Main Container */
     .form-group {
       select {
         border: 1px solid @dark-grey;
-        text-transform: lowercase;
+        text-transform: capitalize;
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
     }
@@ -446,6 +447,10 @@ Main Container */
             span {
               font-size: 80%;
             }
+            .delete-link {
+              font-size: 12px;
+              font-weight: normal;
+            }
           }
           &:nth-child(odd)> {
             td {
@@ -461,6 +466,7 @@ Main Container */
       }
     }
   }
+
   /******* Add Grievance *******/
   .image-preview {
     margin-bottom: 20px;

@@ -131,6 +131,7 @@ img {
 input[type="text"],
 select {
   color: black;
+  text-transform: capitalize;
 }
 label,
 .control-label,
@@ -399,7 +400,7 @@ Main Container */
 }
 .main-wrapper .filter-container .form-group select {
   border: 1px solid #cccccc;
-  text-transform: lowercase;
+  text-transform: capitalize;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .main-wrapper .filter-container .col-lg-3 .form-group select {
@@ -440,6 +441,10 @@ Main Container */
 }
 .main-wrapper .table.table-striped tbody tr td span {
   font-size: 80%;
+}
+.main-wrapper .table.table-striped tbody tr td .delete-link {
+  font-size: 12px;
+  font-weight: normal;
 }
 .main-wrapper .table.table-striped tbody tr:nth-child(odd) td {
   background-color: #eff3f9;
