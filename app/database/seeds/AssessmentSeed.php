@@ -14,9 +14,19 @@ class AssessmentSeed extends Seeder {
         DB::table('assessment_tags')->truncate();
         DB::table('tags_in_assessment')->truncate();
 
-        DB::table(assessment_tags)->insert(array(
-
-            ));
+        DB::table('assessment_tags')->insert(
+            array(
+                array(
+                    'name' => 'PHP',
+                    'created_at' => date('Y-m-d h:m:s', time()),
+                    'updated_at' => date('Y-m-d h:m:s', time()),
+                ),
+                array(
+                    'name' => 'Interview',
+                    'created_at' => date('Y-m-d h:m:s', time()),
+                    'updated_at' => date('Y-m-d h:m:s', time()),
+                ))
+            );
 
         $questions = array(
             array(
