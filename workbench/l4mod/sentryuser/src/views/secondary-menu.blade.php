@@ -1,3 +1,5 @@
+
+<div class="margin-T">
 @if(PermApi::user_has_permission('manage_permissions'))
 <div class="btn-group">
     <a href="{{url('user/permission/list')}}" class="btn btn-primary">Permission</a>
@@ -19,3 +21,4 @@
     <a href="{{url('mailing/list')}}" class="btn btn-primary">Mailing List</a>
 </div>
 @endif
+</div>

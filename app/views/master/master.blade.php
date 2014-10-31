@@ -50,7 +50,7 @@
       </div>
       <div class="main-wrapper main-wrapper-{{UserInterface::getUserMenuPref()}}">
         @if (Session::get('message'))
-          <div class="clearfix">
+          <div class="clearfix margin-T">
             <div class="col-md-12">
               <div class="alert alert-{{ Session::get('message-flag') }}">{{ Session::get('message') }}</div>
             </div>
