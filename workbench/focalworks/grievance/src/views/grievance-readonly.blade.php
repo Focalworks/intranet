@@ -18,7 +18,9 @@
     </div>
     <div class="col-md-4">
         <div class="btn-wrap">
-            <a href="{{url('grievance/list')}}" class="btn btn-edit btn-md"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit</a>
+            @if($grievance->status==1 && ($grievance->user_id==$grievance->my_user_id))
+                <a href="../view/{{$grievance->id}}" class="btn btn-edit btn-md"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit</a>
+            @endif
             <a href="{{url('grievance/list')}}" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
             @if(isset($grievance->status) && ($grievance->status==3) )
                 @if (isset($grievance->req_reopen))

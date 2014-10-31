@@ -86,7 +86,7 @@ $(function() {
                 <tr>
                     <td>{{link_to('grievance/readonly/' . $grievance->id,  $grievance->title )}}
                     <br>
-                    <span>{{substr(strip_tags($grievance->description),0,10)}}</span>
+                    <span>{{substr(strip_tags($grievance->description),0,100)}}</span>
                     @if ($access)
                         @if(isset($grievance->status) && ($grievance->status==3) && isset($grievance->req_reopen))
                             <a href="#" class="mytest" data-toggle="tooltip" data-placement='right' title="{{$grievance->req_reopen}}"><span class="text-danger glyphicon glyphicon-info-sign"></span></a>
@@ -96,23 +96,26 @@ $(function() {
                     <td class="col-md-1">
                     @if($grievance->user_id==$my_user_id)
                         @if($grievance->status==1)
-                            <a href="view/{{$grievance->id}}"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a href="view/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Title" class="mytest"><span class="glyphicon glyphicon-edit" ></span></a>
                         @endif
                     @endif
-                    @if ($access)
-                        {{link_to('grievance/manage/' . $grievance->id, 'Manage')}}
-                    @endif
                     </td>
-                    <td class="col-md-2">{{ucwords($grievance->category)}}</td>
-                    <td class="col-md-2">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</td>
-                    <td class="col-md-2">{{GlobalHelper::formatDate($grievance->created_at, 'dS M Y')}}</td>
-                    <td class="col-md-2">{{Grievance::getStatusName($grievance->status)}}</td>
+                    <td class="col-md-1">{{ucwords($grievance->category)}}</td>
+                    <td class="col-md-1">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</td>
+                    <td class="col-md-1">{{GlobalHelper::formatDate($grievance->created_at, 'dS M Y')}}</td>
+                    <td class="col-md-1">{{Grievance::getStatusName($grievance->status)}}</td>
                     @if ($access)
-                    <td>{{Grievance::getUserName($grievance->user_id,$grievance->anonymous)}}</td>
-                    <td> 
-                    {{link_to('grievance/list', 'Delete', array('class' => 'delete-link',
+                    <td class="col-md-1">{{Grievance::getUserName($grievance->user_id,$grievance->anonymous)}}</td>
+                    <td class="col-md-1"> 
+
+                    {{link_to('grievance/manage/' . $grievance->id, '')}}
+                     <a href="view/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Manage" class="mytest"><span class="glyphicon glyphicon-briefcase" ></span></a>
+                     &nbsp;&nbsp;&nbsp;
+
+                    {{link_to('grievance/list', '', array('class' => 'delete-link glyphicon glyphicon-remove',
                         'data-delete-id' => $grievance->id,
                         'data-delete-entity' => GRIEVANCE))}}
+
                     </td>
                     @endif
                 </tr>
