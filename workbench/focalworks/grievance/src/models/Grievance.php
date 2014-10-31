@@ -86,6 +86,9 @@ class Grievance extends Eloquent
              }
         }
 
+        $userObj = Session::get('userObj');
+        $data->my_user_id=$userObj->id;
+
         return $data;
     }
 

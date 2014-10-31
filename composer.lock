@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "df5ca519bf4770c66d930016f195a068",
+    "hash": "a2e84fa26e9832232ab9a7f091a5c29a",
     "packages": [
         {
             "name": "artdarek/oauth-4-laravel",
@@ -857,16 +857,16 @@
         },
         {
             "name": "intervention/image",
-            "version": "2.0.9",
+            "version": "2.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "88b625394a2428e9ea1202289f1d5435c687c24a"
+                "reference": "38dfffeb09e6a7b170dbbb525e925c88c9cab2fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/88b625394a2428e9ea1202289f1d5435c687c24a",
-                "reference": "88b625394a2428e9ea1202289f1d5435c687c24a",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/38dfffeb09e6a7b170dbbb525e925c88c9cab2fb",
+                "reference": "38dfffeb09e6a7b170dbbb525e925c88c9cab2fb",
                 "shasum": ""
             },
             "require": {
@@ -884,8 +884,8 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Intervention\\Image\\": "src/"
+                "psr-4": {
+                    "Intervention\\Image\\": "src/Intervention/Image"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -909,7 +909,7 @@
                 "thumbnail",
                 "watermark"
             ],
-            "time": "2014-09-06 08:11:17"
+            "time": "2014-10-18 09:53:09"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -1179,12 +1179,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "21bb4b4be57d06a618fb69d2d0cc7579968ae0cd"
+                "reference": "3fe312bf234e7f4615621800f9c9810afa64ae98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/21bb4b4be57d06a618fb69d2d0cc7579968ae0cd",
-                "reference": "21bb4b4be57d06a618fb69d2d0cc7579968ae0cd",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/3fe312bf234e7f4615621800f9c9810afa64ae98",
+                "reference": "3fe312bf234e7f4615621800f9c9810afa64ae98",
                 "shasum": ""
             },
             "require": {
@@ -1202,7 +1202,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.9-dev"
+                    "dev-master": "1.10-dev"
                 }
             },
             "autoload": {
@@ -1226,7 +1226,7 @@
             "keywords": [
                 "debug"
             ],
-            "time": "2014-10-29 14:55:38"
+            "time": "2014-10-30 15:41:48"
         },
         {
             "name": "monolog/monolog",
@@ -2098,12 +2098,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "f30eadf31ccde0bf48c4de95f9711b55899fa111"
+                "reference": "62bda59d3638ee2efcd45a92adf09eec1b99a294"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/f30eadf31ccde0bf48c4de95f9711b55899fa111",
-                "reference": "f30eadf31ccde0bf48c4de95f9711b55899fa111",
+                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/62bda59d3638ee2efcd45a92adf09eec1b99a294",
+                "reference": "62bda59d3638ee2efcd45a92adf09eec1b99a294",
                 "shasum": ""
             },
             "require": {
@@ -2160,7 +2160,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2014-10-26 07:31:56"
+            "time": "2014-10-30 16:06:22"
         },
         {
             "name": "symfony/process",
@@ -2325,21 +2325,13 @@
             "time": "2014-10-26 07:30:58"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
         "artdarek/oauth-4-laravel": 20
     },
     "prefer-stable": false,
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "platform": [],
+    "platform-dev": []
 }
