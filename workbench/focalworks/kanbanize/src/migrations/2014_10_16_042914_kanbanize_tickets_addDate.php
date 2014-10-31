@@ -28,13 +28,7 @@ class KanbanizeTicketsAddDate extends Migration {
      */
     public function down()
     {
-        Schema::table('kanbanize_tickets', function($table) {
-            $table->dropColumn('created_at');
-        });
 
-        Schema::table('kanbanize_log_time', function($table) {
-              $table->dropColumn('assignee');
-          });
     }
 
 }

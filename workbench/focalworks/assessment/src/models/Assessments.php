@@ -144,10 +144,15 @@ class Assessments extends Eloquent {
 
             DB::commit();
 
-            Event::fire('score.submit', [$user_id]);
+            //Event::fire('score.submit', [$user_id]);
+            Log::info('PDF Creation');
+            $this->generateUserAssessmentPDF($user_id);
+
+            $this->sendResultEmail($user_id);
 
             return true;
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             DB::rollback();
             SentryHelper::setMessage('error',$e->getMessage());
             throw $e;
@@ -218,7 +223,7 @@ class Assessments extends Eloquent {
         foreach ($data as $d) {
             if ($qid != $d->question_id) {
                 $qid = $d->question_id;
-                $user_result[] = array(
+                $user_result[$d->question_id] = array(
                     'question_id' => $d->question_id,
                     'option_select' => $d->option_id,
                 );
@@ -232,14 +237,22 @@ class Assessments extends Eloquent {
         }
 
         // fetch questions and options
+        $select = array(
+            'a.title as title',
+            'ao.question_id as question_id',
+            'ao.option as option',
+            'ao.id as option_id',
+            'ao.correct as correct',
+        );
         $question_data = array();
         $query = DB::table('assessments as a')->whereIn('a.id', $qids);
+        $query->select($select);
         $query->join('assessment_options as ao', 'ao.question_id', '=', 'a.id');
         $questions = $query->get();
 
         foreach ($questions as $q) {
             $question_data[$q->question_id]['question'] = $q->title;
-            $question_data[$q->question_id]['option'][] = $q->option;
+            $question_data[$q->question_id]['option'][$q->option_id] = $q->option;
 
             if ($q->correct != 0) {
                 $question_data[$q->question_id]['correct'] = $q->option;
@@ -253,5 +266,62 @@ class Assessments extends Eloquent {
         );
 
         return $finalData;
+    }
+
+    public function generateUserAssessmentPDF($user_id)
+    {
+        $assessments = new Assessments;
+        $assessment_data = $assessments->getAssessmentResult($user_id);
+
+        // fetching data for PDF
+        $viewData = array(
+            'name' => $assessment_data['user_data']->name,
+            'phone' => $assessment_data['user_data']->phone,
+            'email' => $assessment_data['user_data']->email,
+            'post_applied' => $assessment_data['user_data']->post_applied,
+            'question_data' => $assessment_data['question_data'],
+            'user_result' => $assessment_data['user_result'],
+        );
+
+        // interim code to see the Table of data
+        //return View::make('assessment::assessment-data-pdf')->with('data', $viewData);
+
+        // creating the pdf
+        $pdf = App::make('dompdf');
+        $pdf->loadHTML(View::make('assessment::assessment-data-pdf')->with('data', $viewData));
+        $pdfData = $pdf->setPaper('a4')->setOrientation('landscape')->download();
+
+        // checking the folder structure
+        $folder = "assessment_results/" . $assessment_data['user_data']->id;
+        if (!file_exists(public_path($folder))) {
+            @mkdir(public_path($folder), 0777, true);
+        }
+        $filename = public_path($folder) . "/result.pdf";
+        $file_to_save = $filename;
+
+        //save the pdf file on the server
+        file_put_contents($file_to_save, $pdfData);
+
+        return $filename;
+    }
+
+    public function sendResultEmail($user_id)
+    {
+        Log::info('Sending Email');
+        $folder = "assessment_results/" . $user_id;
+        $filename = $folder . "/result.pdf";
+
+        $user_data = DB::table('assessment_user_data')->where('id', $user_id)->first();
+        $subject = 'New assessment by ' . $user_data->name;
+        $body = View::make('assessment::assessment-email');
+
+        $mail = new MailTracker;
+        $mail->sendMail('amitavroy@gmail.com',
+            'amitav.roy@focalworks.in',
+            $subject,
+            $body,
+            $filename,
+            'Amitav Office',
+            'Amitav Gmail');
     }
 }

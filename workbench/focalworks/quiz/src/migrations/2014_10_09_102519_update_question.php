@@ -25,10 +25,7 @@ class UpdateQuestion extends Migration {
      */
     public function down()
     {
-        Schema::table('quiz_questions', function($table)
-        {
-            $table->dropColumn('designation');
-        });
+        Schema::dropIfExists('quiz_questions');
     }
 
 }

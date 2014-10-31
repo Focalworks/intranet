@@ -28,14 +28,7 @@ class UpdateQuizExam extends Migration {
      */
     public function down()
     {
-        Schema::table('quiz_exams', function($table)
-        {
-            $table->string('qe_questions');
-            $table->string('qe_answers');
-            $table->string('designation');
-            $table->date('changed');
-            $table->dropColumn('answers');
-        });
+        Schema::dropIfExists('quiz_exams');
     }
 
 }

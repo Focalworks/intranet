@@ -23,9 +23,7 @@ class AddDepartmentCollumn extends Migration {
      */
     public function down()
     {
-        Schema::table('quiz_questions',function($table) {
-            $table->dropColumn('department');
-        });
+        Schema::dropIfExists('quiz_questions');
     }
 
 }

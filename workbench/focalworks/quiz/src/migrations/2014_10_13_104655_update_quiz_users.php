@@ -25,11 +25,7 @@ class UpdateQuizUsers extends Migration {
      */
     public function down()
     {
-        Schema::table('quiz_users', function($table)
-        {
-            $table->dropColumn('qu_mobile');
-            $table->string('qu_lname');
-        });
+        Schema::dropIfExists('quiz_users');
     }
 
 }

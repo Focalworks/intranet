@@ -6,6 +6,8 @@
  * Time: 5:45 PM
  */
 
+//use Focalworks\Assessment\
+
 class HookSubscriber
 {
     public function onGrievanceUpdate($id)
@@ -16,12 +18,15 @@ class HookSubscriber
 
     public function onScoreSubmit($user_id)
     {
-        \Log::info('I was here');
+        \Log::info('I was here'.$user_id);
+        $assessments = new \Assessments;
+        $assessments->generateUserAssessmentPDF($user_id);
+        //$assessments->sendResultEmail($user_id);
     }
 
     public function subscribe($events)
     {
         $events->listen('grievance.cacheClear', 'FW\Subscriber\HookSubscriber@onGrievanceUpdate');
-        $events->listen('grievance.cacheClear', 'FW\Subscriber\HookSubscriber@onScoreSubmit');
+        $events->listen('score.submit', 'FW\Subscriber\HookSubscriber@onScoreSubmit');
     }
 }
