@@ -483,6 +483,14 @@ Main Container */
 .main-wrapper .upload-img-wrapper .reload-img:hover {
   background: url('../images/btn-change-hover.png') no-repeat;
 }
+.main-wrapper .upload-img-wrapper .reload-img .custom-file-input {
+  cursor: pointer;
+  height: 39px;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  width: 136px !important;
+}
 .main-wrapper .cards-view {
   background: #fff;
   border: 1px solid #eaedf2;
