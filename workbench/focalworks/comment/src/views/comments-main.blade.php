@@ -31,9 +31,9 @@
                         <div class="btn-action"><button class="btn btn-success btn-xs" ng-click="post_comment(comment, 'Edit')">Save</button>
                         </div>
                     </div>
-                    <div ng-hide="hideReply[comment.cid]">
-                        <textarea class="form-control textare-comment float-left" rows="1" ng-model="comment_message" style="width:90%;"></textarea>
-                        <div class=" float-left"><button class="btn btn-success btn-md" ng-click="post_comment(comment)">Post</button></div>
+                    <div ng-hide="hideReply[comment.cid]" class="margin-T">
+                        <textarea class="form-control textare-comment comment-reply" rows="1" ng-model="comment_message"></textarea>
+                        <button class="btn btn-success btn-md float-left" ng-click="post_comment(comment)">Post</button>
                     </div>
                 </div>
             </div>

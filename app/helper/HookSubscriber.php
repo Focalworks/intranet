@@ -14,8 +14,14 @@ class HookSubscriber
         \Cache::forget($key);
     }
 
+    public function onScoreSubmit($user_id)
+    {
+        \Log::info('I was here');
+    }
+
     public function subscribe($events)
     {
         $events->listen('grievance.cacheClear', 'FW\Subscriber\HookSubscriber@onGrievanceUpdate');
+        $events->listen('grievance.cacheClear', 'FW\Subscriber\HookSubscriber@onScoreSubmit');
     }
 }

@@ -149,9 +149,10 @@ img {
   display: block;
   outline: 0;
 }
-/*input[type="text"], select {
-  font-family: 'Bree Serif', serif;
-}*/
+input[type="text"], select {
+  color:black;
+  text-transform: capitalize;
+}
 label, .control-label, .help-block, .checkbox, .radio {
   font-size: 20px; 
   font-family: 'Bree Serif', serif;
@@ -174,6 +175,16 @@ label, .control-label, .help-block, .checkbox, .radio {
       border-color: #99ae32;
     }
   }
+  &.btn-edit {
+    background-color: @blue;
+    border-color: #1f82fc;
+    color:white;
+    &:hover {
+      background-color: #1f82fc;
+      border-color: #1f82fc;
+    }
+  }
+
   &.btn-default { 
     background: #f5f3f3; /* Old browsers */
     background: -moz-linear-gradient(top, #f5f3f3 0%, #ffffff 100%); /* FF3.6+ */
@@ -188,7 +199,7 @@ label, .control-label, .help-block, .checkbox, .radio {
       font-size:12px;
     }
     &:hover {
-      background-color: #f5f3f3;
+      background-color: red;
       border-color: #cccccc;
     }
   }
@@ -196,6 +207,9 @@ label, .control-label, .help-block, .checkbox, .radio {
 .form-control:focus {
   border-color: #cccccc;
   background: #f9f9f9;
+}
+.form-control {
+  color:black;
 }
 
 /****** Icons ******/
@@ -383,7 +397,7 @@ Main Container */
     .form-group {
       select {
         border: 1px solid @dark-grey;
-        text-transform: lowercase;
+        text-transform: capitalize;
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
     }
@@ -424,7 +438,7 @@ Main Container */
           td {
             color: #2e3641;
             background-color: #f8fbff;
-            border-color:@light-grey;
+             border-bottom: 1px solid @dark-grey;
             a:link, a:visited {
               color: #2e3641;
               font-weight: bold;
@@ -433,11 +447,14 @@ Main Container */
             span {
               font-size: 80%;
             }
+            .delete-link {
+              font-size: 12px;
+              font-weight: normal;
+            }
           }
           &:nth-child(odd)> {
             td {
               background-color: #eff3f9;
-              border-color:@light-grey;
             }
           }
           &:hover> {
@@ -449,6 +466,7 @@ Main Container */
       }
     }
   }
+
   /******* Add Grievance *******/
   .image-preview {
     margin-bottom: 20px;
@@ -486,6 +504,14 @@ Main Container */
       &:hover {
         background: url('@{path}btn-change-hover.png') no-repeat;
       }
+      .custom-file-input {
+        cursor: pointer;
+        height: 39px;
+        opacity: 0;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        width: 136px !important;
+      }
     }
   }
   /******** View Grievance ********/
@@ -494,14 +520,18 @@ Main Container */
     background:#fff;
     border:1px solid #eaedf2;
     margin:15px 0;
-    padding:10px;
-   
+    padding:15px;
+    display: block;
   }
   .user {
     border-top:1px solid #cccccc;
     border-bottom:1px solid #cccccc;
     padding:10px 0;
     margin:10px 0;
+    .user-pic {
+      width: 70px;
+      height: 70px;
+    }
     .user-details {
       height: 70px;
       #name {}
@@ -537,11 +567,12 @@ Main Container */
             display: table-cell;
             vertical-align: top;
             .user-picture-inner {
-              border: 1px solid #c3c3c3;
+              border: 1px solid #dedede;
               height: 70px;
               margin-right: 20px;
               text-align: center;
               width: 70px;
+              display: inline-table;;
             }
           }
           .comment-display-content {
@@ -567,6 +598,11 @@ Main Container */
             .btn-action {
               margin-top: 10px;
               text-align: right;
+            }
+            .comment-reply {
+              width:90%;
+              margin-right:5px;
+              .float-left;
             }
           }
           .comment-controle-reply {
