@@ -8,24 +8,21 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Details</h2>
+        <h2>Edit</h2>
     </div>
     <div class="col-md-4">
         <div class="btn-wrap">
-            <button type="submit" class="btn btn-default btn-md"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>
-            <a href="{{url('grievance/list')}}" class="btn btn-default btn-md"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+            <button type="submit" class="btn btn-success btn-md"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>
+            <a href="{{url('grievance/list')}}" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-md-8">
         <div class="row cards-view">    
-             <div class="">
-                
-            </div>
             <div class="col-md-8">
                 <div class="form-group">
-                    <label for="title">Grievance title</label>
+                    <label for="title">Title</label>
                     <input type="text" placeholder="Grievance title" class="form-control" id="title" placeholder="Grievance title" name="title" value="{{$grievance->title}}">
                     <span class="error-display">{{$errors->first('title')}}</span>
                 </div>
@@ -74,15 +71,14 @@
         {{ Form::close() }}
 
         <div ng-app="articleApp" ng-controller="mainCntrl">
-        <comment data-section="grievance_view" data-nid  ="{{$grievance->id}}"></comment>
+            <comment data-section="grievance_view" data-nid  ="{{$grievance->id}}"></comment>
         </div>
 
         <script>
             $(window).load(function ()
             {   
                 CKEDITOR.replace('body',{
-
-                    height:'100px',
+                    height:'120px',
                 });
             });
         </script>
