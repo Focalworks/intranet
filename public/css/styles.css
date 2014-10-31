@@ -430,7 +430,7 @@ Main Container */
 .main-wrapper .table.table-striped tbody tr td {
   color: #2e3641;
   background-color: #f8fbff;
-  border-color: #eaedf2;
+  border-bottom: 1px solid #cccccc;
 }
 .main-wrapper .table.table-striped tbody tr td a:link,
 .main-wrapper .table.table-striped tbody tr td a:visited {
@@ -443,7 +443,6 @@ Main Container */
 }
 .main-wrapper .table.table-striped tbody tr:nth-child(odd) td {
   background-color: #eff3f9;
-  border-color: #eaedf2;
 }
 .main-wrapper .table.table-striped tbody tr:hover td {
   background-color: #ffffff;
