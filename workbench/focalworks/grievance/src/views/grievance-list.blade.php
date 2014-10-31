@@ -7,13 +7,13 @@ $(function() {
 </script>
 @stop
 @section('content')
-<div class="cards-view">
 <div class="row">
     <div class="col-md-12"><h2>List of Grievances / Suggestions</h2></div>
 </div>
+<div class="cards-view">
 <div class="row">
     <div class="col-md-12">
-        <p><a href="{{url('grievance/add')}}" class="btn btn-success btn-md">+ Add New</a></p>
+        <p><a href="{{url('grievance/add')}}" class="btn btn-success btn-md"><span class="glyphicon glyphicon-plus"></span>&nbsp;ADD NEW</a></p>
     </div>
 </div>
 @if ($grievanceCount <= 0)
@@ -54,9 +54,9 @@ $(function() {
     <div class="col-lg-3 col-md-4 col-sm-5">
         <div class="form-group">
            <label class="">&nbsp;</label><br />
-            <button class="btn btn-primary">Filter</button>
+            <button class="btn btn-primary"><span class="glyphicon glyphicon-filter"></span>&nbsp;Filter</button>
             @if(isset($userObj->grievanceFilter))
-              <a href="{{url('grievance/reset')}}" class="btn btn-primary">Reset</a>
+              <a href="{{url('grievance/reset')}}" class="btn btn-primary"><span class="glyphicon glyphicon-repeat"></span>&nbsp;Reset</a>
             @endif
         </div>
     </div>

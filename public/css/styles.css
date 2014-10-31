@@ -128,9 +128,10 @@ img {
   display: block;
   outline: 0;
 }
-/*input[type="text"], select {
-  font-family: 'Bree Serif', serif;
-}*/
+input[type="text"],
+select {
+  color: black;
+}
 label,
 .control-label,
 .help-block,
@@ -158,6 +159,15 @@ label,
   background-color: #99ae32;
   border-color: #99ae32;
 }
+.btn.btn-edit {
+  background-color: #4196fe;
+  border-color: #1f82fc;
+  color: white;
+}
+.btn.btn-edit:hover {
+  background-color: #1f82fc;
+  border-color: #1f82fc;
+}
 .btn.btn-default {
   background: #f5f3f3;
   /* Old browsers */
@@ -181,12 +191,15 @@ label,
   font-size: 12px;
 }
 .btn.btn-default:hover {
-  background-color: #f5f3f3;
+  background-color: red;
   border-color: #cccccc;
 }
 .form-control:focus {
   border-color: #cccccc;
   background: #f9f9f9;
+}
+.form-control {
+  color: black;
 }
 /****** Icons ******/
 .fw-icons {
@@ -475,13 +488,18 @@ Main Container */
   background: #fff;
   border: 1px solid #eaedf2;
   margin: 15px 0;
-  padding: 10px;
+  padding: 15px;
+  display: block;
 }
 .main-wrapper .user {
   border-top: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
   padding: 10px 0;
   margin: 10px 0;
+}
+.main-wrapper .user .user-pic {
+  width: 70px;
+  height: 70px;
 }
 .main-wrapper .user .user-details {
   height: 70px;
@@ -514,11 +532,12 @@ Main Container */
   vertical-align: top;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .user-picture .user-picture-inner {
-  border: 1px solid #c3c3c3;
+  border: 1px solid #dedede;
   height: 70px;
   margin-right: 20px;
   text-align: center;
   width: 70px;
+  display: inline-table;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content {
   display: table-cell;
@@ -544,6 +563,11 @@ Main Container */
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content .btn-action {
   margin-top: 10px;
   text-align: right;
+}
+.main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-display-content .comment-reply {
+  width: 90%;
+  margin-right: 5px;
+  float: left;
 }
 .main-wrapper ul.comments-wrapper .comment-list-item .comment-group .comment-display-wrapper .comment-controle-reply {
   background: #f5f5f5;
