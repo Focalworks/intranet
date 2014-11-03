@@ -31,9 +31,11 @@ class AssessmentApiController extends BaseController {
      */
     public function postSubmitAssessment()
     {
+        Log::info('Assessment submitted');
         $data = Input::all();
         $data['result_new'] = json_decode(Input::get('result'));
         $assessments = new Assessments;
         $assessments->saveAssessmentData($data);
+        die; // not sure why this is required, but without die two emails are getting fired.
     }
 }

@@ -172,4 +172,18 @@ class GlobalHelper {
         $this->dsm($this->last_query());
     }
 
+    public static function convertStringToHTML($string)
+    {
+        $specialChars = array(
+            ">" => "&gt;",
+            "<" => "&lt;",
+        );
+
+        foreach ($specialChars as $char => $code) {
+            $string = str_replace($char, $code, $string);
+        }
+
+        return $string;
+    }
+
 }

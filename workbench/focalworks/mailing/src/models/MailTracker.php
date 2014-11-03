@@ -10,27 +10,28 @@ class MailTracker extends Eloquent
      *
      * Rest of the internal activities will be handled by this function.
      *
-     * @param
-     *          email address to send the email $mail_to_address
-     * @param
-     *          email address to from which we want to send the email
-     *          $mail_from_address
-     * @param
-     *          email subject $mail_subject
-     * @param
-     *          email body content (typically a view) $mail_body
-     * @param
-     *          the name which will come in the to field $mail_to_name
-     * @param
-     *          the name which will come in from field $mail_from_name
+     * @param      $mail_to_address
+     * @param      $mail_from_address
+     * @param      $mail_subject
+     * @param      $mail_body
+     * @param null $attachment
+     * @param null $mail_to_name
+     * @param null $mail_from_name
+     *
+     * @internal param $ email address to send the email $mail_to_address*          email address to send the email $mail_to_address
+     * @internal param $ email address to from which we want to send the email*          email address to from which we want to send the email
+     *           $mail_from_address
+     * @internal param $ email subject $mail_subject*          email subject $mail_subject
+     * @internal param $ email body content (typically a view) $mail_body*          email body content (typically a view) $mail_body
+     * @internal param $ the name which will come in the to field $mail_to_name*          the name which will come in the to field $mail_to_name
+     * @internal param $ the name which will come in from field $mail_from_name*          the name which will come in from field $mail_from_name
      */
     public function sendMail ($mail_to_address, $mail_from_address, $mail_subject,
-        $mail_body, $mail_to_name = null, $mail_from_name = null)
+        $mail_body, $attachment = null, $mail_to_name = null, $mail_from_name = null)
     {
-        Log::info('Mail send function');
         // adding the entry to the table
         $mail_id = $this->addMailTrackerEntry($mail_to_address, $mail_from_address,
-            $mail_subject, $mail_body, $mail_to_name, $mail_from_name);
+            $mail_subject, $mail_body, $attachment,  $mail_to_name, $mail_from_name);
 
         // sending the email after the entry is made to the table
         $this->triggerMail($mail_id);
@@ -44,17 +45,19 @@ class MailTracker extends Eloquent
      * function which is called by the public function. After send mail the status
      * and send time is
      * getting updated.
+     *
      * @param $mail_to_address
      * @param $mail_from_address
      * @param $mail_subject
      * @param $mail_body
+     * @param $attachment
      * @param $mail_to_name
      * @param $mail_from_name
      *
      * @return mixed
      */
     protected function addMailTrackerEntry ($mail_to_address, $mail_from_address,
-        $mail_subject, $mail_body, $mail_to_name, $mail_from_name)
+        $mail_subject, $mail_body, $attachment,  $mail_to_name, $mail_from_name)
     {
         $row_data = array(
             'mail_to_address' => $mail_to_address,
@@ -63,7 +66,8 @@ class MailTracker extends Eloquent
             'mail_from_name' => ($mail_from_name == null) ? $mail_from_address : $mail_from_name,
             'mail_subject' => $mail_subject,
             'mail_body' => $mail_body,
-            'mail_created' => time()
+            'mail_created' => time(),
+            'attachment' => $attachment,
         );
 
         return DB::table($this->table)->insertGetId($row_data);
@@ -152,6 +156,10 @@ class MailTracker extends Eloquent
                     $mail_row->mail_to_address => $mail_row->mail_to_name
                 ))
             ->setBody($mail_row->mail_body, 'text/html');
+
+        if ($mail_row->attachment != "")
+            $message->attach(Swift_Attachment::fromPath(public_path($mail_row->attachment)));
+
         try
         {
             $mailer->send($message);
