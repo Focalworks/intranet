@@ -110,9 +110,9 @@ $(function() {
                     @if ($access)
                     <td class="">{{Grievance::getUserName($grievance->user_id,$grievance->anonymous)}}</td>
                     <td class=""> 
-                     <a href="manage/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Manage" class="mytest"><span class="glyphicon glyphicon-briefcase" ></span></a>
+                     <a href="manage/{{$grievance->id}}" data-toggle="tooltip" data-placement='left' title="Manage" class="mytest"><span class="glyphicon glyphicon-briefcase" ></span></a>
                      &nbsp;&nbsp;&nbsp;
-                     <a href="delete/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Delete" class="mytest confirm"><span class="glyphicon glyphicon-remove" ></span>
+                     <a href="delete/{{$grievance->id}}" data-toggle="tooltip" data-placement='left' title="Delete" class="mytest confirm"><span class="glyphicon glyphicon-remove" ></span>
                      </a>
                     </td>
                     @endif
