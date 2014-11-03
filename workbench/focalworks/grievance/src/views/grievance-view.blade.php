@@ -7,10 +7,10 @@
 {{ Form::open(array('url' => 'grievance/update', 'role' => 'form', 'files' => true)) }}
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-5">
         <h2>Edit</h2>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-5">
         <div class="btn-wrap">
             <button type="submit" class="btn btn-success btn-md"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>
             <a href="{{url('grievance/list')}}" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
@@ -18,7 +18,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-lg-8 col-md-10">
         <div class="row cards-view">    
             <div class="col-md-8">
                 <div class="form-group">
