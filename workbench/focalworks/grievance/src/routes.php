@@ -12,6 +12,7 @@ Route::group(array(
     Route::get('grievance/readonly/{id}', 'GrievanceController@handleGrievanceReadonly');
     Route::get('grievance/manage/{id}', 'GrievanceController@handleGrievanceManage');
     Route::get('grievance/reset', 'GrievanceController@handleGrievanceFilterRest');
+    Route::get('grievance/delete/{id}', 'GrievanceController@handleGrievanceDelete');
     
     Route::group(array(
         'before' => 'csrf'

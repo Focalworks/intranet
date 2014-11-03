@@ -66,7 +66,7 @@ class Grievance extends Eloquent
         $data->first_name = 'Anonymous';
         $data->last_name = '';
         $data->userimage = "../../".Config::get('sentryuser::sentryuser.default-pic');
-        $data->cre_time=date("jS F Y", strtotime($data->created_at));;
+    $data->cre_time=date("jS F Y", strtotime($data->created_at));;
 
         $data->anonymous_val='';
         if($data->anonymous==1)
@@ -251,10 +251,10 @@ class Grievance extends Eloquent
     public function deleteGrievance($id)
     {
         //Deletes should be soft delete. Should not go away from Database
-         DB::table($this->table)
+         $result=DB::table($this->table)
             ->where('id', $id)
             ->update(array('deleted' => 1));
-
+        return $result;
         /*$Grievance = Grievance::find($id);
         $Grievance->delete();
         $FileManaged = FileManaged::find($Grievance->id);

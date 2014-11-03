@@ -3,6 +3,9 @@
 <script type="text/javascript">
 $(function() {
     $('.mytest').tooltip();
+    $('.confirm').click(function(){
+        return confirm("Sure you want to delete ?");
+    });
 });
 </script>
 @stop
@@ -109,10 +112,8 @@ $(function() {
                     <td class=""> 
                      <a href="manage/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Manage" class="mytest"><span class="glyphicon glyphicon-briefcase" ></span></a>
                      &nbsp;&nbsp;&nbsp;
-                    {{link_to('grievance/list', '', array('class' => 'delete-link glyphicon glyphicon-remove',
-                        'data-delete-id' => $grievance->id,
-                        'data-delete-entity' => GRIEVANCE))}}
-
+                     <a href="delete/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Delete" class="mytest confirm"><span class="glyphicon glyphicon-remove" ></span>
+                     </a>
                     </td>
                     @endif
                 </tr>

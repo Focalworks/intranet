@@ -334,4 +334,17 @@ class GrievanceController extends BaseController
 
         return Redirect::to('grievance/list');
     }
+
+    /**
+     * This is the delete.
+     * @param unknown $id
+     */
+    public function handleGrievanceDelete($id)
+    {
+       $Grievance = new Grievance;
+       $re=$Grievance->deleteGrievance($id);
+       SentryHelper::setMessage('Grievance  Deleted....');
+       return Redirect::to('grievance/list');
+    }
+
 }
