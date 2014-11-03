@@ -88,13 +88,13 @@ $(function() {
                 @foreach($grievances as $grievance)
                 <tr>
                     <td class="col-lg-3 col-md-3">{{link_to('grievance/readonly/' . $grievance->id,  $grievance->title )}}
-                    <br>
-                    <span>{{substr(strip_tags($grievance->description),0,60)}}</span>
-                    @if ($access)
+                     @if ($access)
                         @if(isset($grievance->status) && ($grievance->status==3) && isset($grievance->req_reopen))
                             <a href="#" class="mytest" data-toggle="tooltip" data-placement='right' title="{{$grievance->req_reopen}}"><span class="text-danger glyphicon glyphicon-info-sign"></span></a>
                         @endif
                     @endif
+                    <br>
+                    <span>{{substr(strip_tags($grievance->description),0,60)}}</span>
                     </td>
                     <td class="">
                     @if($grievance->user_id==$my_user_id)
