@@ -67,7 +67,7 @@ $(function() {
 </div><br />
 @if (isset($grievances) && count($grievances) > 0)
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-lg-12 col-md-12">
         <p>Total Grievances: {{$grievanceCount}}</p>
         <table class="table table-striped table-hover">
             <thead>
@@ -87,7 +87,7 @@ $(function() {
             <tbody>
                 @foreach($grievances as $grievance)
                 <tr>
-                    <td class="col-md-4">{{link_to('grievance/readonly/' . $grievance->id,  $grievance->title )}}
+                    <td class="col-lg-4 col-md-4">{{link_to('grievance/readonly/' . $grievance->id,  $grievance->title )}}
                     <br>
                     <span>{{substr(strip_tags($grievance->description),0,100)}}</span>
                     @if ($access)
