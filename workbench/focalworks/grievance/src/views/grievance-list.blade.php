@@ -87,9 +87,9 @@ $(function() {
             <tbody>
                 @foreach($grievances as $grievance)
                 <tr>
-                    <td class="col-lg-4 col-md-4">{{link_to('grievance/readonly/' . $grievance->id,  $grievance->title )}}
+                    <td class="col-lg-3 col-md-3">{{link_to('grievance/readonly/' . $grievance->id,  $grievance->title )}}
                     <br>
-                    <span>{{substr(strip_tags($grievance->description),0,100)}}</span>
+                    <span>{{substr(strip_tags($grievance->description),0,60)}}</span>
                     @if ($access)
                         @if(isset($grievance->status) && ($grievance->status==3) && isset($grievance->req_reopen))
                             <a href="#" class="mytest" data-toggle="tooltip" data-placement='right' title="{{$grievance->req_reopen}}"><span class="text-danger glyphicon glyphicon-info-sign"></span></a>

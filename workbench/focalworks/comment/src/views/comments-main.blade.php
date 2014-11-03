@@ -17,7 +17,7 @@
 
         <div class="comment-display-wrapper clearfix">
             <div class="user-picture">
-                <div class="user-picture-inner"><img ng-src="@{{comment.userimage}}" alt="No Image" class="user-picture-inner" /></div>
+                <div class="user-picture-inner" ><img ng-src="@{{comment.userimage}}" alt="No Image" /></div>
             </div>
             <div class="comment-display-content">
                 <div class="comment-display-name-wrapper clearfix">
