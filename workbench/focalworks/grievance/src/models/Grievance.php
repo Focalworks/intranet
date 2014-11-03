@@ -66,7 +66,7 @@ class Grievance extends Eloquent
         $data->first_name = 'Anonymous';
         $data->last_name = '';
         $data->userimage = "../../".Config::get('sentryuser::sentryuser.default-pic');
-    $data->cre_time=date("jS F Y", strtotime($data->created_at));;
+        $data->cre_time=date("jS F Y", strtotime($data->created_at));;
 
         $data->anonymous_val='';
         if($data->anonymous==1)
@@ -88,6 +88,10 @@ class Grievance extends Eloquent
 
         $userObj = Session::get('userObj');
         $data->my_user_id=$userObj->id;
+
+         // check if the user has access to manage permissions. Based on this, manage link will come
+        $access = PermApi::user_has_permission('manage_grievance');
+        $data->access=$access;
 
         return $data;
     }

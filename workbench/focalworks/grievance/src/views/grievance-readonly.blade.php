@@ -18,6 +18,10 @@
     </div>
     <div class="col-lg-4 col-md-5">
         <div class="btn-wrap">
+            @if ($grievance->access)
+            <a href="../manage/{{$grievance->id}}" class="btn btn-primary btn-md">&nbsp; Manage</a>
+            @endif
+            
             @if($grievance->status==1 && ($grievance->user_id==$grievance->my_user_id))
                 <a href="../view/{{$grievance->id}}" class="btn btn-edit btn-md"><span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit</a>
             @endif
