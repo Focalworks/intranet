@@ -107,11 +107,8 @@ $(function() {
                     @if ($access)
                     <td class="col-md-1">{{Grievance::getUserName($grievance->user_id,$grievance->anonymous)}}</td>
                     <td class="col-md-1"> 
-
-                    {{link_to('grievance/manage/' . $grievance->id, '')}}
-                     <a href="view/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Manage" class="mytest"><span class="glyphicon glyphicon-briefcase" ></span></a>
+                     <a href="manage/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Manage" class="mytest"><span class="glyphicon glyphicon-briefcase" ></span></a>
                      &nbsp;&nbsp;&nbsp;
-
                     {{link_to('grievance/list', '', array('class' => 'delete-link glyphicon glyphicon-remove',
                         'data-delete-id' => $grievance->id,
                         'data-delete-entity' => GRIEVANCE))}}
