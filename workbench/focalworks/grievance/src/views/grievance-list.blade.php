@@ -84,7 +84,7 @@ $(function() {
             <tbody>
                 @foreach($grievances as $grievance)
                 <tr>
-                    <td>{{link_to('grievance/readonly/' . $grievance->id,  $grievance->title )}}
+                    <td class="col-md-4">{{link_to('grievance/readonly/' . $grievance->id,  $grievance->title )}}
                     <br>
                     <span>{{substr(strip_tags($grievance->description),0,100)}}</span>
                     @if ($access)
@@ -93,20 +93,20 @@ $(function() {
                         @endif
                     @endif
                     </td>
-                    <td class="col-md-1">
+                    <td class="">
                     @if($grievance->user_id==$my_user_id)
                         @if($grievance->status==1)
                             <a href="view/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Edit" class="mytest"><span class="glyphicon glyphicon-edit" ></span></a>
                         @endif
                     @endif
                     </td>
-                    <td class="col-md-1">{{ucwords($grievance->category)}}</td>
-                    <td class="col-md-1">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</td>
-                    <td class="col-md-1">{{GlobalHelper::formatDate($grievance->created_at, 'dS M Y')}}</td>
-                    <td class="col-md-1">{{Grievance::getStatusName($grievance->status)}}</td>
+                    <td class="">{{ucwords($grievance->category)}}</td>
+                    <td class="">{{ucwords(Grievance::getUrgencies($grievance->urgency))}}</td>
+                    <td class="">{{GlobalHelper::formatDate($grievance->created_at, 'dS M Y')}}</td>
+                    <td class="">{{Grievance::getStatusName($grievance->status)}}</td>
                     @if ($access)
-                    <td class="col-md-1">{{Grievance::getUserName($grievance->user_id,$grievance->anonymous)}}</td>
-                    <td class="col-md-1"> 
+                    <td class="">{{Grievance::getUserName($grievance->user_id,$grievance->anonymous)}}</td>
+                    <td class=""> 
                      <a href="manage/{{$grievance->id}}" data-toggle="tooltip" data-placement='right' title="Manage" class="mytest"><span class="glyphicon glyphicon-briefcase" ></span></a>
                      &nbsp;&nbsp;&nbsp;
                     {{link_to('grievance/list', '', array('class' => 'delete-link glyphicon glyphicon-remove',
