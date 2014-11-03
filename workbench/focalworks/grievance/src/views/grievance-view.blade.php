@@ -12,8 +12,8 @@
     </div>
     <div class="col-lg-4 col-md-5">
         <div class="btn-wrap">
-            <button type="submit" class="btn btn-success btn-md"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>
-            <a href="{{url('grievance/list')}}" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+            <button type="submit" class="btn btn-success btn-md"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp; Save</button>
+            <a href="{{url('grievance/list')}}" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Back</a>
         </div>
     </div>
 </div>

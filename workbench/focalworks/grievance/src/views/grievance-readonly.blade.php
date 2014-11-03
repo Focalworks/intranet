@@ -19,9 +19,9 @@
     <div class="col-lg-4 col-md-5">
         <div class="btn-wrap">
             @if($grievance->status==1 && ($grievance->user_id==$grievance->my_user_id))
-                <a href="../view/{{$grievance->id}}" class="btn btn-edit btn-md"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit</a>
+                <a href="../view/{{$grievance->id}}" class="btn btn-edit btn-md"><span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit</a>
             @endif
-            <a href="{{url('grievance/list')}}" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+            <a href="{{url('grievance/list')}}" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Back</a>
             @if(isset($grievance->status) && ($grievance->status==3) )
                 @if (isset($grievance->req_reopen))
                     Request to Reopen is already sent.
@@ -57,19 +57,17 @@
                 </div>
             </div>
             <div class="row content-body">
-                
-                    @if (isset($grievance->url))
-                    <div class="col-md-4 ">
+                <div class="col-md-4 ">
+                     @if (isset($grievance->url))
                     <div class="form-group image-preview">
                         <label></label>
-                        <img src="{{url($grievance->url)}}" alt="Image" class="img-thumbnail" />
-                    </div>
+                        <img src="{{url($grievance->url)}}" alt="" class="img-thumbnail" />
                     </div>
                     {{ Form::hidden('fid', $grievance->fid) }}
                     @else
                     {{ Form::hidden('fid', '0') }}
                     @endif
-               
+                </div>
                 <div class="col-md-8">
                     {{$grievance->description}}
                 </div>
@@ -79,7 +77,7 @@
             <comment data-section="grievance_view" data-nid="{{$grievance->id}}"></comment>
         </div>
         <div class="">
-           <!-- <label for="title">Grievance title</label>-->
+           <!-- <label for="title">Grievance title</labsel>-->
             <input type="hidden" placeholder="Grievance title" class="form-control" id="title" name="title" value="{{$grievance->title}}" readonly>
         </div>
 

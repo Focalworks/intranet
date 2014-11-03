@@ -11,19 +11,18 @@ if ($urgency == '') {
 
 {{ Form::open(array('url' => 'grievance/save', 'role' => 'form', 'files' => true)) }}
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-5">
         <h2>Add Grievance</h2>
     </div>
-    <div class="col-md-4">
+    <div class="col-lg-4 col-md-5">
         <div class="btn-wrap">
-            <!--<input type="submit" name="save" class="btn btn-success btn-md" value="Save" />&nbsp;&nbsp;-->
-            <button type="submit" class="btn btn-success btn-md"><span class="glyphicon glyphicon-save"></span>&nbsp;Save</button>&nbsp;&nbsp;
-            <a href="{{url('grievance/list')}}" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;Back</a>
+            <button type="submit" class="btn btn-success btn-md"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp; Save</button>
+            <a href="{{url('grievance/list')}}" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp; Back</a>
         </div>
     </div>
 </div>
 <div class="row">
-        <div class="col-md-8">
+        <div class="col-lg-8 col-md-10">
             <div class="cards-view">
                 <div class="row">
                     <div class="col-md-6">
