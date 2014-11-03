@@ -10,8 +10,8 @@ class EmailEvents {
     
     public function onGrievanceSave($grievance)
     {
-        $grievanceMails = new GrievanceMails;
-        $grievanceMails->sendGrievanceSaveEmail($grievance);
+        /*$grievanceMails = new GrievanceMails;
+        $grievanceMails->sendGrievanceSaveEmail($grievance);*/
     }
 
     /**
