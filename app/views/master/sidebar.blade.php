@@ -26,12 +26,12 @@
                 <span class="fw-icons glyphicon glyphicon-question-sign"></span>
                 <span class="enlarge">Quiz</span>
             </div>
-            <ul class="sub-menu-wrapper sub-menu-normal clearfix">
+            <!--<ul class="sub-menu-wrapper sub-menu-normal clearfix">
                 <li class="leaf last clearfix">{{ link_to('quiz#/examList', 'Quiz Exams') }}</li>
                 <li class="leaf first clearfix">{{ link_to('quiz#/', 'Questions') }}</li>
                 <li class="leaf first clearfix">{{ link_to('quiz#/new', 'Add Questions') }}</li>
 
-            </ul>
+            </ul>-->
         </li>
 
         <!-- <li class="leaf clearfix last"><div class="item-wrapper clearfix"><a href="#"title="Mail"><span class="fw-icons fw-icon-mail">&nbsp;</span><span class="enlarge">Mail</span></a></div></li> -->
