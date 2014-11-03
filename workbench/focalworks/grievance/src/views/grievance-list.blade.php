@@ -11,6 +11,10 @@ $(function() {
         $( "#div_addnew" ).show();
          $( "#addnew" ).hide();
     });
+    $( "#cancel" ).click(function() {
+        $( "#addnew" ).show();
+        $( "#div_addnew" ).hide();
+    });
 });
 </script>
 @stop
@@ -21,7 +25,7 @@ $(function() {
 <div class="cards-view">
 <div class="row">
     <div class="col-md-12 ">
-        <button id="addnew" class="btn btn-success btn-md"><span class="glyphicon glyphicon-plus"></span>&nbsp;ADD NEW</button>
+        <button id="addnew" class="btn btn-success btn-md margin-B"><span class="glyphicon glyphicon-plus"></span>&nbsp;ADD NEW</button>
     </div>
     <div style="display: none" id="div_addnew" class="col-md-12 ">
         <?php
@@ -33,17 +37,19 @@ if ($urgency == '') {
 
 {{ Form::open(array('url' => 'grievance/save', 'role' => 'form', 'files' => true)) }}
 <div class="row">
-    <div class="col-lg-4 col-md-5">
+    <div class="col-lg-6 col-md-6">
         <h2>Add Grievance</h2>
     </div>
-    <div class="col-lg-4 col-md-5">
+    <div class="col-lg-6 col-md-6">
         <div class="btn-wrap">
             <button type="submit" class="btn btn-success btn-md"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp; Save</button>
+
+             <span id="cancel" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-remove"></span>&nbsp;Cancel</span>
         </div>
     </div>
 </div>
 <div class="row">
-        <div class="col-lg-8 col-md-10">
+        <div class="col-lg-12 col-md-12">
             <div class="cards-view">
                 <div class="row">
                     <div class="col-md-6">
