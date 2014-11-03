@@ -76,7 +76,7 @@ $(function() {
                     <th>{{Grievance::sortColumnLinkHelper($sortArray, 'created_at', $sortBy)}}</th>
                     <th>{{Grievance::sortColumnLinkHelper($sortArray, 'status', $sortBy)}}</th>
                     @if ($access)
-                    <th>Created User</th>
+                    <th>User</th>
                     <th></th>
                     @endif
                 </tr>
