@@ -373,6 +373,7 @@ class Grievance extends Eloquent
 
             $Grivance->save();
              DB::commit();
+              Event::fire('grievance.cacheClear', [$Grivance->id]);
              return true;
 
         } catch (Exception $e) {
