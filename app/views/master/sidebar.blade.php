@@ -1,13 +1,13 @@
 <div class="menu-inner">
     <div class="fw-btn-menu clearfix" id="menuButton"><div class="fw-btn-menu-inner clearfix"><span class="enlarge">Menu</span><span class="fw-icons glyphicon glyphicon-th-list"></span></div></div>
     <ul class="menu">
-        <li class="leaf first clearfix" data-title="Home">
+        <!--<li class="leaf first clearfix" data-title="Home">
             <div class="item-wrapper clearfix">
                 <a href="#" title="Home"><span class="fw-icons glyphicon glyphicon-home"></span>
                     <span class="enlarge">Home</span>
                 </a>
             </div>
-        </li>
+        </li>-->
         <li class="leaf clearfix sub-menu">
             <div class="item-wrapper clearfix">
                 <span class="fw-icons fw-icons-left glyphicon glyphicon-plus"></span>
