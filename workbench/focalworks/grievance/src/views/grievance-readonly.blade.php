@@ -57,17 +57,19 @@
                 </div>
             </div>
             <div class="row content-body">
-                <div class="col-md-4 ">
-                     @if (isset($grievance->url))
+                
+                    @if (isset($grievance->url))
+                    <div class="col-md-4 ">
                     <div class="form-group image-preview">
                         <label></label>
-                        <img src="{{url($grievance->url)}}" alt="" class="img-thumbnail" />
+                        <img src="{{url($grievance->url)}}" alt="Image" class="img-thumbnail" />
+                    </div>
                     </div>
                     {{ Form::hidden('fid', $grievance->fid) }}
                     @else
                     {{ Form::hidden('fid', '0') }}
                     @endif
-                </div>
+               
                 <div class="col-md-8">
                     {{$grievance->description}}
                 </div>
