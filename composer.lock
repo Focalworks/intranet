@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a2e84fa26e9832232ab9a7f091a5c29a",
+    "hash": "ea3bf1864c96e78f4cedbbe24a153157",
     "packages": [
         {
             "name": "artdarek/oauth-4-laravel",
@@ -60,24 +60,24 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "c3ee98b0213a738171dd79a8e1be4a0f98245762"
+                "reference": "a14e20208640b5656d20c6230a31a55540e173cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/c3ee98b0213a738171dd79a8e1be4a0f98245762",
-                "reference": "c3ee98b0213a738171dd79a8e1be4a0f98245762",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/a14e20208640b5656d20c6230a31a55540e173cb",
+                "reference": "a14e20208640b5656d20c6230a31a55540e173cb",
                 "shasum": ""
             },
             "require": {
                 "laravel/framework": "4.*|5.0.*",
-                "maximebf/debugbar": "~1.9.15",
+                "maximebf/debugbar": "1.10.*",
                 "php": ">=5.3.0",
                 "symfony/finder": "~2.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7-dev"
+                    "dev-master": "1.8-dev"
                 }
             },
             "autoload": {
@@ -106,7 +106,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2014-10-27 15:50:05"
+            "time": "2014-10-31 21:32:30"
         },
         {
             "name": "barryvdh/laravel-dompdf",
@@ -856,6 +856,59 @@
             "time": "2013-06-10 12:22:13"
         },
         {
+            "name": "fitztrev/laravel-html-minify",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fitztrev/laravel-html-minify.git",
+                "reference": "8005fc4a8489ca0fc44dbf2514e35148eb3a8693"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fitztrev/laravel-html-minify/zipball/8005fc4a8489ca0fc44dbf2514e35148eb3a8693",
+                "reference": "8005fc4a8489ca0fc44dbf2514e35148eb3a8693",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/view": "4.x"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/php-code-coverage": ">=1.2.10,<1.3.0",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Fitztrev\\LaravelHtmlMinify": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Trevor Fitzgerald",
+                    "email": "fitztrev@gmail.com"
+                }
+            ],
+            "description": "Minifies the HTML output of Laravel 4 applications",
+            "homepage": "https://github.com/fitztrev/laravel-html-minify",
+            "keywords": [
+                "L4",
+                "blade",
+                "compress",
+                "html",
+                "laravel",
+                "minifier",
+                "minify",
+                "optimization",
+                "performance"
+            ],
+            "time": "2014-07-14 18:21:35"
+        },
+        {
             "name": "intervention/image",
             "version": "2.0.12",
             "source": {
@@ -1179,12 +1232,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "3fe312bf234e7f4615621800f9c9810afa64ae98"
+                "reference": "c94b4815280144257b749e1d96db1aad728802df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/3fe312bf234e7f4615621800f9c9810afa64ae98",
-                "reference": "3fe312bf234e7f4615621800f9c9810afa64ae98",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/c94b4815280144257b749e1d96db1aad728802df",
+                "reference": "c94b4815280144257b749e1d96db1aad728802df",
                 "shasum": ""
             },
             "require": {
@@ -1226,7 +1279,7 @@
             "keywords": [
                 "debug"
             ],
-            "time": "2014-10-30 15:41:48"
+            "time": "2014-11-02 19:44:24"
         },
         {
             "name": "monolog/monolog",
@@ -2048,12 +2101,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "1edfac97de764554c1f44bc56e4e4e553f0555c2"
+                "reference": "d1d1f1d8b14b8fcde224f6f06e52f24d74613d6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/1edfac97de764554c1f44bc56e4e4e553f0555c2",
-                "reference": "1edfac97de764554c1f44bc56e4e4e553f0555c2",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/d1d1f1d8b14b8fcde224f6f06e52f24d74613d6f",
+                "reference": "d1d1f1d8b14b8fcde224f6f06e52f24d74613d6f",
                 "shasum": ""
             },
             "require": {
@@ -2089,7 +2142,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "http://symfony.com",
-            "time": "2014-10-26 07:31:56"
+            "time": "2014-11-02 01:30:13"
         },
         {
             "name": "symfony/http-kernel",
@@ -2098,12 +2151,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "62bda59d3638ee2efcd45a92adf09eec1b99a294"
+                "reference": "d506a95bfbff5522ee25fa6d01359ba9a4719dfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/62bda59d3638ee2efcd45a92adf09eec1b99a294",
-                "reference": "62bda59d3638ee2efcd45a92adf09eec1b99a294",
+                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/d506a95bfbff5522ee25fa6d01359ba9a4719dfe",
+                "reference": "d506a95bfbff5522ee25fa6d01359ba9a4719dfe",
                 "shasum": ""
             },
             "require": {
@@ -2160,7 +2213,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2014-10-30 16:06:22"
+            "time": "2014-11-02 00:22:14"
         },
         {
             "name": "symfony/process",
