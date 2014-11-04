@@ -1,5 +1,11 @@
 <div class="menu-inner">
-    <div class="fw-btn-menu clearfix" id="menuButton"><div class="fw-btn-menu-inner clearfix"><span class="enlarge">Menu</span><span class="fw-icons glyphicon glyphicon-th-list"></span></div></div>
+    <div class="fw-btn-menu clearfix" id="menuButton">
+        <div class="fw-btn-menu-inner clearfix">
+            <span class="enlarge">Menu</span>
+            <span class="fw-icons glyphicon glyphicon-th-list"></span>
+        </div>
+    </div>
+
     <ul class="menu">
         <!--<li class="leaf clearfix sub-menu">
             <div class="item-wrapper clearfix">

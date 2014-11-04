@@ -755,6 +755,10 @@ Sidebar */
   max-width: 170px;
   float: left;
 }
+.sidebar.menu-wrapper .enlarge a {
+  color: #eaedf2;
+  text-decoration: none;
+}
 .sidebar.menu-wrapper [class*="fw-icon-"],
 .sidebar.menu-wrapper [class^="fw-icon-"] {
   float: right;
