@@ -14,8 +14,8 @@
         </li>-->
         <li class="leaf clearfix last">
             <div class="item-wrapper clearfix">
-                <a href="../grievance/list"title="Mail"><span class="fw-icons glyphicon glyphicon-edit"></span>
-                <span class="enlarge">Grievance</span></a>
+                <span class="fw-icons glyphicon glyphicon-edit"></span>
+                <span class="enlarge">{{ link_to('grievance/list', 'Grievance') }}</span>
             </div>
         </li>
 
