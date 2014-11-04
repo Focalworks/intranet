@@ -1,16 +1,22 @@
 <div class="menu-inner">
     <div class="fw-btn-menu clearfix" id="menuButton"><div class="fw-btn-menu-inner clearfix"><span class="enlarge">Menu</span><span class="fw-icons glyphicon glyphicon-th-list"></span></div></div>
     <ul class="menu">
-        <li class="leaf clearfix sub-menu">
+        <!--<li class="leaf clearfix sub-menu">
             <div class="item-wrapper clearfix">
                 <span class="fw-icons fw-icons-left glyphicon glyphicon-plus"></span>
                 <span class="fw-icons glyphicon glyphicon-edit"></span>
-                <span class="enlarge">Grievance</span>
+                <span class="enlarge">{{ link_to('grievance/list', 'Grievance') }}</span>
             </div>
             <ul class="sub-menu-wrapper sub-menu-normal clearfix">
                 <li class="leaf first clearfix">{{ link_to('grievance/list', 'Grievance List') }}</li>
                 <li class="leaf last clearfix">{{ link_to('grievance/add', 'Grievance Add') }}</li>
             </ul>
+        </li>-->
+        <li class="leaf clearfix last">
+            <div class="item-wrapper clearfix">
+                <a href="../grievance/list"title="Mail"><span class="fw-icons glyphicon glyphicon-edit"></span>
+                <span class="enlarge">Grievance</span></a>
+            </div>
         </li>
 
         <!--<li class="leaf clearfix sub-menu last">
@@ -27,6 +33,11 @@
             </ul>
         </li>-->
 
-        <!-- <li class="leaf clearfix last"><div class="item-wrapper clearfix"><a href="#"title="Mail"><span class="fw-icons fw-icon-mail">&nbsp;</span><span class="enlarge">Mail</span></a></div></li> -->
+        <!--<li class="leaf clearfix last">
+            <div class="item-wrapper clearfix">
+                <a href="#"title="Mail"><span class="fw-icons fw-icon-mail">&nbsp;</span>
+                <span class="enlarge">Mail</span></a>
+            </div>
+        </li>-->
     </ul>
 </div>
