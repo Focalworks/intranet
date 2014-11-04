@@ -8,12 +8,14 @@ $(function() {
         return confirm("Sure you want to delete ?");
     });
     $( "#addnew" ).click(function() {
-        $( "#div_addnew" ).show();
-         $( "#addnew" ).hide();
+        $( "#div_addnew" ).slideDown(800);
+        $( "#div_addnew_btn" ).fadeIn(800);
+         $( "#addnew" ).fadeOut(500);
     });
     $( "#cancel" ).click(function() {
-        $( "#addnew" ).show();
-        $( "#div_addnew" ).hide();
+        $( "#addnew" ).fadeIn(500);
+        $( "#div_addnew" ).slideUp(800);
+        $( "#div_addnew_btn" ).fadeOut(800);
     });
 });
 </script>
@@ -23,29 +25,28 @@ $(function() {
     <div class="col-md-12"><h2>List of Grievances / Suggestions</h2></div>
 </div>
 <div class="cards-view">
-<div class="row">
-    <div class="col-md-12 ">
-        <button id="addnew" class="btn btn-success btn-md margin-B"><span class="glyphicon glyphicon-plus"></span>&nbsp;ADD NEW</button>
-    </div>
-    <div style="display: none" id="div_addnew" class="col-md-12 ">
-        <?php
+<?php
 $urgency = Input::old('urgency');
 if ($urgency == '') {
     $urgency = 1;
 }
 ?>
-
 {{ Form::open(array('url' => 'grievance/save', 'role' => 'form', 'files' => true)) }}
 <div class="row">
-    <div class="col-lg-6 col-md-6">
-        <h2>Add Grievance</h2>
+    <div class="col-md-6 ">
+        <span id="addnew" class="btn btn-success btn-md margin-B"><span class="glyphicon glyphicon-plus"></span>&nbsp;ADD NEW</span>
     </div>
-    <div class="col-lg-6 col-md-6">
-        <div class="btn-wrap">
+    <div class="col-md-6">
+         <div class="btn-wrap" style="display:none" id="div_addnew_btn">
             <button type="submit" class="btn btn-success btn-md"><span class="glyphicon glyphicon-floppy-save"></span>&nbsp; Save</button>
-
              <span id="cancel" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-remove"></span>&nbsp;Cancel</span>
         </div>
+    </div>
+<div style="display: none" id="div_addnew" class="col-md-12 ">
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <h2>Add Grievance</h2>
     </div>
 </div>
 <div class="row">
