@@ -54,6 +54,7 @@
                 <br>
                 <h1>Assessment result</h1>
                 @foreach($data['question_data'] as $q_key => $question)
+                <!--div required to break table in to next page.-->
                 <div style="page-break-inside: avoid;">
                     <table class="table table-striped table-bordered" cellpadding="0" cellspacing="0">
                         <tr>
