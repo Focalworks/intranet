@@ -336,7 +336,8 @@ class UserController extends BaseController
                 $SentryUser->handleOAuthLogin($result);
                 return Redirect::to('user/dashboard');
             } else {
-                SentryHelper::dsm('This domain is not allowed on this site.', 'warning');
+                App::abort(403, 'The domain you are trying to login with, is not allowed for this site.');
+                Log::error('User tried to access with a domain which is not allowed.');
             }
         }         // if not ask for permission first
         else {

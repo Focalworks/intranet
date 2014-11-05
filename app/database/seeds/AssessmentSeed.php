@@ -25,6 +25,35 @@ class AssessmentSeed extends Seeder {
                     'name' => 'Interview',
                     'created_at' => date('Y-m-d h:m:s', time()),
                     'updated_at' => date('Y-m-d h:m:s', time()),
+                ),
+                array(
+                    'name' => 'ASP .NET',
+                    'created_at' => date('Y-m-d h:m:s', time()),
+                    'updated_at' => date('Y-m-d h:m:s', time()),
+                ),
+                array(
+                    'name' => 'Java',
+                    'created_at' => date('Y-m-d h:m:s', time()),
+                    'updated_at' => date('Y-m-d h:m:s', time()),
+                ),
+                array(
+                    'name' => 'Android',
+                    'created_at' => date('Y-m-d h:m:s', time()),
+                    'updated_at' => date('Y-m-d h:m:s', time()),
+                ),
+                array(
+                    'name' => 'Flash',
+                    'created_at' => date('Y-m-d h:m:s', time()),
+                    'updated_at' => date('Y-m-d h:m:s', time()),
+                ),
+                array(
+                    'name' => 'Designer',
+                    'created_at' => date('Y-m-d h:m:s', time()),
+                    'updated_at' => date('Y-m-d h:m:s', time()),
+                ),array(
+                    'name' => 'Tester',
+                    'created_at' => date('Y-m-d h:m:s', time()),
+                    'updated_at' => date('Y-m-d h:m:s', time()),
                 ))
             );
 
