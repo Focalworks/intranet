@@ -52,7 +52,7 @@
                     <span id="time">{{$grievance->cre_time}}</span>
                 </div>
                 <div class="col-md-5 user-destails">
-                    <span>Category- {{ucwords($grievance->category)}}</span><br>
+                    <span>Category - {{ucwords($grievance->category)}}</span><br>
                     <span>Urgency - {{ucwords(Grievance::getUrgencies($grievance->urgency))}}</span><br>
                     <!--span>
                         <input type="checkbox" name="anonymous" id="anonymous" value="1" {{$grievance->anonymous_val}} disabled>
