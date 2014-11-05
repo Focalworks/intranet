@@ -38,4 +38,23 @@ class AssessmentApiController extends BaseController {
         $assessments->saveAssessmentData($data);
         die; // not sure why this is required, but without die two emails are getting fired.
     }
+
+    /**
+     * This url will return all the required tags
+     * @return array
+     */
+    public function getTags()
+    {
+        $tags = array(
+            '1' => 'PHP',
+            '3' => 'ASP .NET',
+            '4' => 'Java',
+            '5' => 'Android',
+            '6' => 'Flash',
+            '7' => 'Designer',
+            '8' => 'Tester',
+        );
+
+        return $tags;
+    }
 }
