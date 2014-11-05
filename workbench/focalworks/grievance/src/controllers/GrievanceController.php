@@ -152,7 +152,7 @@ class GrievanceController extends BaseController
         if ($validator->fails()) {
             // send back to the page with the input data and errors
             GlobalHelper::setMessage('Fix the errors.', 'warning'); // setting the error message
-            return Redirect::to('grievance/add')->withInput()->withErrors($validator);
+            return Redirect::back()->withInput()->withErrors($validator);
         }
 
         $Grievance = new Grievance;

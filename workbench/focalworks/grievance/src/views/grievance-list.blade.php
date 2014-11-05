@@ -3,6 +3,7 @@
 <script src="//cdn.ckeditor.com/4.4.3/basic/ckeditor.js"></script>
 <script type="text/javascript">
 $(function() {
+
     $('.mytest').tooltip();
     $('.confirm').click(function(){
         return confirm("Sure you want to delete ?");
@@ -17,6 +18,13 @@ $(function() {
         $( "#div_addnew" ).slideUp(800);
         $( "#div_addnew_btn" ).fadeOut(800);
     });
+    
+    if($('#is_error').val()!=''){
+        $( "#div_addnew" ).slideDown(800);
+        $( "#div_addnew_btn" ).fadeIn(800);
+        $( "#addnew" ).fadeOut(500);
+    }
+
 });
 </script>
 @stop
@@ -55,6 +63,7 @@ if ($urgency == '') {
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <input type="hidden" id="is_error" name="is_error" value="{{$errors->first()}}">
                             <label for="title">Title</label>
                             <input type="text" class="form-control" id="title" placeholder="" name="title" value="{{Input::old('title')}}">
                             <span class="error-display">{{$errors->first('title')}}</span>
