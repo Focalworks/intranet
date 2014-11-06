@@ -26,3 +26,13 @@ Route::get('assessment/test', function() {
             'Amitav Office',
             'Amitav Gmail');*/
     });
+
+/* this section is for authenticated users only */
+Route::group(array(
+        'before' => 'checkAuth'
+    ), function ()
+    {
+        Route::get('assessment', 'AssessmentController@getLandingPage');
+    });
+
+Route::get('assessment/template/land', function() {return View::make('assessment::templates.assessment-land');});

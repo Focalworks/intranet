@@ -9,4 +9,5 @@ Thumbs.db
 .idea/
 public/packages/
 public/grievance/
+public/assessment_results/
 /node_modules
