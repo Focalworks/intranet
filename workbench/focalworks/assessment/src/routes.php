@@ -35,4 +35,6 @@ Route::group(array(
         Route::get('assessment', 'AssessmentController@getLandingPage');
     });
 
-Route::get('assessment/template/land', function() {return View::make('assessment::templates.assessment-list');});
+Route::get('assessment/template/land', function() {
+        return View::make('assessment::templates.assessment-list');
+    });

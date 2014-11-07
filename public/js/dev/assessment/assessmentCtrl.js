@@ -1,9 +1,11 @@
 /**
  * Created by amitav on 11/6/14.
  */
-function listingCtrl($scope) {
+function listingCtrl($scope,assessmentFactory) {
     $scope.title = 'Check';
-    console.log(123);
     console.log($scope.title);
+    assessmentFactory.getMultiple().then(function(data) {
+        $scope.questions = data.data;
+    });
 };
-listingCtrl.$inject = ['$scope'];
+listingCtrl.$inject = ['$scope', 'assessmentFactory'];

@@ -7,17 +7,10 @@ var assessment = angular.module('assessment', ['ngRoute']);
  * Handling the routes for the application
  */
 assessment.config(['$routeProvider', function($routeProvider) {
-    /*$routeProvider.when('list',{
-        controller: 'listingCtrl',
+    $routeProvider.when('/list', {
         templateUrl: base_url + "assessment/template/land",
-        pageTitle: "List of Assessments"});*/
-
-    $routeProvider.when('list', {
-        controller: 'listingCtrl',
-        templateUrl: base_url + "assessment/template/land"
+        controller: 'listingCtrl'
     }).otherwise({
-        redirectTo:'list'
+        redirectTo:'/list'
     });
-
-    $routeProvider.otherwise({redirectTo: "list"});
 }]);

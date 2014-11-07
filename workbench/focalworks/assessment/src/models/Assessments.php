@@ -91,6 +91,7 @@ class Assessments extends Eloquent {
 
         $data = $q->first();
         $data->options = $this->getAssessmentOptions($data->id);
+        $data->tags = $this->getAssessmentTags($data->id);
 
         // setting the cache
         Cache::put('assessment_'.$id, $data, 10);
@@ -103,6 +104,13 @@ class Assessments extends Eloquent {
         $opt = DB::table('assessment_options');
         $opt->where('question_id', $question_id);
         return $opt->get();
+    }
+
+    private function getAssessmentTags($question_id)
+    {
+        $query = DB::table('tags_in_assessment')->where('question_id', $question_id);
+        $query->join('assessment_tags', 'assessment_tags.id', '=', 'tags_in_assessment.tag_id');
+        return $query->get();
     }
 
     public function saveAssessmentData($data)
