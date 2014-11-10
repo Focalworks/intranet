@@ -156,7 +156,7 @@ class Assessments extends Eloquent {
             Log::info('PDF Creation');
             $this->generateUserAssessmentPDF($user_id);
 
-            $this->sendResultEmail($user_id);
+            //$this->sendResultEmail($user_id);
 
             return true;
         }
@@ -325,11 +325,11 @@ class Assessments extends Eloquent {
 
         $mail = new MailTracker;
         $mail->sendMail('amitavroy@gmail.com',
-            'amitav.roy@focalworks.in',
-            $subject,
-            $body,
-            $filename,
-            'Amitav Office',
-            'Amitav Gmail');
+          'amitav.roy@focalworks.in',
+          $subject,
+          $body,
+          $filename,
+          'Amitav Office',
+          'Amitav Gmail');
     }
 }
